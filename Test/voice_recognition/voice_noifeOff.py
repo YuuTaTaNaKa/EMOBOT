@@ -11,7 +11,7 @@ with sr.Microphone() as source:
 
 # 音声認識を実行 
 try:
-    text = recognizer.recognize_google(audio_data)
+    text = recognizer.recognize_google(audio_data,language="ja-JP")
     print("認識されたテキスト: " + text)
 except sr.UnknownValueError:
     print("音声が理解できませんでした")
