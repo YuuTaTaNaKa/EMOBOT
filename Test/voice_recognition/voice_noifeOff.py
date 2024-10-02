@@ -9,7 +9,7 @@ with sr.Microphone() as source:
     recognizer.adjust_for_ambient_noise(source)  # 環境音を調整
     audio_data = recognizer.listen(source)  # 音声を聞き取る
 
-# 音声認識を実行
+# 音声認識を実行 
 try:
     text = recognizer.recognize_google(audio_data)
     print("認識されたテキスト: " + text)
