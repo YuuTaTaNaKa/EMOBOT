@@ -9,3 +9,17 @@ try:
         print(voice_text)
 except:
     print('Sorry, I could not listen')
+
+"""
+使用するAPI(ターミナルでのインストール)
+SpeechRecognitionのインストール
+まずはSpeechRecognitionのライブラリをインストールします。
+
+pip install SpeechRecognition
+
+次に音声を録音・保存・再選する機能があるPyAudioをインストールします。
+
+pip install PyAudio
+
+
+"""
