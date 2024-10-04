@@ -1,5 +1,7 @@
 import speech_recognition as sr
 import pyttsx3  # テキストを音声に変換するライブラリ
+import sys
+import requests
 
 # 音声認識の初期化
 recognizer = sr.Recognizer()
@@ -40,7 +42,32 @@ def assistant():
                 break
             elif "天気"in command:
                 speak("現在の天気を調べます...")
-                # 天気情報を取得するコードを追加可能
+                # 天気情報を取得するコードを追加可能                
+                
+                def main():
+                    api_key = "c9b6c535d058a8f1384591966dfd5492"  # OpenWeatherMapのAPIキーをここに入れる
+                    city = "Tokyo"  # 都市名
+                    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+
+                    try:
+                        tenki_data = requests.get(url).json()  # jsonで情報を取得
+                    except requests.exceptions.RequestException as e:
+                        print(f"APIリクエストに失敗しました: {e}")
+                        return
+                    except ValueError as e:
+                        print(f"無効なJSONデータ: {e}")
+                        return
+
+                    print("------------------------")
+                    print("都市名:", tenki_data["name"])
+                    print("天気:", tenki_data["weather"][0]["description"])
+                    print("気温 (摂氏):", tenki_data["main"]["temp"])
+                    print("------------------------")
+
+                if __name__ == '__main__':
+                    main()
+
+
             elif "時間"in command:
                 from datetime import datetime
                 current_time = datetime.now().strftime("%H時%M分です")
@@ -50,3 +77,16 @@ def assistant():
 
 # アシスタントの起動
 assistant()
+
+"""
+使用するAPI(ターミナルでのインストール)
+pyttsx3 は、テキストを音声に変換できる Python ライブラリです。
+そのため、テキストを提供すると、そのテキストが音声に変換されます。
+
+pip install pyttsx3
+
+OpenWeatherMapのAPIキー
+
+c9b6c535d058a8f1384591966dfd5492
+
+"""
