@@ -43,10 +43,9 @@ def assistant():
             elif "天気"in command:
                 speak("現在の天気を調べます...")
                 # 天気情報を取得するコードを追加可能                
-                
                 def main():
                     api_key = "c9b6c535d058a8f1384591966dfd5492"  # OpenWeatherMapのAPIキーをここに入れる
-                    city = "Tokyo"  # 都市名
+                    city = "Gunma"  # 都市名
                     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
 
                     try:
@@ -61,7 +60,7 @@ def assistant():
                     print("------------------------")
                     print("都市名:", tenki_data["name"])
                     print("天気:", tenki_data["weather"][0]["description"])
-                    print("気温 (摂氏):", tenki_data["main"]["temp"])
+                    print("気温 (摂氏):", tenki_data["main"]["temp"]+("℃"))
                     print("------------------------")
 
                 if __name__ == '__main__':
