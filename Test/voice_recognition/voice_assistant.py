@@ -60,7 +60,7 @@ def assistant():
                     print("------------------------")
                     print("都市名:", tenki_data["name"])
                     print("天気:", tenki_data["weather"][0]["description"])
-                    print("気温 (摂氏):", tenki_data["main"]["temp"]+("℃"))
+                    print("気温 (摂氏):", tenki_data["main"]["temp"])
                     print("------------------------")
 
                 if __name__ == '__main__':
