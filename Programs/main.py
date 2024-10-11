@@ -10,6 +10,11 @@ import EmotionalAnalysis
 # ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー#
 # メインのコード
 def main():
-    
-    if __name__ == "__main__":
-        main()
+    while True:
+        # メインの処理を記述する
+        print("メインの処理を実行します")
+        
+
+# メイン関数の実行
+if __name__ == "__main__":
+    main()
