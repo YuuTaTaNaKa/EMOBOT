@@ -61,3 +61,88 @@ Raspberry Pi 4環境で使えるライブラリやAPIの確認を行います。
 	•	pygame: 表情表示（代替: Pillow）。
 
 Raspberry Pi 4に最適化するには、代替案として示したライブラリを活用すると、システム全体がより安定して動作するでしょう。
+
+RaspberryPI4用
+# GPIO制御用のライブラリ
+sudo apt-get update
+sudo apt-get install python3-rpi.gpio
+
+# OpenCV（画像処理・顔認識用）
+sudo apt-get install python3-opencv
+
+# 音声認識用のライブラリ（speech_recognition + Vosk）
+pip install SpeechRecognition
+pip install vosk
+
+# Pillow（画像処理、ディスプレイの顔表示用）
+pip install Pillow
+
+# pyAudioAnalysis（音声の感情解析用）
+pip install pyAudioAnalysis
+
+# face_recognition（顔認識のため、dlib代替）
+pip install face_recognition
+
+# pyserial（サーボモーター制御用、必要に応じて）
+pip install pyserial
+
+# その他の依存関係
+sudo apt-get install libportaudio2
+sudo apt-get install python3-pyaudio
+pip install pyaudio
+
+
+
+Windows用
+# GPIOライブラリ（Raspberry Pi用なのでWindowsでは不要）
+
+# OpenCV（画像処理・顔認識用）
+pip install opencv-python
+
+# 音声認識ライブラリ（speech_recognition + Vosk）
+pip install SpeechRecognition
+pip install vosk
+
+# Pillow（画像処理、ディスプレイの顔表示用）
+pip install Pillow
+
+# pyAudioAnalysis（音声の感情解析用）
+pip install pyAudioAnalysis
+
+# face_recognition（dlibの代替として顔認識用）
+pip install face_recognition
+
+# pyserial（サーボモーター制御用、必要に応じて）
+pip install pyserial
+
+# PyAudio（音声入力・出力のため）
+pip install pyaudio
+
+
+
+Mac用
+# GPIOライブラリ（Raspberry Pi用なのでMacでは不要）
+
+# OpenCV（画像処理・顔認識用）
+brew install opencv
+pip install opencv-python
+
+# 音声認識ライブラリ（speech_recognition + Vosk）
+pip install SpeechRecognition
+pip install vosk
+
+# Pillow（画像処理、ディスプレイの顔表示用）
+pip install Pillow
+
+# pyAudioAnalysis（音声の感情解析用）
+pip install pyAudioAnalysis
+
+# face_recognition（dlibの代替として顔認識用）
+pip install face_recognition
+
+# pyserial（サーボモーター制御用、必要に応じて）
+pip install pyserial
+
+# PyAudio（音声入力・出力のため）
+brew install portaudio
+pip install pyaudio
