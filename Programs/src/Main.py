@@ -2,6 +2,12 @@
 # モジュール・プログラムファイルのインポート
 import threading
 import time
+import InCamera
+import InVoice
+import InIR
+import BatteryMonitor
+import EarControl
+import Display
 
 # 処理の記述
 def main():
