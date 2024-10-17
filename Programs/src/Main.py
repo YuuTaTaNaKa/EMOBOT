@@ -14,7 +14,7 @@ def main():
     battery = threading.Thread(target=BatteryMonitor.battery,name="battery",demon=True)
     voice = threading.Thread(target=InVoice.voice,name="voice",demon=True)
     display = threading.Thread(target=Display.display,name="display",demon=True)
-    ir = threading.Thread(target=InIR.InputIR,name="ir",demon=True)
+    ir = threading.Thread(target=InIR.inputIR,name="ir",demon=True)
     # スレッドの開始
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
 # LEDの制御を行います
 
-def LED():
+def led():
     print("LEDの制御を行います。")
