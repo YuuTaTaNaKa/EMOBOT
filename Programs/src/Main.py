@@ -1,6 +1,6 @@
 # プログラムの起動・終了、スレッドの管理・作成・実行
 # モジュール・プログラムファイルのインポート
-import threading
+from concurrent.futures import ThreadPoolExecutor
 import time
 import InVoice
 import InIR
@@ -9,13 +9,16 @@ import Display
 
 # 処理の記述
 def main():
-    print("メイン関数の実行")
-    # スレッドの作成
-    battery = threading.Thread(target=BatteryMonitor.battery,name="battery",demon=True)
-    voice = threading.Thread(target=InVoice.voice,name="voice",demon=True)
-    display = threading.Thread(target=Display.display,name="display",demon=True)
-    ir = threading.Thread(target=InIR.inputIR,name="ir",demon=True)
-    # スレッドの開始
+    print("スレッドを開始します。")
+    executor = ThreadPoolExecutor(max_workers=3)
+    executor.submit(InVoice.main)
+    executor.submit(InIR.inputIR)
+    executor.submit(BatteryMonitor.battery)
+    executor.submit(Display.display)
+    
 
+    def stop():
+        print("スレッドを終了します。")
+        
 if __name__ == "__main__":
     main()
