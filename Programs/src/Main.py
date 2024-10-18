@@ -9,7 +9,7 @@ import Display
 # 処理の記述
 def main():
     print("スレッドを開始します。")
-    executor = ThreadPoolExecutor(max_workers=14)
+    executor = ThreadPoolExecutor(max_workers=9)
     executor.submit(InVoice.main)
     executor.submit(InIR.inputIR)
     executor.submit(Display.display)
