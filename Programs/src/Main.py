@@ -4,16 +4,14 @@ from concurrent.futures import ThreadPoolExecutor
 import time
 import InVoice
 import InIR
-import BatteryMonitor
 import Display
 
 # 処理の記述
 def main():
     print("スレッドを開始します。")
-    executor = ThreadPoolExecutor(max_workers=3)
+    executor = ThreadPoolExecutor(max_workers=14)
     executor.submit(InVoice.main)
     executor.submit(InIR.inputIR)
-    executor.submit(BatteryMonitor.battery)
     executor.submit(Display.display)
     
 
