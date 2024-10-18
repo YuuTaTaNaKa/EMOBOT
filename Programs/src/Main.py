@@ -1,6 +1,7 @@
 # プログラムの起動・終了、スレッドの管理・作成・実行
 # モジュール・プログラムファイルのインポート
 from concurrent.futures import ThreadPoolExecutor
+import sys
 import time
 import InVoice
 import InIR
@@ -14,9 +15,10 @@ def main():
     executor.submit(InIR.inputIR)
     executor.submit(Display.display)
     
-
-    def stop():
-        print("スレッドを終了します。")
         
 if __name__ == "__main__":
     main()
+
+def stop():
+        print("スレッドを終了します。")
+        sys.exit()
