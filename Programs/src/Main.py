@@ -11,7 +11,7 @@ import Display
 def main():
     print("スレッドを開始します。")
     executor = ThreadPoolExecutor(max_workers=9)
-    executor.submit(InVoice.main)
+    executor.submit(InVoice.assistant)
     executor.submit(InIR.inputIR)
     executor.submit(Display.display)
     
