@@ -6,6 +6,8 @@ import time
 import InVoice
 import InIR
 import Display
+import LED
+import OutSound
 
 # 処理の記述
 def main():
@@ -14,7 +16,8 @@ def main():
     executor.submit(InVoice.assistant)
     executor.submit(InIR.inputIR)
     executor.submit(Display.display)
-    
+    executor.submit(LED.led)
+    executor.submit(OutSound.outSound)
         
 if __name__ == "__main__":
     main()
