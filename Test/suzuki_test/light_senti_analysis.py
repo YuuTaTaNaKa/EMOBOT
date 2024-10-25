@@ -1,7 +1,7 @@
 from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 
-# 軽量な日本語対応モデルに変更（DistilBERTなどを推奨）
-model_name = 'lxyuan/distilbert-base-multilingual-cased-sentiments-student'  # 一番使い勝手の良かったモデルに置き換え済。より軽いモデルがあれば、それに置き換え
+# 事前学習済みの日本語感情分析モデルとそのトークナイザをロード
+model_name  = 'lxyuan/distilbert-base-multilingual-cased-sentiments-student'  # 一番使い勝手の良かった軽量モデルに置き換え済。より軽いモデルがあれば、それに置き換え
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
@@ -18,7 +18,7 @@ results = nlp(texts)
 for text, result in zip(texts, results):
     print('*' * 50)
     print(f'テキスト：{text}')
-    print(f'感情：{result["label"]}')
+    print(f'感情：{result["label"]}')  # positive,negative,neutralの3種類
     print(f'感情スコア：{result["score"]:.4f}')
 
 # """pip install Cython"""
