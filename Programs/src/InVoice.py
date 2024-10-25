@@ -1,23 +1,15 @@
+# 音声入力・感情認識用スレッド
 import speech_recognition as sr
-import pyttsx3  # テキストを音声に変換するライブラリ
 import requests
-
+from concurrent.futures import ThreadPoolExecutor
 # 音声認識の初期化
 recognizer = sr.Recognizer()
-
-# 音声出力の初期化
-engine = pyttsx3.init()
-
-# 音声出力関数
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
 
 # 音声認識関数
 def listen():
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
-        print("何か話してください...")
+        print("何かおはなしして")
         audio = recognizer.listen(source)
 
         try:
@@ -25,37 +17,22 @@ def listen():
             print(f"認識されたコマンド: {command}")
             return command
         except sr.UnknownValueError:
-            speak("音声が理解できませんでした。もう一度お話しください。")
+            print("よくわからなかったな。もういっかい！")
         except sr.RequestError as e:
-            speak(f"音声認識サービスに接続できませんでした。詳細: {e}")
+            print(f"うまくつながらないな: {e}")
 
 # 音声アシスタントのループ処理
 def assistant():
-    speak("こんにちは、何をお手伝いできますか？")
+    print("なにをする？")
     while True:
         command = listen()
 
         if command:
             if "終了" in command:
-                speak("さようなら")
+                print("またね！")
                 break
-            # 喜び
-            elif "" in command:
-                speak()
-            elif "" in command:
-                speak()
-            elif "" in command:
-                speak()
-            elif "" in command:
-                speak()
-            elif "" in command:
-                speak()
-            elif "" in command:
-                speak()
-
-
             elif "天気"in command:
-                speak("現在の天気を調べます...")
+                print("天気をしらべるね")
                 # 天気情報を取得するコードを追加可能                
                 def main():
                     api_key = "c9b6c535d058a8f1384591966dfd5492"  # OpenWeatherMapのAPIキーをここに入れる
@@ -65,10 +42,10 @@ def assistant():
                     try:
                         tenki_data = requests.get(url).json()  # jsonで情報を取得
                     except requests.exceptions.RequestException as e:
-                        print(f"APIリクエストに失敗しました: {e}")
+                        print(f"調べるのに失敗しちゃった: {e}")
                         return
                     except ValueError as e:
-                        print(f"無効なJSONデータ: {e}")
+                        print(f"結果が見れなかった。ごめんね: {e}")
                         return
 
                     print("------------------------")
@@ -84,13 +61,9 @@ def assistant():
             elif "時間"in command:
                 from datetime import datetime
                 current_time = datetime.now().strftime("%H時%M分です")
-                speak(f"今の時間は {current_time}")
+                print(f"今の時間は {current_time}だよ")
             else:
-                speak("すみません、そのコマンドは理解できませんでした。")
-            
-
-# アシスタントの起動
-assistant()
+                print("なんて言ったかわかんないなぁ")
 
 """
 使用するAPI(ターミナルでのインストール)
