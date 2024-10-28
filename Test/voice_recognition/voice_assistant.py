@@ -39,6 +39,21 @@ def assistant():
             if "終了" in command:
                 speak("さようなら")
                 break
+            # 喜び
+            elif "" in command:
+                speak()
+            elif "" in command:
+                speak()
+            elif "" in command:
+                speak()
+            elif "" in command:
+                speak()
+            elif "" in command:
+                speak()
+            elif "" in command:
+                speak()
+
+
             elif "天気"in command:
                 speak("現在の天気を調べます...")
                 # 天気情報を取得するコードを追加可能                
@@ -72,6 +87,7 @@ def assistant():
                 speak(f"今の時間は {current_time}")
             else:
                 speak("すみません、そのコマンドは理解できませんでした。")
+            
 
 # アシスタントの起動
 assistant()
