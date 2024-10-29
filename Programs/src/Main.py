@@ -2,7 +2,6 @@ from concurrent.futures import ThreadPoolExecutor
 import sys
 import time
 import InVoice
-import InIR
 import Display
 import LED
 
@@ -16,7 +15,6 @@ def main():
     # 9つのスレッドで処理を並列実行
     executor = ThreadPoolExecutor(max_workers=9)
     executor.submit(InVoice.assistant)
-    executor.submit(InIR.inputIR)
     executor.submit(Display.display)
     executor.submit(LED.led)
 
