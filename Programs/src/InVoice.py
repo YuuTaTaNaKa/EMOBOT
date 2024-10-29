@@ -1,6 +1,7 @@
 # 音声入力・感情認識用スレッド
 import speech_recognition as sr
 import Process.VoiceProcess as vp
+import Process.Empath as ep
 import time
 
 recognizer = sr.Recognizer()
@@ -31,8 +32,10 @@ def assistant():
             # 音声の認識を実行
             order = listen()
             vp.process(order)
-        if "アレクサ" or "オッケーグーグル" or "ヘイシリー" in command:
+            ep.empath(order)
+        if "アレクサ" or "あれくさ" or"ALXA"or "alxa" or "オッケーグーグル" or "おっけーぐーぐる" or "OK Google" or "ヘイシリー" or "へいしり" or "Hey Siri" or "hey siri" in command:
             time.sleep(0.5)
+            vp.angry()
         else:
             print("なんて言ったかわかんないなぁ")
 
