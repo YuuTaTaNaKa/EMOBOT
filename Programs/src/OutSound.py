@@ -1,6 +1,8 @@
 # 音声出力スレッド
 import time
 from playsound import playsound
+Musics = []
+
 # 感情
 def angry():
     print("EMOBOTだよ！")
@@ -51,5 +53,9 @@ def NO():
 
 def OK():
     print("わかりました")
+    return
+
+def playMusic():
+    print("音楽を再生します")
     return
 
