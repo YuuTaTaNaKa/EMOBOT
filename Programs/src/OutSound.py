@@ -1,6 +1,18 @@
 # 音声出力スレッド
 import time
 from playsound import playsound
+Angry = []
+Happy = []
+Sad = []
+Surprise = []
+Fear = []
+Greet_morning = []
+Greet_afternoon = []
+Greet_night = []
+Goodnight = []
+Bye = []
+Ok = []
+No = []
 Musics = []
 
 # 感情
@@ -47,15 +59,22 @@ def bye():
     return
 
 # 
-def NO():
+def no():
     print("わかりません")
     return
 
-def OK():
+def ok():
     print("わかりました")
     return
 
+# 音楽の再生
 def playMusic():
     print("音楽を再生します")
+    return
+
+
+# 汎用処理
+def stop():
+    print("音楽を停止します")
     return
 

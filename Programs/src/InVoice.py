@@ -1,7 +1,7 @@
 # 音声入力・感情認識用スレッド
 import speech_recognition as sr
 import Process.VoiceProcess as vp
-import Process.Empath as ep
+# import Process.Empath as ep
 import time
 
 recognizer = sr.Recognizer()

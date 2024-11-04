@@ -15,8 +15,8 @@ def main():
     # 9つのスレッドで処理を並列実行
     executor = ThreadPoolExecutor(max_workers=9)
     executor.submit(InVoice.assistant)
-    executor.submit(Display.display)
-    executor.submit(LED.led)
+    # executor.submit(Display.display)
+    # executor.submit(LED.led)
 
     # プログラムの終了を防ぐために、適宜待機処理を追加
     try:
