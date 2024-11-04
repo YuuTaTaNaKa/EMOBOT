@@ -15,7 +15,7 @@ def listen():
         try:
             command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
             # 感情認識側へ音声を渡す
-            ep.empath(audio)
+            # ep.empath(audio)
             print(f"認識されたコマンド: {command}")
             return command
         except sr.UnknownValueError:
