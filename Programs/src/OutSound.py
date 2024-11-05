@@ -75,6 +75,6 @@ def playMusic():
 
 # 汎用処理
 def stop():
-    print("音楽を停止します")
+    print("停止")
     return
 
