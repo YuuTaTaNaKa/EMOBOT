@@ -18,6 +18,8 @@ def listen():
             # ep.empath(audio)
             print(f"認識されたコマンド: {command}")
             return command
+        except sr.WaitTimeoutError:
+            print("タイムアウトしました。音声入力が検出されませんでした。")
         except sr.UnknownValueError:
             print("よくわからなかったな。もういっかい！")
         except sr.RequestError as e:
