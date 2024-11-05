@@ -1,4 +1,10 @@
-# LEDの制御を行います
+# ラズパイ上でインストールするライブラリ
+# import gpiozero as LED
+import time
 
-def led():
-    print("LEDの制御を行います。")
+# LEDのインスタンスを生成
+led = 11
+bule = 13
+green = 15
+
+# led = LED.LED(led)

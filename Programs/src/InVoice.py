@@ -1,82 +1,52 @@
 # 音声入力・感情認識用スレッド
 import speech_recognition as sr
-import requests
-from concurrent.futures import ThreadPoolExecutor
-# 音声認識の初期化
-recognizer = sr.Recognizer()
+import Process.VoiceProcess as vp
+# import Process.Empath as ep
+import time
 
+recognizer = sr.Recognizer()
 # 音声認識関数
 def listen():
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
-        print("何か話してください...")
-        audio = recognizer.listen(source)
-
+        print("何かおはなしして")
+        # 音声の検出
+        audio = recognizer.listen(source,timeout=5)
         try:
             command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
+            # 感情認識側へ音声を渡す
+            # ep.empath(audio)
             print(f"認識されたコマンド: {command}")
             return command
+        except sr.WaitTimeoutError:
+            print("タイムアウトしました。音声入力が検出されませんでした。")
         except sr.UnknownValueError:
-            print("音声が理解できませんでした。もう一度お話しください。")
+            print("よくわからなかったな。もういっかい！")
         except sr.RequestError as e:
-            print(f"音声認識サービスに接続できませんでした。詳細: {e}")
+            print(f"うまくつながらないな: {e}")
 
 # 音声アシスタントのループ処理
 def assistant():
-    print("こんにちは、何をお手伝いできますか？")
+    print("なにをする？")
     while True:
         command = listen()
+        # 以下のキーワードを受け取ったら
+        if "エモボット" or "えもぼっと" or "EMOBOT" or "emobot" in command:
+            # time.sleep(0.5)
+            #コマンドの認識を開始
+            # 音声の認識、日本語文字化を実行
+            order = listen()
+            # 検出した文字列をコマンド処理側へ渡す
+            vp.process(order)
 
-        if command:
-            if "終了" in command:
-                print("さようなら")
-                break
-            elif "天気"in command:
-                print("現在の天気を調べます...")
-                # 天気情報を取得するコードを追加可能                
-                def main():
-                    api_key = "c9b6c535d058a8f1384591966dfd5492"  # OpenWeatherMapのAPIキーをここに入れる
-                    city = "Gunma"  # 都市名
-                    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+        # 以下のキーワードを受け取ったら
+        if "アレクサ" or "あれくさ" or"ALXA"or "alxa" or "オッケーグーグル" or "おっけーぐーぐる" or "OK Google" or "ヘイシリー" or "へいしり" or "Hey Siri" or "hey siri" in command:
+            # time.sleep(0.5)
+            # 少し怒った反応を返す
+            vp.angry()
+        # 想定外のキーワードの場合
+        else:
+            print("なんて言ったかわかんないなぁ")
 
-                    try:
-                        tenki_data = requests.get(url).json()  # jsonで情報を取得
-                    except requests.exceptions.RequestException as e:
-                        print(f"APIリクエストに失敗しました: {e}")
-                        return
-                    except ValueError as e:
-                        print(f"無効なJSONデータ: {e}")
-                        return
-
-                    print("------------------------")
-                    print("都市名:", tenki_data["name"])
-                    print("天気:", tenki_data["weather"][0]["description"])
-                    print("気温 (摂氏):", tenki_data["main"]["temp"])
-                    print("------------------------")
-
-                if __name__ == '__main__':
-                    main()
-
-
-            elif "時間"in command:
-                from datetime import datetime
-                current_time = datetime.now().strftime("%H時%M分です")
-                print(f"今の時間は {current_time}")
-            else:
-                print("すみません、そのコマンドは理解できませんでした。")
-
-# アシスタントの起動
-assistant()
-
-"""
-使用するAPI(ターミナルでのインストール)
-pyttsx3 は、テキストを音声に変換できる Python ライブラリです。
-そのため、テキストを提供すると、そのテキストが音声に変換されます。
-
-pip install pyttsx3
-
-OpenWeatherMapのAPIキー
-
-c9b6c535d058a8f1384591966dfd5492
-
-"""
+if __name__ == '__main__':
+    assistant()
