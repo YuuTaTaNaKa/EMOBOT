@@ -47,6 +47,3 @@ def assistant():
         # 想定外のキーワードの場合
         else:
             print("なんて言ったかわかんないなぁ")
-
-if __name__ == '__main__':
-    assistant()
