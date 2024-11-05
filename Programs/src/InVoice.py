@@ -11,7 +11,7 @@ def listen():
         recognizer.adjust_for_ambient_noise(source)
         print("何かおはなしして")
         # 音声の検出
-        audio = recognizer.listen(source)
+        audio = recognizer.listen(source,timeout=5)
         try:
             command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
             # 感情認識側へ音声を渡す
