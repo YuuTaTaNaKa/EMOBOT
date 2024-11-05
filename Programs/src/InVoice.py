@@ -30,7 +30,7 @@ def assistant():
         command = listen()
         # 以下のキーワードを受け取ったら
         if "エモボット" or "えもぼっと" or "EMOBOT" or "emobot" in command:
-            time.sleep(0.5)
+            # time.sleep(0.5)
             #コマンドの認識を開始
             # 音声の認識、日本語文字化を実行
             order = listen()
@@ -39,7 +39,7 @@ def assistant():
 
         # 以下のキーワードを受け取ったら
         if "アレクサ" or "あれくさ" or"ALXA"or "alxa" or "オッケーグーグル" or "おっけーぐーぐる" or "OK Google" or "ヘイシリー" or "へいしり" or "Hey Siri" or "hey siri" in command:
-            time.sleep(0.5)
+            # time.sleep(0.5)
             # 少し怒った反応を返す
             vp.angry()
         # 想定外のキーワードの場合
