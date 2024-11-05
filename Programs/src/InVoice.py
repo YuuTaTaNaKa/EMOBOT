@@ -31,7 +31,7 @@ def assistant():
     while True:
         command = listen()
         # 以下のキーワードを受け取ったら
-        if "エモボット" or "えもぼっと" or "EMOBOT" or "emobot" in command:
+        if "エモボット" or "エムボット" or "えもぼっと" or "EMOBOT" or "emobot" in command:
             # time.sleep(0.5)
             #コマンドの認識を開始
             # 音声の認識、日本語文字化を実行
