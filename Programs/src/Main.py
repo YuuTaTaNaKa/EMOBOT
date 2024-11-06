@@ -31,7 +31,6 @@ def stop():
     print("スレッドを終了します。")
     if executor:
         executor.shutdown(wait=True)  # スレッドが完了するのを待つ
-    executor.stop()
     sys.exit()
 
 # プログラムのエントリーポイント
