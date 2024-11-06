@@ -58,3 +58,7 @@ def assistant():
         # 想定外のキーワードの場合
         else:
             print("なんて言ったかわかんないなぁ")
+
+def stop():
+    print("停止")
+    return
