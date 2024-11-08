@@ -26,10 +26,12 @@ def main():
         thread.start()
 
     # プログラムの終了を防ぐために、適宜待機処理を追加
+    print ("test")
     try:
         while True:
             time.sleep(1)  # 1秒待機
-    except KeyboardInterrupt:
+    except KeyboardInterrupt as e:
+        print(e)
         stop()  # Ctrl+Cで停止
 
 # スレッドの終了処理
