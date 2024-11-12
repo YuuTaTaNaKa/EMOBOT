@@ -1,1 +1,20 @@
+from voice_recognition.voice_assistant import speak
+from voice_recognition.voice_assistant import listen
 
+def greeting():
+    while True:
+        command = listen()
+
+        if command:
+
+            if "終了" in command:
+                speak("さようなら")
+                break
+
+            elif "おはよう" in command:
+                speak("こんにちは")
+            
+            else:
+                speak("すみません、そのコマンドは理解できませんでした。")
+
+greeting()
