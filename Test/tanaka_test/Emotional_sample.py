@@ -18,3 +18,5 @@ result = detector.detect_image(single_face_img_path)
 # 結果を出力
 result.plot_detections()
 plt.show()
+
+# test2
