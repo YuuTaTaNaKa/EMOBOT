@@ -1,5 +1,4 @@
-from voice_recognition.voice_assistant import speak
-from voice_recognition.voice_assistant import listen
+from voice_recognition.voice_assistant import speak, listen
 
 def greeting():
     while True:
@@ -12,8 +11,19 @@ def greeting():
                 break
 
             elif "おはよう" in command:
+                # 目を覚ます動作を追加する？
+                speak("おはよう")
+
+            elif "こんにちは" in command:
                 speak("こんにちは")
-            
+
+            elif "おやすみ" in command:
+                speak("おやすみ")
+                # 目を閉じる動作を追加する？
+
+            elif "いってきます" in command or "おかえりなさい" in command:
+                # 元気よく反応する
+
             else:
                 speak("すみません、そのコマンドは理解できませんでした。")
 
