@@ -1,12 +1,8 @@
 import cv2
 
-def display_emotion_image(emotion):
-    if emotion == "positive":
-        image_path = 'YuuTaTaNaKa/EMOBOT/Test/sato_test/egaoFBK.png'
-    elif emotion == "negative":
-        image_path = 'YuuTaTaNaKa/EMOBOT/Test/sato_test/kanasimiFBK.png'
-    else:
-        image_path = 'YuuTaTaNaKa/EMOBOT/Test/sato_test/fubuki.jpg'
+def standbydisplay (displayflag):
+    displayflag = "stand"
+    image_path = 'YuuTaTaNaKa/EMOBOT/Test/sato_test/tozime.png'
     
     # 画像を読み込む
     image = cv2.imread(image_path)

@@ -1,18 +1,9 @@
-#test
 import speech_recognition as sr
-import pyttsx3  # テキストを音声に変換するライブラリ
 import requests
 
 # 音声認識の初期化
 recognizer = sr.Recognizer()
 
-# 音声出力の初期化
-engine = pyttsx3.init()
-
-# 音声出力関数
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
 
 # 音声認識関数
 def listen():
@@ -26,22 +17,37 @@ def listen():
             print(f"認識されたコマンド: {command}")
             return command
         except sr.UnknownValueError:
-            speak("音声が理解できませんでした。もう一度お話しください。")
+            print("音声が理解できませんでした。もう一度お話しください。")
         except sr.RequestError as e:
-            speak(f"音声認識サービスに接続できませんでした。詳細: {e}")
+            print(f"音声認識サービスに接続できませんでした。詳細: {e}")
 
 # 音声アシスタントのループ処理
 def assistant():
-    speak("こんにちは、何をお手伝いできますか？")
+    print("こんにちは、何をお手伝いできますか？")
     while True:
         command = listen()
 
         if command:
             if "終了" in command:
-                speak("さようなら")
+                print("さようなら")
                 break
+            # 喜び
+            elif "おはよう" in command:
+                print("おっはよー！！！")
+            elif "" in command:
+                print()
+            elif "" in command:
+                print()
+            elif "" in command:
+                print()
+            elif "" in command:
+                print()
+            elif "" in command:
+                print()
+
+
             elif "天気"in command:
-                speak("現在の天気を調べます...")
+                print("現在の天気を調べます...")
                 # 天気情報を取得するコードを追加可能                
                 def main():
                     api_key = "c9b6c535d058a8f1384591966dfd5492"  # OpenWeatherMapのAPIキーをここに入れる
@@ -70,9 +76,10 @@ def assistant():
             elif "時間"in command:
                 from datetime import datetime
                 current_time = datetime.now().strftime("%H時%M分です")
-                speak(f"今の時間は {current_time}")
+                print(f"今の時間は {current_time}")
             else:
-                speak("すみません、そのコマンドは理解できませんでした。")
+                print("すみません、そのコマンドは理解できませんでした。")
+            
 
 # アシスタントの起動
 assistant()
