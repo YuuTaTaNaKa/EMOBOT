@@ -32,8 +32,8 @@ def assistant():
                 print("さようなら")
                 break
             # 喜び
-            elif "" in command:
-                print()
+            elif "おはよう" in command:
+                print("おっはよー！！！")
             elif "" in command:
                 print()
             elif "" in command:
