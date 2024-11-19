@@ -1,34 +1,31 @@
-import threading
 import sys
-import time
 import os
+import threading
+import time
 import InVoice
 import Display
 import LED
-from contextlib import redirect_stderr
 
-# グローバルで定義されたスレッドリスト
+# グローバルスレッドリスト
 threads = []
 
-# エラー出力を/dev/nullにリダイレクトするコンテキストs
-class NullError:
-    def __enter__(self):
-        self.devnull = open(os.devnull, 'w')
-        self.original_stderr = sys.stderr
-        sys.stderr = self.devnull
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        sys.stderr = self.original_stderr
-        self.devnull.close()
+def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
+    """
+    ALSAエラーなど、すべての標準エラー出力を指定されたログファイルにリダイレクトする。
+    """
+    sys.stderr = open(logfile, 'a')  # 標準エラー出力を追記モードで開く
 
 # メイン処理
 def main():
     global threads
+
+    # 標準エラー出力をリダイレクト
+    redirect_stderr_to_logfile()
+
     print("スレッドを開始します。")
 
     # 各機能に対してデーモンスレッドを作成
-    voice_thread = threading.Thread(target=run_in_silence, args=(InVoice.assistant,), daemon=True)
+    voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
     display_thread = threading.Thread(target=Display.display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
@@ -43,23 +40,15 @@ def main():
     try:
         while True:
             time.sleep(1)  # 1秒待機
-    except KeyboardInterrupt as e:
+    except KeyboardInterrupt:
         print("\n停止処理を実行します...")
         stop()  # Ctrl+Cで停止
-
-# 特定の処理をエラー出力を無効化した状態で実行
-def run_in_silence(target_function):
-    """
-    指定された関数をエラー出力を/dev/nullにリダイレクトした状態で実行する。
-    """
-    with NullError():
-        target_function()
 
 # スレッドの終了処理
 def stop():
     print("プログラムを終了します。")
     sys.exit()
 
-# プログラムのエントリーポイント
+# エントリーポイント
 if __name__ == "__main__":
     main()
