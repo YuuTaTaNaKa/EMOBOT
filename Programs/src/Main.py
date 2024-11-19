@@ -10,7 +10,7 @@ from contextlib import redirect_stderr
 # グローバルで定義されたスレッドリスト
 threads = []
 
-# エラー出力を/dev/nullにリダイレクトするコンテキスト
+# エラー出力を/dev/nullにリダイレクトするコンテキストs
 class NullError:
     def __enter__(self):
         self.devnull = open(os.devnull, 'w')
