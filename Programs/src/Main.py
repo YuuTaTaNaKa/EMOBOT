@@ -1,24 +1,26 @@
-import threading
 import sys
-import time
 import os
+import threading
+import time
 import InVoice
 import Display
 import LED
 
-# グローバルで定義されたスレッドリスト
+# グローバルスレッドリスト
 threads = []
 
-# 標準エラー出力を/dev/nullにリダイレクト
-def redirect_stderr_to_null():
-    sys.stderr = open(os.devnull, 'w')
+def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
+    """
+    ALSAエラーなど、すべての標準エラー出力を指定されたログファイルにリダイレクトする。
+    """
+    sys.stderr = open(logfile, 'a')  # 標準エラー出力を追記モードで開く
 
 # メイン処理
 def main():
     global threads
 
-    # エラー出力を/dev/nullにリダイレクト
-    redirect_stderr_to_null()
+    # 標準エラー出力をリダイレクト
+    redirect_stderr_to_logfile()
 
     print("スレッドを開始します。")
 
@@ -47,6 +49,6 @@ def stop():
     print("プログラムを終了します。")
     sys.exit()
 
-# プログラムのエントリーポイント
+# エントリーポイント
 if __name__ == "__main__":
     main()
