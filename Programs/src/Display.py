@@ -2,6 +2,7 @@
 import time
 import tkinter
 
+
 def display():
     print("画面を表示します。")
 
