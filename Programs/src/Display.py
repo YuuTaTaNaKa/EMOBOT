@@ -41,7 +41,7 @@ def display():
         canvas.image = img_tk  # 画像がガベージコレクションされないように保持
         
         # メッセージ表示
-        canvas.create_text(canvas_width / 2, canvas_height / 4, text="主人公の性別を選んでください。", font=("Arial", 24), fill="black")
+        # canvas.create_text(canvas_width / 2, canvas_height / 4, text="主人公の性別を選んでください。", font=("Arial", 24), fill="black")
 
         # ボタンの領域を描画
         """rect1 = canvas.create_rectangle(100, 300, 300, 400, fill="red", outline="black")
