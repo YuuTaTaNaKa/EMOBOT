@@ -9,3 +9,5 @@ def display():
 def stop():
     print("スレッドを終了します。")
     return
+
+
