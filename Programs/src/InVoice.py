@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import Process.VoiceProcess as vp
 import time
+import atexit
 
 recognizer = sr.Recognizer()
 
@@ -21,6 +22,14 @@ def listen(timeout=8):
                 command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
                 print(f"認識されたコマンド: {command}")
                 return command
+                #
+                # ログファイルを開く
+                logfile = open("alsa_log.txt", 'a')
+                sys.stderr = logfile
+
+                # プログラム終了時にファイルを閉じる
+                atexit.register(logfile.close)
+                #
             except sr.WaitTimeoutError:
                 print("タイムアウトしました。音声入力が検出されませんでした。")
                 continue  # 再度待機

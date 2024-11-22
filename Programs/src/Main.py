@@ -5,6 +5,7 @@ import time
 import InVoice
 import Display
 import LED
+import atexit
 
 # グローバルスレッドリスト
 threads = []
@@ -48,6 +49,7 @@ def main():
 def stop():
     print("プログラムを終了します。")
     sys.exit()
+
 
 # エントリーポイント
 if __name__ == "__main__":
