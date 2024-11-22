@@ -68,7 +68,7 @@ def display():
         frame = tk.Frame(root)
         
         # 画像を読み込み
-        image_path = "Programs\img\emobot1 copy.jpg"
+        image_path = "Programs\img\emobot1.jpg"
         img = Image.open(image_path)
         img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
         img_tk = ImageTk.PhotoImage(img)
@@ -90,7 +90,7 @@ def display():
         frame = tk.Frame(root)
         
         # 画像を読み込み
-        image_path = "Programs\img\emobot2 copy.jpg"
+        image_path = "Programs\img\emobot2.jpg"
         img = Image.open(image_path)
         img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
         img_tk = ImageTk.PhotoImage(img)
