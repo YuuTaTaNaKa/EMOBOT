@@ -3,7 +3,7 @@ import os
 import threading
 import time
 import InVoice
-import Display
+# import Display
 import LED
 import time
 import tkinter
@@ -67,7 +67,7 @@ def main():
             frame.pack_forget()  # すべてのフレームを非表示
         frames[frame_name].pack(fill=tk.BOTH, expand=True)  # 指定のフレームを表示
 
-    # 画面1: メイン画面
+        # 画面1: メイン画面
     def create_main_screen():
         frame = tk.Frame(root)
         
