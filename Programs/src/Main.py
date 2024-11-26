@@ -31,12 +31,12 @@ def main():
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
-    # display_thread = threading.Thread(target=Display.display, daemon=True)
+    display_thread = threading.Thread(target=Display.display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
-    # threads.extend([voice_thread, display_thread])  # led_thread])
-    threads.extend([voice_thread])  # led_thread])
+    threads.extend([voice_thread, display_thread])  # led_thread])
+    # threads.extend([voice_thread])  # led_thread])
 
     # スレッドを開始
     for thread in threads:
@@ -50,6 +50,7 @@ def main():
         print("\n停止処理を実行します...")
         stop()  # Ctrl+Cで停止
 
+def Display():
     # メインウィンドウの作成
     root = tk.Tk()
     root.title("タッチイベントで画面推移")
@@ -76,7 +77,7 @@ def main():
         canvas.pack(fill=tk.BOTH, expand=True)
         
         # 画像を読み込み
-        image_path = "ookawa_test/emobot1.jpg"
+        image_path = "Programs\img\emobot1.jpg"
         img = Image.open(image_path)
         img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
         img_tk = ImageTk.PhotoImage(img)

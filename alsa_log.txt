@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "c:\Users\yuuta\OneDrive\デスクトップ\EMOBOT\Programs\src\Main.py", line 175, in <module>
+    main()
+  File "c:\Users\yuuta\OneDrive\デスクトップ\EMOBOT\Programs\src\Main.py", line 34, in main
+    display_thread = threading.Thread(target=Display.display, daemon=True)
+                                             ^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'display'
+Traceback (most recent call last):
+  File "c:\Users\yuuta\OneDrive\デスクトップ\EMOBOT\Programs\src\Main.py", line 175, in <module>
+    main()
+  File "c:\Users\yuuta\OneDrive\デスクトップ\EMOBOT\Programs\src\Main.py", line 34, in main
+    display_thread = threading.Thread(target=Display.display, daemon=True)
+                                             ^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'display'
