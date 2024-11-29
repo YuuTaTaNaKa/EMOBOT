@@ -1,6 +1,5 @@
 # 音声入力をもとに処理を行うスレッド
 import time
-
 import OutSound
 from Process import DisplayProcess
 # import EarProcess
