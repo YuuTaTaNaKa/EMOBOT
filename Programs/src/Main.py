@@ -6,7 +6,7 @@ import InVoice
 # import Display
 import LED
 import time
-import tkinter
+# import tkinter
 import tkinter as tk
 from PIL import Image, ImageTk
 
@@ -67,6 +67,28 @@ def Display():
     frames["main"] = create_main_screen(root, canvas_width, canvas_height)
     frames["screen_a"] = create_screen_a(root, canvas_width, canvas_height)
     frames["screen_b"] = create_screen_b(root, canvas_width, canvas_height)
+
+    """# Shiftキーでアプリケーションを終了 
+    def on_shift(event): 
+    if event.keysym == "Shift_L" or event.keysym == "Shift_R": 
+        print("アプリケーションを終了します") 
+        root.destroy() 
+    root.bind("<Key>", on_shift)"""
+
+    # Escキーでアプリケーションを終了 
+    def on_esc(event): 
+        print("アプリケーションを終了します") 
+        # root.destroy() 
+        stop()
+    root.bind("<Escape>", on_esc)
+
+    # F1キーでメイン画面に戻る
+    def on_f1(event):
+        if event.keysym == "F1":
+            print("メイン画面に戻ります")
+            switch_frame("main")
+    root.bind("<KeyPress-F1>", on_f1)
+
 
     # 最初の画面を表示
     switch_frame("main")
