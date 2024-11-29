@@ -42,19 +42,19 @@ def create_main_screen():
     # メッセージ表示
     canvas.create_text(canvas_width / 2, canvas_height / 4, text="主人公の性別を選んでください。", font=("Arial", 24), fill="black")
 
-    """# ボタンの領域を描画
-    rect1 = canvas.create_rectangle(320, 360, 660, 720, fill="red", outline="black") #左、上、右、下 160, 180, 330, 360にて確認
+    # ボタンの領域を描画
+    rect1 = canvas.create_rectangle(160, 180, 330, 360, fill="red", outline="black") #左、上、右、下 160, 180, 330, 360にて確認
     canvas.create_text(200, 350, text="男", font=("Arial", 18), fill="white")
 
-    rect2 = canvas.create_rectangle(1250, 360, 1600, 720, fill="green", outline="black") #左、上、右、下 625, 180, 800, 360にて確認
-    canvas.create_text(600, 350, text="女", font=("Arial", 18), fill="white")"""
+    rect2 = canvas.create_rectangle(625, 180, 800, 360, fill="green", outline="black") #左、上、右、下 625, 180, 800, 360にて確認
+    canvas.create_text(600, 350, text="女", font=("Arial", 18), fill="white")
 
     # タッチイベントのバインド
     def on_touch(event):
-        if 320 <= event.x <= 660 and 360 <= event.y <= 720: #左、右、上、下
+        if 160 <= event.x <= 180 and 330 <= event.y <= 360: #左、右、上、下
             print("画面Aに移動します")
             switch_frame("screen_a")
-        elif 1250 <= event.x <= 1600 and 360 <= event.y <= 720: #左、右、上、下
+        elif 625 <= event.x <= 180 and 800 <= event.y <= 360: #左、右、上、下
             print("画面Bに移動します")
             switch_frame("screen_b")
 
@@ -65,7 +65,7 @@ def create_main_screen():
 # 画面A: 画像Aを表示
 def create_screen_a():
     frame = tk.Frame(root)
-    
+   
     # 画像を読み込み
     image_path = "Test/haga_test/emobot10.jpg"
     img = Image.open(image_path)
