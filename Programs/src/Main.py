@@ -4,7 +4,7 @@ import threading
 import time
 import InVoice
 # import Display
-import LED
+# import LED
 import atexit
 import time
 # import tkinter
