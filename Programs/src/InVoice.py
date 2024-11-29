@@ -4,6 +4,7 @@ import Process.VoiceProcess as vp
 # import Process.VoiceProcess_Empath as vp
 import time
 import atexit
+from Process import Empath
 
 recognizer = sr.Recognizer()
 
