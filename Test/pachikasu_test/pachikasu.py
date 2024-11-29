@@ -1,6 +1,8 @@
-#待機状態（複数色）
+import cv2
 
-#通常状態 (青)
-#エラー状態(赤)
-#音声解析(緑)
-#音楽再生(黄色)
+image_file = 'cat.png'
+img = cv2.imread(image_file)
+cv2.imshow('image', img)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
