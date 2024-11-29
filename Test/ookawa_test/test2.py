@@ -6,7 +6,7 @@ root = tk.Tk()
 root.title("タッチイベントで画面推移")
 
 # ウィンドウの装飾を無効化（タイトルバーを非表示） 
-root.overrideredirect(True)
+#root.overrideredirect(True)
 
 # 画面サイズの設定
 canvas_width, canvas_height = 1920,1080 #960,540にて確認
