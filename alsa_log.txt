@@ -21,3 +21,17 @@ Traceback (most recent call last):
                                              ^^^^^^^^^^^^^^^
 AttributeError: 'function' object has no attribute 'display'
 >>>>>>> origin/thread_merge
+Traceback (most recent call last):
+  File "/Users/akaishiyuuto/Desktop/EMOBOT/Programs/src/Main.py", line 177, in <module>
+    main()
+  File "/Users/akaishiyuuto/Desktop/EMOBOT/Programs/src/Main.py", line 35, in main
+    display_thread = threading.Thread(target=Display.display, daemon=True)
+                                             ^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'display'
+Traceback (most recent call last):
+  File "/Users/akaishiyuuto/Desktop/EMOBOT/Programs/src/Main.py", line 177, in <module>
+    main()
+  File "/Users/akaishiyuuto/Desktop/EMOBOT/Programs/src/Main.py", line 35, in main
+    display_thread = threading.Thread(target=Display.display, daemon=True)
+                                             ^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'display'
