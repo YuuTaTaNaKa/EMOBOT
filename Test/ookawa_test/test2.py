@@ -121,12 +121,12 @@ frames["screen_b"] = create_screen_b()
 # 最初の画面を表示
 switch_frame("main")
 
-# Shiftキーでアプリケーションを終了 
+"""# Shiftキーでアプリケーションを終了 
 def on_shift(event): 
     if event.keysym == "Shift_L" or event.keysym == "Shift_R": 
         print("アプリケーションを終了します") 
         root.destroy() 
-root.bind("<Key>", on_shift)
+root.bind("<Key>", on_shift)"""
 
 # Escキーでアプリケーションを終了 
 def on_esc(event): 
