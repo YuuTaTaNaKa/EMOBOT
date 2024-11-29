@@ -10,7 +10,6 @@ def process(command):
     #　「あいさつ」　*************************************************************   
 
     if "おはよう" in command:
-        
         print("おはよう")
         OutSound.greet_morning()
 
