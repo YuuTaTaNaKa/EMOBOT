@@ -1,12 +1,12 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-
+#原寸大きさ1920x1080
 # メインウィンドウの作成
 root = tk.Tk()
 root.title("タッチイベントで画面推移")
 
-"""# ウィンドウの装飾を無効化（タイトルバーを非表示） 
-root.overrideredirect(True)"""
+# ウィンドウの装飾を無効化（タイトルバーを非表示） 
+#root.overrideredirect(True)
 
 # 画面サイズの設定
 canvas_width, canvas_height = 1920,1080 #960,540にて確認
@@ -42,12 +42,12 @@ def create_main_screen():
     # メッセージ表示
     canvas.create_text(canvas_width / 2, canvas_height / 4, text="主人公の性別を選んでください。", font=("Arial", 24), fill="black")
 
-    """# ボタンの領域を描画
-    rect1 = canvas.create_rectangle(320, 360, 660, 720, fill="red", outline="black") #左、上、右、下 160, 180, 330, 360にて確認
-    canvas.create_text(200, 350, text="男", font=("Arial", 18), fill="white")
+    # ボタンの領域を描画
+    #rect1 = canvas.create_rectangle(320, 360, 660, 720, fill="red", outline="black") #左、上、右、下 160, 180, 330, 360にて確認
+    canvas.create_text(490, 580, text="男", font=("Arial", 60), fill="black")
 
-    rect2 = canvas.create_rectangle(1250, 360, 1600, 720, fill="green", outline="black") #左、上、右、下 625, 180, 800, 360にて確認
-    canvas.create_text(600, 350, text="女", font=("Arial", 18), fill="white")"""
+    #rect2 = canvas.create_rectangle(1250, 360, 1600, 720, fill="green", outline="black") #左、上、右、下 625, 180, 800, 360にて確認
+    canvas.create_text(1420, 580, text="女", font=("Arial", 60), fill="black")
 
     # タッチイベントのバインド
     def on_touch(event):
@@ -77,11 +77,13 @@ def create_screen_a():
     canvas.create_image(0, 0, anchor=tk.NW, image=img_tk)
     canvas.image = img_tk  # 画像がガベージコレクションされないように保持
     canvas.pack(fill=tk.BOTH, expand=True)
-    
-    # 戻るボタン
-    back_button = tk.Button(frame, text="メイン画面に戻る", command=lambda: switch_frame("main"))
-    back_button.pack(pady=20)
+    canvas.create_text(490, 580, text="戻る", font=("Arial", 60), fill="black") 
+    def on_touch(event): 
+        if 320 <= event.x <= 660 and 360 <= event.y <= 720: # 左、右、上、下 
+            print("メイン画面に戻ります") 
+            switch_frame("main") 
 
+    canvas.bind("<Button-1>", on_touch) # 左クリックをタッチとして扱う
     return frame
 
 # 画面B: 画像Bを表示
@@ -99,11 +101,16 @@ def create_screen_b():
     canvas.create_image(0, 0, anchor=tk.NW, image=img_tk)
     canvas.image = img_tk  # 画像がガベージコレクションされないように保持
     canvas.pack(fill=tk.BOTH, expand=True)
+    canvas.create_text(490, 580, text="戻る", font=("Arial", 60), fill="black")
     
-    # 戻るボタン
-    back_button = tk.Button(frame, text="やり直す", command=lambda: switch_frame("main"))
-    back_button.pack(pady=20)
+    # タッチイベントのバインド 
+    def on_touch(event): 
+        if 320 <= event.x <= 660 and 320 <= event.y <= 720: # 左、右、上、下 
+            print("メイン画面に戻ります")
+            
+            switch_frame("main") 
 
+    canvas.bind("<Button-1>", on_touch) # 左クリックをタッチとして扱う
     return frame
 
 # フレームを登録
@@ -126,6 +133,13 @@ def on_esc(event):
     print("アプリケーションを終了します") 
     root.destroy() 
 root.bind("<Escape>", on_esc)
+
+# F1キーでメイン画面に戻る
+def on_f1(event):
+    if event.keysym == "F1":
+        print("メイン画面に戻ります")
+        switch_frame("main")
+root.bind("<KeyPress-F1>", on_f1)
 
 # メインループ
 root.mainloop()
