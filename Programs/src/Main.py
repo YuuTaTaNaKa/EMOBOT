@@ -33,7 +33,7 @@ def main():
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
-    display_thread = threading.Thread(target=Display.display, daemon=True)
+    display_thread = threading.Thread(target=Display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
@@ -60,6 +60,16 @@ def Display():
     # 画面サイズの設定
     canvas_width, canvas_height = 800, 600
     root.geometry(f"{canvas_width}x{canvas_height}")
+
+    frames["main"] = create_main_screen(root, canvas_width, canvas_height)
+    frames["screen_a"] = create_screen_a(root, canvas_width, canvas_height)
+    frames["screen_b"] = create_screen_b(root, canvas_width, canvas_height)
+
+    # 最初の画面を表示
+    switch_frame("main")
+
+    # メインループ
+    root.mainloop()
 
 def switch_frame(frame_name):
     """指定されたフレームを表示"""
@@ -94,19 +104,20 @@ def create_main_screen(root, canvas_width, canvas_height):
 
     rect2 = canvas.create_rectangle(500, 300, 700, 400, fill="green", outline="black")
     canvas.create_text(600, 350, text="女", font=("Arial", 18), fill="white")"""
-    
+
+    # タッチイベントのバインド
+    def on_touch(event):
+        if 100 <= event.x <= 300 and 300 <= event.y <= 400:
+            print("画面Aに移動します")
+            switch_frame("screen_a")
+        elif 500 <= event.x <= 700 and 300 <= event.y <= 400:
+            print("画面Bに移動します")
+            switch_frame("screen_b")
+
     canvas.bind("<Button-1>", on_touch)  # 左クリックをタッチとして扱う
 
     return frame
 
-    # タッチイベントのバインド
-def on_touch(event):
-    if 100 <= event.x <= 300 and 300 <= event.y <= 400:
-        print("画面Aに移動します")
-        switch_frame("screen_a")
-    elif 500 <= event.x <= 700 and 300 <= event.y <= 400:
-        print("画面Bに移動します")
-        switch_frame("screen_b")
 
 
 # 画面A: 画像Aを表示
