@@ -57,8 +57,11 @@ def Display():
     root = tk.Tk()
     root.title("タッチイベントで画面推移")
 
+    # ウィンドウの装飾を無効化（タイトルバーを非表示） 
+    # root.overrideredirect(True)
+
     # 画面サイズの設定
-    canvas_width, canvas_height = 800, 600
+    canvas_width, canvas_height = 1920, 1080
     root.geometry(f"{canvas_width}x{canvas_height}")
 
     frames["main"] = create_main_screen(root, canvas_width, canvas_height)
