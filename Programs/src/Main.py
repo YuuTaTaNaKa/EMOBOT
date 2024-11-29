@@ -79,7 +79,7 @@ def Display():
     # Escキーでアプリケーションを終了 
     def on_esc(event): 
         print("アプリケーションを終了します") 
-        # root.destroy() 
+        root.destroy() 
         stop()
     root.bind("<Escape>", on_esc)
 
