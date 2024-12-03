@@ -82,7 +82,7 @@ def Display():
     # Escキーでアプリケーションを終了 
     def on_esc(event): 
         print("アプリケーションを終了します") 
-        # root.destroy() 
+        root.destroy() 
         stop()
     root.bind("<Escape>", on_esc)
 
@@ -115,7 +115,8 @@ def create_main_screen(root, canvas_width, canvas_height):
     canvas.pack(fill=tk.BOTH, expand=True)
     
     # 画像を読み込み
-    image_path = "Programs\img\emobot1.jpg"
+    image_path = os.path.join("Programs", "img", "emobot1.jpg")
+    # image_path = "Programs\img\emobot1.jpg"
     img = Image.open(image_path)
     img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
     img_tk = ImageTk.PhotoImage(img)
@@ -154,7 +155,8 @@ def create_screen_a(root, canvas_width, canvas_height):
     frame = tk.Frame(root)
     
     # 画像を読み込み
-    image_path = "Programs\img\emobot1.jpg"
+    image_path = os.path.join("Programs", "img", "emobot1.jpg")
+    # image_path = "Programs\img\emobot1.jpg"
     img = Image.open(image_path)
     img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
     img_tk = ImageTk.PhotoImage(img)
@@ -176,7 +178,8 @@ def create_screen_b(root, canvas_width, canvas_height):
     frame = tk.Frame(root)
     
     # 画像を読み込み
-    image_path = "Programs\img\emobot2.jpg"
+    image_path = os.path.join("Programs", "img", "emobot2.jpg")
+    # image_path = "Programs\img\emobot2.jpg"
     img = Image.open(image_path)
     img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
     img_tk = ImageTk.PhotoImage(img)
