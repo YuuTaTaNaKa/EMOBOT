@@ -4,6 +4,7 @@ import time
 import InVoice
 import Display
 import LED
+import Process
 
 # グローバルで定義されたスレッドリスト
 threads = []
@@ -14,7 +15,7 @@ def main():
     print("スレッドを開始します。")
     
     # 各機能に対してデーモンスレッドを作成
-    voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
+    voice_thread = threading.Thread(target=Process.assistant, daemon=True)
     display_thread = threading.Thread(target=Display.display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
     
