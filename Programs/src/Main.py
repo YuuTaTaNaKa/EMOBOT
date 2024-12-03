@@ -9,12 +9,9 @@ import time
 # import tkinter
 import tkinter as tk
 from PIL import Image, ImageTk
+import queue
 
-
-# グローバルスレッドリスト
-threads = []
-# 各画面を切り替えるためのフレーム作成
-frames = {}
+data_queue = queue.Queue()
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
     """
@@ -33,12 +30,12 @@ def main():
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
-    display_thread = threading.Thread(target=Display, daemon=True)
+    # display_thread = threading.Thread(target=Display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
-    threads.extend([voice_thread, display_thread])  # led_thread])
-    # threads.extend([voice_thread])  # led_thread])
+    # threads.extend([voice_thread, display_thread])  # led_thread])
+    threads.extend([voice_thread])  # led_thread])
 
     # スレッドを開始
     for thread in threads:
@@ -88,7 +85,6 @@ def Display():
             print("メイン画面に戻ります")
             switch_frame("main")
     root.bind("<KeyPress-F1>", on_f1)
-
 
     # 最初の画面を表示
     switch_frame("main")
@@ -145,7 +141,6 @@ def create_main_screen(root, canvas_width, canvas_height):
     return frame
 
 
-
 # 画面A: 画像Aを表示
 def create_screen_a(root, canvas_width, canvas_height):
     frame = tk.Frame(root)
@@ -200,4 +195,38 @@ def stop():
 
 # エントリーポイント
 if __name__ == "__main__":
+    # グローバルスレッドリスト
+    global threads
+    threads = []
+    # 各画面を切り替えるためのフレーム作成
+    frames = {}
+
     main()
+
+    # # 標準エラー出力をリダイレクト
+    # redirect_stderr_to_logfile()
+
+    # print("スレッドを開始します。")
+
+    # # 各機能に対してデーモンスレッドを作成
+    # voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
+    # # display_thread = threading.Thread(target=Display, daemon=True)
+    # # led_thread = threading.Thread(target=LED.led, daemon=True)
+
+    # # スレッドをリストに追加
+    # # threads.extend([voice_thread, display_thread])  # led_thread])
+    # threads.extend([voice_thread])  # led_thread])
+
+    # # スレッドを開始
+    # for thread in threads:
+    #     thread.start()
+
+    # # プログラムの終了を防ぐために、適宜待機処理を追加
+    # try:
+    #     while True:
+    #         time.sleep(1)  # 1秒待機
+    # except KeyboardInterrupt:
+    #     print("\n停止処理を実行します...")
+    #     stop()  # Ctrl+Cで停止
+
+    # Display()
