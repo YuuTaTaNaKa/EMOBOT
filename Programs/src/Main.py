@@ -4,14 +4,17 @@ import threading
 import time
 import InVoice
 # import Display
-import LED
+# import LED
+import atexit
 import time
 # import tkinter
 import tkinter as tk
 from PIL import Image, ImageTk
-import queue
+import Display
+import LED
+import Process
 
-data_queue = queue.Queue()
+# data_queue = queue.Queue()
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
     """
@@ -75,7 +78,7 @@ def Display():
     # Escキーでアプリケーションを終了 
     def on_esc(event): 
         print("アプリケーションを終了します") 
-        # root.destroy() 
+        root.destroy() 
         stop()
     root.bind("<Escape>", on_esc)
 
@@ -192,6 +195,7 @@ def create_screen_b(root, canvas_width, canvas_height):
 def stop():
     print("プログラムを終了します。")
     sys.exit()
+
 
 # エントリーポイント
 if __name__ == "__main__":

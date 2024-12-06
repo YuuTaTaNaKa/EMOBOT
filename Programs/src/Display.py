@@ -4,6 +4,7 @@ import tkinter
 import tkinter as tk
 from PIL import Image, ImageTk
 
+
 def display():
     # メインウィンドウの作成
     root = tk.Tk()
