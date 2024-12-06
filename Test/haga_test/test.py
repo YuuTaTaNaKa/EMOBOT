@@ -1,4 +1,5 @@
 import tkinter as tk
+import time
 from PIL import Image, ImageTk
 
 # メインウィンドウの作成
@@ -20,6 +21,12 @@ def switch_frame(frame_name):
     for frame in frames.values():
         frame.pack_forget()  # すべてのフレームを非表示
     frames[frame_name].pack(fill=tk.BOTH, expand=True)  # 指定のフレームを表示
+
+    # 時計を更新する関数
+def update_clock(canvas, clock_text): 
+    current_time = time.strftime("%H:%M") 
+    canvas.itemconfig(clock_text, text=current_time) 
+    canvas.after(1000, update_clock, canvas, clock_text) # 1秒ごとに更新
 
 # 画面1: メイン画面
 def create_main_screen():
@@ -59,6 +66,10 @@ def create_main_screen():
             switch_frame("screen_b")
 
     canvas.bind("<Button-1>", on_touch)  # 左クリックをタッチとして扱う
+
+    # 時計をキャンバスに追加
+    clock_text = canvas.create_text(890, 50, text="", font=("Arial", 24), fill="black") 
+    update_clock(canvas, clock_text)
 
     return frame
 
