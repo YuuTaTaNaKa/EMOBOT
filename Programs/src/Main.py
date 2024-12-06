@@ -11,14 +11,10 @@ import time
 import tkinter as tk
 from PIL import Image, ImageTk
 import Display
-import LED
+# import LED
 import Process
 
-
-# グローバルスレッドリスト
-threads = []
-# 各画面を切り替えるためのフレーム作成
-frames = {}
+# data_queue = queue.Queue()
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
     """
@@ -36,7 +32,7 @@ def main():
     print("スレッドを開始します。")
 
     # 各機能に対してデーモンスレッドを作成
-    voice_thread = threading.Thread(target=Process.assistant, daemon=True)
+    voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
     display_thread = threading.Thread(target=Display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
@@ -93,7 +89,6 @@ def Display():
             switch_frame("main")
     root.bind("<KeyPress-F1>", on_f1)
 
-
     # 最初の画面を表示
     switch_frame("main")
 
@@ -147,7 +142,6 @@ def create_main_screen(root, canvas_width, canvas_height):
     canvas.bind("<Button-1>", on_touch)  # 左クリックをタッチとして扱う
 
     return frame
-
 
 
 # 画面A: 画像Aを表示
@@ -205,4 +199,9 @@ def stop():
 
 # エントリーポイント
 if __name__ == "__main__":
+    # グローバルスレッドリスト
+    threads = []
+    # 各画面を切り替えるためのフレーム作成
+    frames = {}
+
     main()
