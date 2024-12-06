@@ -11,7 +11,7 @@ import time
 import tkinter as tk
 from PIL import Image, ImageTk
 import Display
-import LED
+# import LED
 import Process
 
 # data_queue = queue.Queue()
@@ -33,12 +33,12 @@ def main():
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
-    # display_thread = threading.Thread(target=Display, daemon=True)
+    display_thread = threading.Thread(target=Display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
-    # threads.extend([voice_thread, display_thread])  # led_thread])
-    threads.extend([voice_thread])  # led_thread])
+    threads.extend([voice_thread, display_thread])  # led_thread])
+    # threads.extend([voice_thread])  # led_thread])
 
     # スレッドを開始
     for thread in threads:
@@ -200,7 +200,6 @@ def stop():
 # エントリーポイント
 if __name__ == "__main__":
     # グローバルスレッドリスト
-    global threads
     threads = []
     # 各画面を切り替えるためのフレーム作成
     frames = {}
