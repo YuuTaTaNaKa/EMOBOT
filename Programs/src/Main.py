@@ -13,8 +13,9 @@ from PIL import Image, ImageTk
 import Display
 # import LED
 import Process
+import queue
 
-# data_queue = queue.Queue()
+data_queue = queue.Queue()
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
     """
