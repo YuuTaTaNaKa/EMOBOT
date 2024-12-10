@@ -1,8 +1,40 @@
 # 音声入力をもとに処理を行うスレッド
 import time
 import OutSound
-from Process import DisplayProcess
+import DisplayProcess
+import Empath
+import InVoice
 # import EarProcess
+
+# 音声アシスタントのループ処理
+def assistant():
+    print("なにをする？")
+    while True:
+        command, audio_file = InVoice.listen(timeout=8)
+        
+        if command is None and audio_file is None:
+            print("リセットされました。再度話しかけてください。")
+            continue
+
+        # エモボットに関連するキーワード
+        emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
+        # 他のアシスタントのキーワード
+        other_assistant_keywords = ["アレクサ", "あれくさ", "ALXA", "alxa", "オッケーグーグル", "おっけーぐーぐる", "OK Google", "ヘイシリー", "へいしり", "Hey Siri", "hey siri"]
+
+        # エモボットのキーワードが含まれている場合
+        if any(word in command for word in emobot_keywords):
+            order = InVoice.listen(timeout=8)[0]  # 再度8秒間だけONにしてコマンドを聞き取る
+            if order:
+                process(order)
+
+        # # 他のアシスタントのキーワードが含まれている場合
+        # elif any(word in command for word in other_assistant_keywords):
+        #     angry()
+        
+        # 想定外のキーワードの場合
+        else:
+            empath_transfer(audio_file)
+            print("なんて言ったかわかんないなぁ")
 
 def process(command):
     print("音声入力をもとに処理を行います")
@@ -10,6 +42,7 @@ def process(command):
     #　「あいさつ」　*************************************************************   
 
     if "おはよう" in command:
+        
         print("おはよう")
         OutSound.greet_morning()
 
@@ -79,3 +112,13 @@ def process(command):
 
     else:
         print("なんて言ったかわかんないなぁ")
+
+# ********************************〔Empath.pyの呼び出し〕*******************************************
+def empath_transfer(audio_file):
+    if not audio_file:
+        print("音声データがありません。")
+        return
+    
+    # 感情分析
+    print("感情を分析しています...")
+    Empath.empath(audio_file)
