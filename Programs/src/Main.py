@@ -3,8 +3,7 @@ import os
 import threading
 import time
 import InVoice
-import Display
-import LED
+# import LED
 import atexit
 import time
 import tkinter as tk
@@ -34,12 +33,10 @@ def main():
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=Process.assistant, daemon=True)
-    display_thread = threading.Thread(target=Display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
-    threads.extend([voice_thread, display_thread])  # led_thread])
-    # threads.extend([voice_thread])  # led_thread])
+    threads.extend([voice_thread])  # led_thread])
 
     # スレッドを開始
     for thread in threads:
@@ -47,8 +44,14 @@ def main():
 
     # プログラムの終了を防ぐために、適宜待機処理を追加
     try:
-        while True:
-            time.sleep(1)  # 1秒待機
+        # メインウィンドウの作成
+        root = tk.Tk()
+        root.title("タッチイベントで画面推移")
+
+        # 画面サイズの設定
+        canvas_width, canvas_height = 1920, 1080
+        root.geometry(f"{canvas_width}x{canvas_height}")
+        
     except KeyboardInterrupt:
         print("\n停止処理を実行します...")
         stop()  # Ctrl+Cで停止
