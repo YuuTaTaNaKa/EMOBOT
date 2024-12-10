@@ -40,7 +40,7 @@ def listen(timeout=8):
                 # 音声認識を実行
                 command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
                 print(f"認識されたコマンド: {command}")
-                return command
+                return command,converted_audio_file
                 #
                 # ログファイルを開く
                 logfile = open("alsa_log.txt", 'a')
