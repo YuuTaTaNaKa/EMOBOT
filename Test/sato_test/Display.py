@@ -7,15 +7,15 @@ def display():
     screen_width, screen_height = 800, 600
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("タッチイベントで画面推移")
-
+    """""
     # 画像の読み込み
     def load_image(path):
-        full_path = os.path.join("Programs", "img", path)
+        full_path = os.path.join("Test","Programs", "img", path)
         return pygame.transform.scale(pygame.image.load(full_path), (screen_width, screen_height))
-
-    main_image = load_image("emobot1.jpg")
-    screen_a_image = load_image("emobot1.jpg")
-    screen_b_image = load_image("emobot2.jpg")
+    """
+    main_image = pygame.image.load("emobot1.jpg")
+    screen_a_image =pygame.image.load("emobot1.jpg")
+    screen_b_image =pygame.image.load("emobot2.jpg")
 
     # フレームの状態管理
     current_screen = "main"
