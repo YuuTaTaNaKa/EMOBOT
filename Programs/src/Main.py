@@ -32,15 +32,6 @@ def main():
 
     print("スレッドを開始します。")
 
-    # 各機能に対してデーモンスレッドを作成
-    voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
-    display_thread = threading.Thread(target=Display, daemon=True)
-    # led_thread = threading.Thread(target=LED.led, daemon=True)
-
-    # スレッドをリストに追加
-    threads.extend([voice_thread, display_thread])  # led_thread])
-    # threads.extend([voice_thread])  # led_thread])
-
     # スレッドを開始
     for thread in threads:
         thread.start()
@@ -53,7 +44,7 @@ def main():
         print("\n停止処理を実行します...")
         stop()  # Ctrl+Cで停止
 
-def Display():
+# def Display():
     # メインウィンドウの作成
     root = tk.Tk()
     root.title("タッチイベントで画面推移")
@@ -204,5 +195,14 @@ if __name__ == "__main__":
     threads = []
     # 各画面を切り替えるためのフレーム作成
     frames = {}
+
+    # 各機能に対してデーモンスレッドを作成
+    voice_thread = threading.Thread(target=InVoice.assistant, daemon=True)
+    display_thread = threading.Thread(target=Display, daemon=True)
+    # led_thread = threading.Thread(target=LED.led, daemon=True)
+
+    # スレッドをリストに追加
+    threads.extend([voice_thread, display_thread])  # led_thread])
+    # threads.extend([voice_thread])  # led_thread])
 
     main()
