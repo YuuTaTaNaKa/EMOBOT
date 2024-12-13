@@ -5,8 +5,11 @@ from PIL import Image, ImageTk
 root = tk.Tk()
 root.title("タッチイベントで画面推移")
 
+# ウィンドウの装飾を無効化（タイトルバーを非表示） 
+#root.overrideredirect(True)
+
 # 画面サイズの設定
-canvas_width, canvas_height = 800, 600
+canvas_width, canvas_height = 960,540 #960,540にて確認
 root.geometry(f"{canvas_width}x{canvas_height}")
 
 # 各画面を切り替えるためのフレーム作成
@@ -40,18 +43,18 @@ def create_main_screen():
     canvas.create_text(canvas_width / 2, canvas_height / 4, text="主人公の性別を選んでください。", font=("Arial", 24), fill="black")
 
     # ボタンの領域を描画
-    """rect1 = canvas.create_rectangle(100, 300, 300, 400, fill="red", outline="black")
-    canvas.create_text(200, 350, text="男", font=("Arial", 18), fill="white")
+    #rect1 = canvas.create_rectangle(160, 180, 330, 360, fill="red", outline="black") #左、上、右、下 160, 180, 330, 360にて確認
+    canvas.create_text(245, 290, text="男", font=("Arial", 30), fill="black")
 
-    rect2 = canvas.create_rectangle(500, 300, 700, 400, fill="green", outline="black")
-    canvas.create_text(600, 350, text="女", font=("Arial", 18), fill="white")"""
+    #rect2 = canvas.create_rectangle(625, 180, 800, 360, fill="green", outline="black") #左、上、右、下 625, 180, 800, 360にて確認
+    canvas.create_text(710, 290, text="女", font=("Arial", 30), fill="black")
 
     # タッチイベントのバインド
     def on_touch(event):
-        if 100 <= event.x <= 300 and 300 <= event.y <= 400:
+        if 160 <= event.x <= 330 and 180 <= event.y <= 360: #左、右、上、下
             print("画面Aに移動します")
             switch_frame("screen_a")
-        elif 500 <= event.x <= 700 and 300 <= event.y <= 400:
+        elif 625 <= event.x <= 800 and 180 <= event.y <= 360: #左、右、上、下
             print("画面Bに移動します")
             switch_frame("screen_b")
 
@@ -74,11 +77,13 @@ def create_screen_a():
     canvas.create_image(0, 0, anchor=tk.NW, image=img_tk)
     canvas.image = img_tk  # 画像がガベージコレクションされないように保持
     canvas.pack(fill=tk.BOTH, expand=True)
-    
-    # 戻るボタン
-    back_button = tk.Button(frame, text="メイン画面に戻る", command=lambda: switch_frame("main"))
-    back_button.pack(pady=20)
+    canvas.create_text(245, 290, text="戻る", font=("Arial", 30), fill="black") 
+    def on_touch(event): 
+        if 160 <= event.x <= 330 and 180 <= event.y <= 360: # 左、右、上、下 
+            print("メイン画面に戻ります") 
+            switch_frame("main") 
 
+    canvas.bind("<Button-1>", on_touch) # 左クリックをタッチとして扱う
     return frame
 
 # 画面B: 画像Bを表示
@@ -96,10 +101,17 @@ def create_screen_b():
     canvas.create_image(0, 0, anchor=tk.NW, image=img_tk)
     canvas.image = img_tk  # 画像がガベージコレクションされないように保持
     canvas.pack(fill=tk.BOTH, expand=True)
+    canvas.create_text(245, 290, text="戻る", font=("Arial", 30), fill="black")
     
-    # 戻るボタン
-    back_button = tk.Button(frame, text="やり直す", command=lambda: switch_frame("main"))
-    back_button.pack(pady=20)
+    # タッチイベントのバインド 
+    def on_touch(event): 
+        if 160 <= event.x <= 330 and 180 <= event.y <= 360: # 左、右、上、下 
+            print("メイン画面に戻ります")
+            
+            switch_frame("main") 
+
+    canvas.bind("<Button-1>", on_touch) # 左クリックをタッチとして扱う
+    
 
     return frame
 
@@ -113,3 +125,5 @@ switch_frame("main")
 
 # メインループ
 root.mainloop()
+
+#pip install pillow これ入れるかも？
