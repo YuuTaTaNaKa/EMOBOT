@@ -30,7 +30,7 @@ def create_main_screen():
     canvas.pack(fill=tk.BOTH, expand=True)
     
     # 画像を読み込み
-    image_path = "Programs/img/boy_1.jpg"
+    image_path = "Test/ookawa_test/emobot1.jpg"
     img = Image.open(image_path)
     img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
     img_tk = ImageTk.PhotoImage(img)
@@ -67,7 +67,7 @@ def create_screen_a():
     frame = tk.Frame(root)
     
     # 画像を読み込み
-    image_path = "Programs/img/boy_1.jpg"
+    image_path = "Test/ookawa_test/emobot1.jpg"
     img = Image.open(image_path)
     img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
     img_tk = ImageTk.PhotoImage(img)
@@ -91,7 +91,7 @@ def create_screen_b():
     frame = tk.Frame(root)
     
     # 画像を読み込み
-    image_path = "Programs/img/girl_1.jpg"
+    image_path = "Test/ookawa_test/emobot2.jpg"
     img = Image.open(image_path)
     img = img.resize((canvas_width, canvas_height))  # 画像のサイズを調整
     img_tk = ImageTk.PhotoImage(img)
@@ -145,5 +145,3 @@ root.bind("<KeyPress-F1>", on_f1)
 root.mainloop()
 
 #pip install pillow これ入れるかも？
-
-

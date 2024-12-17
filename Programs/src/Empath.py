@@ -2,7 +2,6 @@
 from gpiozero import LED
 from time import sleep
 import requests
-import pydub
 
 def empath(voice):
     url = "https://api.webempath.net/v2/analyzeWav"
