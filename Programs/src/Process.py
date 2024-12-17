@@ -10,7 +10,7 @@ import InVoice
 def assistant():
     print("なにをする？")
     while True:
-        command, audio_file = InVoice.listen(timeout=8)
+        command, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5)
         
         if command is None and audio_file is None:
             print("リセットされました。再度話しかけてください。")
@@ -23,7 +23,7 @@ def assistant():
 
         # エモボットのキーワードが含まれている場合
         if any(word in command for word in emobot_keywords):
-            order = InVoice.listen(timeout=8)[0]  # 再度8秒間だけONにしてコマンドを聞き取る
+            order = InVoice.listen(mic_timeout=5, phrase_time_limit=5)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
             if order:
                 process(order)
 
