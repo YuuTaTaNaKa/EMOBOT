@@ -71,6 +71,68 @@ def process(command):
         DisplayProcess.close_eyes()
         OutSound.good_night()
 
+#キーワードコマンド
+
+    elif "いいね" in command:
+        print("いいね")
+        OutSound.welcome_home()
+
+    elif "体調が悪い" in command:
+        print("体調が悪い")
+        OutSound.welcome_home()
+
+    elif "体調がいい" in command:
+        print("体調がいい")
+        OutSound.welcome_home()
+
+    elif "体調がいい" in command:
+        print("体調がいい")
+        OutSound.welcome_home()
+
+    elif "誕生日" in command:
+        print("誕生日")
+        OutSound.welcome_home()
+
+    elif "ハッピーバースデー" in command:
+        print("ハッピーバースデー")
+        OutSound.welcome_home()
+
+    elif "いい気分" in command:
+        print("いい気分")
+        OutSound.welcome_home()
+
+    elif "かっこいい" in command:
+            print("かっこいい")
+            OutSound.welcome_home()
+
+    elif "癒してほしい" in command:
+        print("癒してほしい")
+        OutSound.welcome_home()
+
+    elif "つらい" in command:
+        print("つらい")
+        OutSound.welcome_home()
+
+    elif "疲れた" in command:
+            print("疲れた")
+            OutSound.welcome_home()
+
+    elif "しんどい" in command:
+            print("しんどい")
+            OutSound.welcome_home()
+
+    elif "おめでとう" in command:
+            print("おめでとう")
+            OutSound.welcome_home()
+
+    elif "最高" in command:
+            print("最高")
+            OutSound.welcome_home()
+
+    elif "憂鬱" in command:
+            print("憂鬱")
+            OutSound.welcome_home()
+
 #　「感情」　*************************************************************       
 
     elif "驚き" in command:
