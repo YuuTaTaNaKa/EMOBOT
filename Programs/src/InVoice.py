@@ -11,9 +11,18 @@ def convert_sample_rate(input_file, output_file, target_rate=11025):
     audio = audio.set_frame_rate(target_rate)
     audio.export(output_file, format="wav")
     print(f"音声ファイルを {target_rate}Hz に変換しました: {output_file}")
+    
+# 音声wavファイルを5秒間のファイルにトリミング
+def trim_audio(file_path, max_duration=5):
+    """音声ファイルを最大指定時間にトリミングする"""
+    audio = AudioSegment.from_wav(file_path)
+    if len(audio) > max_duration * 1000:  # ミリ秒単位
+        audio = audio[:max_duration * 1000]
+        audio.export(file_path, format="wav")
+        print(f"音声ファイルを {max_duration} 秒にトリミングしました: {file_path}")
 
 # 音声認識関数
-def listen(timeout=8):
+def listen(mic_timeout=5, phrase_time_limit=5):
     start_time = time.time()  # 現在の時刻を取得
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
@@ -21,11 +30,11 @@ def listen(timeout=8):
         
         while True:
             # 音声の検出（5秒でタイムアウト）
-            if time.time() - start_time > timeout:
+            if time.time() - start_time > mic_timeout:
                 print("時間が切れました。")
                 return None, None
             try:
-                audio = recognizer.listen(source, timeout=5)
+                audio = recognizer.listen(source, timeout=mic_timeout, phrase_time_limit=phrase_time_limit)
 
                 temp_audio_file = "temp_audio.wav"
                 with open(temp_audio_file, "wb") as f:
@@ -34,6 +43,8 @@ def listen(timeout=8):
                 # サンプルレートを変換
                 converted_audio_file = "converted_audio.wav"
                 convert_sample_rate(temp_audio_file, converted_audio_file)
+                #ファイルを5秒にトリミング
+                trim_audio(converted_audio_file, max_duration=5)
 
                 # 音声認識を実行
                 command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
