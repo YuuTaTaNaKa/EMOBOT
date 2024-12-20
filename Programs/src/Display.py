@@ -237,6 +237,11 @@ root.bind("<KeyPress-F1>", on_f1)
 # メインループ
 root.mainloop()
 
+# スレッドの終了処理
+def stop():
+    print("プログラムを終了します。")
+    sys.exit()
+
 # RasPi4側 エントリーポイント
 if __name__ == "__Display__":
     Display()
