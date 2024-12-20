@@ -1,3 +1,5 @@
+import sys
+import os
 import tkinter as tk
 from PIL import Image, ImageTk
 #原寸大きさ1920x1080
