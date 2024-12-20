@@ -4,18 +4,9 @@ import threading
 import time
 import InVoice
 import Display
-import LED
-import atexit
-import time
-import tkinter as tk
-from PIL import Image, ImageTk
+# import LED
 import Process
 
-
-# グローバルスレッドリスト
-threads = []
-# 各画面を切り替えるためのフレーム作成
-frames = {}
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
     """
@@ -27,10 +18,8 @@ def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
 def main():
     global threads
 
-    # 標準エラー出力をリダイレクト
-    redirect_stderr_to_logfile()
-
-    print("mainスレッドを開始します。")
+    # グローバルスレッドリスト
+    threads = []
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=Process.assistant, daemon=True)
@@ -40,6 +29,11 @@ def main():
     # スレッドをリストに追加
     threads.extend([voice_thread, display_thread])  # led_thread])
     # threads.extend([voice_thread])  # led_thread])
+
+    # 標準エラー出力をリダイレクト
+    redirect_stderr_to_logfile()
+
+    print("mainスレッドを開始します。")
 
     # スレッドを開始
     for thread in threads:
@@ -59,7 +53,6 @@ def stop():
     print("プログラムを終了します。")
     sys.exit()
 
-
-# RasPi5側 エントリーポイント
+# エントリーポイント
 if __name__ == "__main__":
     main()
