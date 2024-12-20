@@ -144,6 +144,10 @@ root.bind("<KeyPress-F1>", on_f1)
 # メインループ
 root.mainloop()
 
+# RasPi4側 エントリーポイント
+if __name__ == "__Display__":
+    Display()
+
 #pip install pillow これ入れるかも？
 
 

@@ -71,4 +71,3 @@ def raspi4_send(strongest_emotion):
 
     print(strongest_emotion + pin + "をONにします。")
     sleep(3)
-    LED.off
