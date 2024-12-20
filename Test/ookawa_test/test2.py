@@ -145,5 +145,3 @@ root.bind("<KeyPress-F1>", on_f1)
 root.mainloop()
 
 #pip install pillow これ入れるかも？
-
-

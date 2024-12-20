@@ -3,13 +3,6 @@ import os
 import threading
 import time
 import InVoice
-# import Display
-# import LED
-import atexit
-import time
-# import tkinter
-import tkinter as tk
-from PIL import Image, ImageTk
 import Display
 # import LED
 import Process
@@ -30,7 +23,7 @@ def main():
     # 標準エラー出力をリダイレクト
     redirect_stderr_to_logfile()
 
-    print("スレッドを開始します。")
+    print("mainスレッドを開始します。")
 
     # スレッドを開始
     for thread in threads:
