@@ -25,6 +25,7 @@ def display():
         boy_wink_image = pygame.image.load("Programs/img/boy_wink.jpg")
         boy_sleep_image = pygame.image.load("Programs/img/boy_sleep.jpg")
         boy_sad_image = pygame.image.load("Programs/img/boy_sad.jpg")
+        boy_omg_image = pygame.image.load("Programs/img/boy_omg.jpg")
 
         # girl画像
         girl_Default_image = pygame.image.load("Programs/img/girl_Default.jpg")
@@ -35,6 +36,8 @@ def display():
         girl_thinEye_image = pygame.image.load("Programs/img/girl_thinEye.jpg")
         girl_sleep_image = pygame.image.load("Programs/img/girl_sleep.jpg")
         girl_sad_image = pygame.image.load("Programs/img/girl_sad.jpg")
+        girl_omg_image = pygame.image.load("Programs/img/girl_omg.jpg")
+        girl_embarrassed_image = pygame.image.load("Programs/img/girl_embarrassed.jpg")
     except pygame.error as e:
         print(f"画像の読み込みエラー: {e}")
         pygame.quit()
