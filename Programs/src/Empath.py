@@ -1,5 +1,5 @@
 # 感情の読み取りと感情スコア生成を行う
-from gpiozero import LED
+# from gpiozero import LED
 from time import sleep
 import requests
 
@@ -47,27 +47,27 @@ def emotion(scores):
         print(f"{emotion}: {category}")
 
     print(f"\n最も強い感情は '{strongest_emotion}' で、スコアは {strongest_score} です。")
-    raspi4_send(strongest_emotion)
+    # raspi4_send(strongest_emotion)
 
 
 #一番高い値の感情を元に、Displayに信号を送る gpiozero
-def raspi4_send(strongest_emotion):
+# def raspi4_send(strongest_emotion):
     
-    if strongest_emotion == "calm":
-        LED(17).on() 
-        pin = "LED(17)"
-    elif strongest_emotion == "anger":
-        LED(27).on()
-        pin = "LED(27)"
-    elif strongest_emotion == "joy":
-        LED(22).on()
-        pin = "LED(22)"
-    elif strongest_emotion == "sorrow":
-        LED(5).on()
-        pin = "LED(5)"
-    elif strongest_emotion == "energy":
-        LED(6).on()
-        pin = "LED(6)"
+#     if strongest_emotion == "calm":
+#         LED(17).on() 
+#         pin = "LED(17)"
+#     elif strongest_emotion == "anger":
+#         LED(27).on()
+#         pin = "LED(27)"
+#     elif strongest_emotion == "joy":
+#         LED(22).on()
+#         pin = "LED(22)"
+#     elif strongest_emotion == "sorrow":
+#         LED(5).on()
+#         pin = "LED(5)"
+#     elif strongest_emotion == "energy":
+#         LED(6).on()
+#         pin = "LED(6)"
 
-    print(strongest_emotion + pin + "をONにします。")
-    sleep(3)
+#     print(strongest_emotion + pin + "をONにします。")
+#     sleep(3)
