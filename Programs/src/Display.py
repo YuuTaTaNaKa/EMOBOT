@@ -2,7 +2,7 @@ import pygame
 import os
 import sys
 from gpiozero import LED, Button
-from signal import pause
+# from signal import pause
 
 def display():
     # Pygameの初期化
@@ -106,6 +106,7 @@ calm_pin = Button(0)
 anger_pin = Button(5)
 joy_pin = Button(6)
 sorrow_pin = Button(13)
+energy_pin = Button(5)
 # Pin番号 0,5,6,13
 
 # 各感情に対応する処理
@@ -138,7 +139,15 @@ energy_pin.when_pressed = handle_energy
 
 # 無限ループで監視
 print("信号を監視しています。Ctrl+C で終了します。")
-pause()
+
+# windowsの場合pause()は使えないから代用
+# pause()
+try:
+    while True:
+        pass  # 無限ループで待機
+except KeyboardInterrupt:
+    print("プログラムを終了します。")
+
 
 # import tkinter as tk
 # from PIL import Image, ImageTk
