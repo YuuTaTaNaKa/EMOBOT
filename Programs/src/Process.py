@@ -3,6 +3,7 @@ import time
 import OutSound
 import Empath
 import InVoice
+import Display
 # import EarProcess
 
 # 音声アシスタントのループ処理
@@ -67,7 +68,7 @@ def process(command):
 
     elif "おやすみ" in command:
     #「目を閉じる」DisplayProcessに遷移
-        DisplayProcess.close_eyes()
+        Display.close_eyes()
         OutSound.good_night()
 
 #キーワードコマンド
@@ -166,10 +167,10 @@ def process(command):
         print("音楽を再生します")
         OutSound.playMusic()
 
-    elif "クイズ" in command:
-        print("クイズを出して")
-        DisplayProcess.quiz()
-        #OutSound() ??
+    # elif "クイズ" in command:
+    #     print("クイズを出して")
+    #     DisplayProcess.quiz()
+    #     #OutSound() ??
 
     else:
         print("なんて言ったかわかんないなぁ")
