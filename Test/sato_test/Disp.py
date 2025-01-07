@@ -11,9 +11,12 @@ def display():
 
     # 画像の読み込み
     try:
-        main_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
-        screen_a_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
-        screen_b_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
+        # main_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
+        # screen_a_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
+        # screen_b_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
+        main_image = pygame.image.load("Test/sato_test/emobot1.jpg")
+        screen_a_image = pygame.image.load("Test/sato_test/emobot1.jpg")
+        screen_b_image = pygame.image.load("Test/sato_test/emobot2.jpg")
     except pygame.error as e:
         print(f"画像の読み込みエラー: {e}")
         pygame.quit()
