@@ -102,10 +102,10 @@ def display():
                         if abs(dx) > abs(dy):
                             if dx > 0:
                                 print("右スワイプ")
-                                current_screen = "boy_Default"
+                                current_screen = "boy"
                             else:
                                 print("左スワイプ")
-                                current_screen = "girl_Default"
+                                current_screen = "girl"
                         else:
                             if dy > 0:
                                 print("下スワイプ")
@@ -123,9 +123,9 @@ def display():
         # 画面描画
         if current_screen == "main":
             screen.blit(boy_Default_image, (0, 0))
-        elif current_screen == "screen_a":
+        elif current_screen == "boy":
             screen.blit(boy_Default_image, (0, 0))
-        elif current_screen == "screen_b":
+        elif current_screen == "girl":
             screen.blit(girl_Default_image, (0, 0))
 
         # 画面更新
@@ -139,6 +139,7 @@ def display():
 if __name__ == "__main__":
     display()
 
+<<<<<<< HEAD
 #Empath → gpioPin受け取り側
 # 各ピンを監視するためのセットアップ
 calm_pin = Button(0)
@@ -149,6 +150,9 @@ energy_pin = Button(5)
 # Pin番号 0,5,6,13
 # def close_eyes():
     
+=======
+# def close_eyes():
+>>>>>>> b909b2740877dfa9303fe75bb2d3257ca1dac365
 
 # 各感情に対応する処理
 def handle_calm():
