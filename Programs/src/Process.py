@@ -4,6 +4,7 @@ import OutSound
 import DisplayProcess
 import Empath
 import InVoice
+# import gpiozero
 # import EarProcess
 
 # 音声アシスタントのループ処理
@@ -41,8 +42,7 @@ def process(command):
 
     #　「あいさつ」　*************************************************************   
 
-    if "おはよう" in command:
-        
+    if "おはよう" in command:        
         print("おはよう")
         OutSound.greet_morning()
 
