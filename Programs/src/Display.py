@@ -9,28 +9,30 @@ try:
     # screen_b_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
 
     # boy画像
-    boy_Default_image = pygame.image.load("Programs/img/boy_Default.jpg")
-    boy_smile_image = pygame.image.load("Programs/img/boy_smile.jpg")
-    boy_kirarin_image = pygame.image.load("Programs/img/boy_kirarin.jpg")
-    boy_anger_image = pygame.image.load("Programs/img/boy_anger.jpg")
-    boy_doubt_image = pygame.image.load("Programs/img/boy_doubt.jpg")
-    boy_thinEye_image = pygame.image.load("Programs/img/boy_thinEye.jpg")
-    boy_wink_image = pygame.image.load("Programs/img/boy_wink.jpg")
-    boy_sleep_image = pygame.image.load("Programs/img/boy_sleep.jpg")
-    boy_sad_image = pygame.image.load("Programs/img/boy_sad.jpg")
-    boy_omg_image = pygame.image.load("Programs/img/boy_omg.jpg")
+    boy_Default_image = pygame.image.load("Programs\\img\\boy_Default.jpg")
+    boy_smile_image = pygame.image.load("Programs\\img\\boy_smile.jpg")
+    boy_kirarin_image = pygame.image.load("Programs\\img\\boy_kirarin.jpg")
+    boy_anger_image = pygame.image.load("Programs\\img\\boy_anger.jpg")
+    boy_doubt_image = pygame.image.load("Programs\\img\\boy_doubt.jpg")
+    boy_thinEye_image = pygame.image.load("Programs\\img\\boy_thinEye.jpg")
+    boy_wink_image = pygame.image.load("Programs\\img\\boy_wink.jpg")
+    boy_sleep_image = pygame.image.load("Programs\\img\\boy_sleep.jpg")
+    boy_sad_image = pygame.image.load("Programs\\img\\boy_sad.jpg")
+    boy_omg_image = pygame.image.load("Programs\\img\\boy_omg.jpg")
+    boy_embarrassed_image = pygame.image.load("Programs\\img\\boy_embarrassed.jpg")
 
     # girl画像
-    girl_Default_image = pygame.image.load("Programs\img\girl_Default.jpg")
-    girl_smile_image = pygame.image.load("Programs\img\girl_smile.jpg")
-    girl_kirarin_image = pygame.image.load("Programs\img\girl_kirarin.jpg")
-    girl_anger_image = pygame.image.load("Programs\img\girl_anger.jpg")
-    girl_doubt_image = pygame.image.load("Programs\img\girl_doubt.jpg")
-    girl_thinEye_image = pygame.image.load("Programs\img\girl_thinEye.jpg")
-    girl_sleep_image = pygame.image.load("Programs\img\girl_sleep.jpg")
-    girl_sad_image = pygame.image.load("Programs\img\girl_sad.jpg")
-    girl_omg_image = pygame.image.load("Programs\img\girl_omg.jpg")
-    girl_embarrassed_image = pygame.image.load("Programs\img\girl_embarrassed.jpg")
+    girl_Default_image = pygame.image.load("Programs\\img\\girl_Default.jpg")
+    girl_smile_image = pygame.image.load("Programs\\img\\girl_smile.jpg")
+    girl_kirarin_image = pygame.image.load("Programs\\img\\girl_kirarin.jpg")
+    girl_anger_image = pygame.image.load("Programs\\img\\girl_anger.jpg")
+    girl_doubt_image = pygame.image.load("Programs\\img\\girl_doubt.jpg")
+    girl_thinEye_image = pygame.image.load("Programs\\img\\girl_thinEye.jpg")
+    girl_wink_image = pygame.image.load("Programs\\img\\girl_wink.jpg")
+    girl_sleep_image = pygame.image.load("Programs\\img\\girl_sleep.jpg")
+    girl_sad_image = pygame.image.load("Programs\\img\\girl_sad.jpg")
+    girl_omg_image = pygame.image.load("Programs\\img\\girl_omg.jpg")
+    girl_embarrassed_image = pygame.image.load("Programs\\img\\girl_embarrassed.jpg")
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     pygame.quit()
@@ -82,10 +84,10 @@ def display():
                         if abs(dx) > abs(dy):
                             if dx > 0:
                                 print("右スワイプ")
-                                current_screen = "boy_Default"
+                                current_screen = "boy"
                             else:
                                 print("左スワイプ")
-                                current_screen = "girl_Default"
+                                current_screen = "girl"
                         else:
                             if dy > 0:
                                 print("下スワイプ")
@@ -103,9 +105,9 @@ def display():
         # 画面描画
         if current_screen == "main":
             screen.blit(boy_Default_image, (0, 0))
-        elif current_screen == "screen_a":
+        elif current_screen == "boy":
             screen.blit(boy_Default_image, (0, 0))
-        elif current_screen == "screen_b":
+        elif current_screen == "girl":
             screen.blit(girl_Default_image, (0, 0))
 
         # 画面更新
