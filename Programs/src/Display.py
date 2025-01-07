@@ -1,42 +1,55 @@
 import pygame
 import os
 import sys
+# from gpiozero import LED, Button
+# from signal import pause
 
-# 画像の読み込み
 try:
-    # main_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
-    # screen_a_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
-    # screen_b_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
+
+    #pathの読み込み
+    base_path = "C:\\EMOBOT\\Programs\\img"
 
     # boy画像
-    boy_Default_image = pygame.image.load("Programs\\img\\boy_Default.jpg")
-    boy_smile_image = pygame.image.load("Programs\\img\\boy_smile.jpg")
-    boy_kirarin_image = pygame.image.load("Programs\\img\\boy_kirarin.jpg")
-    boy_anger_image = pygame.image.load("Programs\\img\\boy_anger.jpg")
-    boy_doubt_image = pygame.image.load("Programs\\img\\boy_doubt.jpg")
-    boy_thinEye_image = pygame.image.load("Programs\\img\\boy_thinEye.jpg")
-    boy_wink_image = pygame.image.load("Programs\\img\\boy_wink.jpg")
-    boy_sleep_image = pygame.image.load("Programs\\img\\boy_sleep.jpg")
-    boy_sad_image = pygame.image.load("Programs\\img\\boy_sad.jpg")
-    boy_omg_image = pygame.image.load("Programs\\img\\boy_omg.jpg")
-    boy_embarrassed_image = pygame.image.load("Programs\\img\\boy_embarrassed.jpg")
-
+    boy_Default_image = pygame.image.load(os.path.join(base_path, "boy_Default.jpg"))
+    boy_smile_image = pygame.image.load(os.path.join(base_path, "boy_smile.jpg"))
+    boy_kirarin_image = pygame.image.load(os.path.join(base_path, "boy_kirarin.jpg"))
+    boy_anger_image = pygame.image.load(os.path.join(base_path, "boy_anger.jpg"))
+    boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_doubt.jpg"))
+    boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_embarrassed.jpg"))
+    boy_thinEye_image = pygame.image.load(os.path.join(base_path, "boy_thinEye.jpg"))
+    boy_wink_image = pygame.image.load(os.path.join(base_path, "boy_wink.jpg"))
+    boy_sleep_image = pygame.image.load(os.path.join(base_path, "boy_sleep.jpg"))
+    boy_sad_image = pygame.image.load(os.path.join(base_path, "boy_sad.jpg"))
+    boy_omg_image = pygame.image.load(os.path.join(base_path, "boy_omg.jpg"))
     # girl画像
-    girl_Default_image = pygame.image.load("Programs\\img\\girl_Default.jpg")
-    girl_smile_image = pygame.image.load("Programs\\img\\girl_smile.jpg")
-    girl_kirarin_image = pygame.image.load("Programs\\img\\girl_kirarin.jpg")
-    girl_anger_image = pygame.image.load("Programs\\img\\girl_anger.jpg")
-    girl_doubt_image = pygame.image.load("Programs\\img\\girl_doubt.jpg")
-    girl_thinEye_image = pygame.image.load("Programs\\img\\girl_thinEye.jpg")
-    girl_wink_image = pygame.image.load("Programs\\img\\girl_wink.jpg")
-    girl_sleep_image = pygame.image.load("Programs\\img\\girl_sleep.jpg")
-    girl_sad_image = pygame.image.load("Programs\\img\\girl_sad.jpg")
-    girl_omg_image = pygame.image.load("Programs\\img\\girl_omg.jpg")
-    girl_embarrassed_image = pygame.image.load("Programs\\img\\girl_embarrassed.jpg")
+    girl_Default_image = pygame.image.load(os.path.join(base_path, "girl_Default.jpg"))
+    girl_smile_image = pygame.image.load(os.path.join(base_path, "girl_smile.jpg"))
+    girl_kirarin_image = pygame.image.load(os.path.join(base_path, "girl_kirarin.jpg"))
+    girl_anger_image = pygame.image.load(os.path.join(base_path, "girl_anger.jpg"))
+    girl_doubt_image = pygame.image.load(os.path.join(base_path, "girl_doubt.jpg"))
+    girl_embarrassed_image = pygame.image.load(os.path.join(base_path, "girl_embarrassed.jpg"))
+    girl_thinEye_image = pygame.image.load(os.path.join(base_path, "girl_thinEye.jpg"))
+    girl_wink_image = pygame.image.load(os.path.join(base_path, "girl_wink.jpg"))
+    girl_sleep_image = pygame.image.load(os.path.join(base_path, "girl_sleep.jpg"))
+    girl_sad_image = pygame.image.load(os.path.join(base_path, "girl_sad.jpg"))
+    girl_omg_image = pygame.image.load(os.path.join(base_path, "girl_omg.jpg"))
+
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     pygame.quit()
     # sys.exit()
+
+def resize_image(image, screen_width, screen_height):
+    """画像をフルスクリーンに合わせてリサイズする"""
+    img_width, img_height = image.get_width(), image.get_height()
+    aspect_ratio = img_width / img_height
+    if screen_width / screen_height > aspect_ratio:
+        new_width = int(screen_height * aspect_ratio)
+        new_height = screen_height
+    else:
+        new_width = screen_width
+        new_height = int(screen_width / aspect_ratio)
+    return pygame.transform.scale(image, (new_width, new_height))
 
 def display():
     # Pygameの初期化
@@ -45,12 +58,11 @@ def display():
     # 色の定義 (RGB形式)
     WHITE = (255, 255, 255)
 
-    # 画像のサイズを取得してウィンドウサイズを設定
-    WIDTH, HEIGHT = boy_Default_image.get_width(), boy_Default_image.get_height()
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))  # ウィンドウの作成
-    pygame.display.set_caption("Pygame 画面出力例")  # ウィンドウタイトル
+    # フルスクリーンの解像度を取得
+    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # フルスクリーンの設定
+    screen_width, screen_height = screen.get_size()
 
-    # フレームの状態管理
+    # 画像の初期表示
     current_screen = "main"
 
     # スワイプに関連する変数
@@ -104,11 +116,14 @@ def display():
 
         # 画面描画
         if current_screen == "main":
-            screen.blit(boy_Default_image, (0, 0))
+            resized_image = resize_image(boy_Default_image, screen_width, screen_height)
+            screen.blit(resized_image, (0, 0))
         elif current_screen == "boy":
-            screen.blit(boy_Default_image, (0, 0))
+            resized_image = resize_image(boy_Default_image, screen_width, screen_height)
+            screen.blit(resized_image, (0, 0))
         elif current_screen == "girl":
-            screen.blit(girl_Default_image, (0, 0))
+            resized_image = resize_image(girl_Default_image, screen_width, screen_height)
+            screen.blit(resized_image, (0, 0))
 
         # 画面更新
         pygame.display.flip()
@@ -121,7 +136,66 @@ def display():
 if __name__ == "__main__":
     display()
 
-# def close_eyes():
+
+# #Empath → gpioPin受け取り側
+# # 各ピンを監視するためのセットアップ
+# calm_pin = Button(0)
+# anger_pin = Button(5)
+# joy_pin = Button(6)
+# sorrow_pin = Button(13)
+# energy_pin = Button(5)
+# # Pin番号 0,5,6,13
+# # def close_eyes():
+    
+
+# # 各感情に対応する処理
+# def handle_calm():
+#     print("Calm (17): 落ち着いた信号を受信しました。")
+#     # 必要な処理をここに追加
+
+# def handle_anger():
+#     print("Anger (27): 怒りの信号を受信しました。")
+#     # 必要な処理をここに追加
+
+# def handle_joy():
+#     print("Joy (22): 喜びの信号を受信しました。")
+#     # 必要な処理をここに追加
+
+# def handle_sorrow():
+#     print("Sorrow (5): 悲しみの信号を受信しました。")
+#     # 必要な処理をここに追加
+
+# def handle_energy():
+#     print("Energy (6): 活力の信号を受信しました。")
+#     # 必要な処理をここに追加
+
+# # ピンに信号が入ったときのイベント設定
+# calm_pin.when_pressed = handle_calm
+# anger_pin.when_pressed = handle_anger
+# joy_pin.when_pressed = handle_joy
+# sorrow_pin.when_pressed = handle_sorrow
+# energy_pin.when_pressed = handle_energy
+
+# # 無限ループで監視
+# print("信号を監視しています。Ctrl+C で終了します。")
+
+# # windowsの場合pause()は使えないから代用
+# pause()
+# try:
+#     while True:
+#         pass  # 無限ループで待機
+# except KeyboardInterrupt:
+#     print("プログラムを終了します。")
+
+
+
+
+
+
+
+
+
+
 
 
 
