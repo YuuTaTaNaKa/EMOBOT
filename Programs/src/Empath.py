@@ -54,7 +54,7 @@ def emotion(scores):
 def raspi4_send(strongest_emotion):
     
     if strongest_emotion == "calm":
-        LED(17).on()
+        LED(17).on() 
         pin = "LED(17)"
     elif strongest_emotion == "anger":
         LED(27).on()

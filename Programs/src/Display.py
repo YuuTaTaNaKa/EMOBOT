@@ -1,6 +1,8 @@
 import pygame
 import os
 import sys
+from gpiozero import LED, Button
+from signal import pause
 
 def display():
     # Pygameの初期化
@@ -98,8 +100,45 @@ def display():
 if __name__ == "__main__":
     display()
 
+#Empath → gpioPin受け取り側
+# 各ピンを監視するためのセットアップ
+calm_pin = Button(0)
+anger_pin = Button(5)
+joy_pin = Button(6)
+sorrow_pin = Button(13)
+# Pin番号 0,5,6,13
 
+# 各感情に対応する処理
+def handle_calm():
+    print("Calm (17): 落ち着いた信号を受信しました。")
+    # 必要な処理をここに追加
 
+def handle_anger():
+    print("Anger (27): 怒りの信号を受信しました。")
+    # 必要な処理をここに追加
+
+def handle_joy():
+    print("Joy (22): 喜びの信号を受信しました。")
+    # 必要な処理をここに追加
+
+def handle_sorrow():
+    print("Sorrow (5): 悲しみの信号を受信しました。")
+    # 必要な処理をここに追加
+
+def handle_energy():
+    print("Energy (6): 活力の信号を受信しました。")
+    # 必要な処理をここに追加
+
+# ピンに信号が入ったときのイベント設定
+calm_pin.when_pressed = handle_calm
+anger_pin.when_pressed = handle_anger
+joy_pin.when_pressed = handle_joy
+sorrow_pin.when_pressed = handle_sorrow
+energy_pin.when_pressed = handle_energy
+
+# 無限ループで監視
+print("信号を監視しています。Ctrl+C で終了します。")
+pause()
 
 # import tkinter as tk
 # from PIL import Image, ImageTk
