@@ -10,29 +10,47 @@ try:
     # screen_a_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
     # screen_b_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
 
+
     # boy画像
-    boy_Default_image = pygame.image.load("Programs/img/boy_Default.jpg")
-    boy_smile_image = pygame.image.load("Programs/img/boy_smile.jpg")
-    boy_kirarin_image = pygame.image.load("Programs/img/boy_kirarin.jpg")
-    boy_anger_image = pygame.image.load("Programs/img/boy_anger.jpg")
-    boy_doubt_image = pygame.image.load("Programs/img/boy_doubt.jpg")
-    boy_thinEye_image = pygame.image.load("Programs/img/boy_thinEye.jpg")
-    boy_wink_image = pygame.image.load("Programs/img/boy_wink.jpg")
-    boy_sleep_image = pygame.image.load("Programs/img/boy_sleep.jpg")
-    boy_sad_image = pygame.image.load("Programs/img/boy_sad.jpg")
-    boy_omg_image = pygame.image.load("Programs/img/boy_omg.jpg")
+    # 画像のパスを指定
+    base_path = "C:\\EMOBOT\\Programs\\img"
+
+    # 各画像をロード
+    boy_Default_image = pygame.image.load(os.path.join(base_path, "boy_Default.jpg"))
+    boy_smile_image = pygame.image.load(os.path.join(base_path, "boy_smile.jpg"))
+    boy_kirarin_image = pygame.image.load(os.path.join(base_path, "boy_kirarin.jpg"))
+    boy_anger_image = pygame.image.load(os.path.join(base_path, "boy_anger.jpg"))
+    boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_doubt.jpg"))
+    boy_thinEye_image = pygame.image.load(os.path.join(base_path, "boy_thinEye.jpg"))
+    boy_wink_image = pygame.image.load(os.path.join(base_path, "boy_wink.jpg"))
+    boy_sleep_image = pygame.image.load(os.path.join(base_path, "boy_sleep.jpg"))
+    boy_sad_image = pygame.image.load(os.path.join(base_path, "boy_sad.jpg"))
+    boy_omg_image = pygame.image.load(os.path.join(base_path, "boy_omg.jpg"))
 
     # girl画像
-    girl_Default_image = pygame.image.load("Programs\img\girl_Default.jpg")
-    girl_smile_image = pygame.image.load("Programs\img\girl_smile.jpg")
-    girl_kirarin_image = pygame.image.load("Programs\img\girl_kirarin.jpg")
-    girl_anger_image = pygame.image.load("Programs\img\girl_anger.jpg")
-    girl_doubt_image = pygame.image.load("Programs\img\girl_doubt.jpg")
-    girl_thinEye_image = pygame.image.load("Programs\img\girl_thinEye.jpg")
-    girl_sleep_image = pygame.image.load("Programs\img\girl_sleep.jpg")
-    girl_sad_image = pygame.image.load("Programs\img\girl_sad.jpg")
-    girl_omg_image = pygame.image.load("Programs\img\girl_omg.jpg")
-    girl_embarrassed_image = pygame.image.load("Programs\img\girl_embarrassed.jpg")
+    girl_Default_image = pygame.image.load(os.path.join("Programs", "img", "girl_Default.jpg"))
+    girl_smile_image = pygame.image.load(os.path.join("Programs", "img", "girl_smile.jpg"))
+    girl_kirarin_image = pygame.image.load(os.path.join("Programs", "img", "girl_kirarin.jpg"))
+    girl_anger_image = pygame.image.load(os.path.join("Programs", "img", "girl_anger.jpg"))
+    girl_doubt_image = pygame.image.load(os.path.join("Programs", "img", "girl_doubt.jpg"))
+    girl_thinEye_image = pygame.image.load(os.path.join("Programs", "img", "girl_thinEye.jpg"))
+    girl_sleep_image = pygame.image.load(os.path.join("Programs", "img", "girl_sleep.jpg"))
+    girl_sad_image = pygame.image.load(os.path.join("Programs", "img", "girl_sad.jpg"))
+    girl_omg_image = pygame.image.load(os.path.join("Programs", "img", "girl_omg.jpg"))
+    girl_embarrassed_image = pygame.image.load(os.path.join("Programs", "img", "girl_embarrassed.jpg"))
+
+    boy_Default_image = pygame.image.load(os.path.join(base_path, "boy_Default.jpg"))
+    boy_smile_image = pygame.image.load(os.path.join(base_path, "boy_smile.jpg"))
+    boy_kirarin_image = pygame.image.load(os.path.join(base_path, "boy_kirarin.jpg"))
+    boy_anger_image = pygame.image.load(os.path.join(base_path, "boy_anger.jpg"))
+    boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_doubt.jpg"))
+    boy_thinEye_image = pygame.image.load(os.path.join(base_path, "boy_thinEye.jpg"))
+    boy_wink_image = pygame.image.load(os.path.join(base_path, "boy_wink.jpg"))
+    boy_sleep_image = pygame.image.load(os.path.join(base_path, "boy_sleep.jpg"))
+    boy_sad_image = pygame.image.load(os.path.join(base_path, "boy_sad.jpg"))
+    boy_omg_image = pygame.image.load(os.path.join(base_path, "boy_omg.jpg"))
+    
+
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     pygame.quit()
@@ -129,7 +147,8 @@ joy_pin = Button(6)
 sorrow_pin = Button(13)
 energy_pin = Button(5)
 # Pin番号 0,5,6,13
-def close_eyes():
+# def close_eyes():
+    
 
 # 各感情に対応する処理
 def handle_calm():
