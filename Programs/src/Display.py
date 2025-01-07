@@ -34,7 +34,7 @@ try:
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     pygame.quit()
-    sys.exit()
+    # sys.exit()
 
 def display():
     # Pygameの初期化
@@ -120,6 +120,7 @@ if __name__ == "__main__":
     display()
 
 # def close_eyes():
+
 
 
 
