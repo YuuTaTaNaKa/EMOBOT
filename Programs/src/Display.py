@@ -141,6 +141,7 @@ import pygame
 import os
 import sys
 from gpiozero import LED, Button
+from signal import pause
 
 try:
 
@@ -318,12 +319,12 @@ energy_pin.when_pressed = handle_energy
 print("信号を監視しています。Ctrl+C で終了します。")
 
 # windowsの場合pause()は使えないから代用
-# pause()
-try:
-    while True:
-        pass  # 無限ループで待機
-except KeyboardInterrupt:
-    print("プログラムを終了します。")
+pause()
+# try:
+#     while True:
+#         pass  # 無限ループで待機
+# except KeyboardInterrupt:
+#     print("プログラムを終了します。")
 
 
 
