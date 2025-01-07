@@ -119,7 +119,7 @@ def display():
 if __name__ == "__main__":
     display()
 
-def close_eyes():
+# def close_eyes():
 
 
 
