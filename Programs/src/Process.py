@@ -6,6 +6,11 @@ import InVoice
 # import gpiozero
 # import EarProcess
 
+# gpioPinテスト用
+import gpiozero
+from gpiozero.pins.mock import MockFactory
+from time import sleep
+
 # 音声アシスタントのループ処理
 def assistant():
     print("なにをする？")

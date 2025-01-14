@@ -3,6 +3,11 @@ from gpiozero import LED
 from time import sleep
 import requests
 
+# gpioPinテスト用
+import gpiozero
+from gpiozero.pins.mock import MockFactory
+from time import sleep
+
 def empath(voice):
     url = "https://api.webempath.net/v2/analyzeWav"
     api_key = "-m_gBMbIiYjyyA-3k6ahRpM9X14-zg6gTg3HqokktI4"

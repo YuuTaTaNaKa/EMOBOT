@@ -141,7 +141,9 @@ import pygame
 import os
 import sys
 from gpiozero import LED, Button
-from signal import pause
+from time import sleep
+# from signal import pause
+
 
 try:
 
@@ -276,55 +278,95 @@ if __name__ == "__main__":
     display()
 
 
+
+
+
+
+
 #Empath → gpioPin受け取り側
 # 各ピンを監視するためのセットアップ
-calm_pin = Button(0)
-anger_pin = Button(5)
-joy_pin = Button(6)
-sorrow_pin = Button(13)
-energy_pin = Button(5)
-# Pin番号 0,5,6,13
-# def close_eyes():
-    
+# Pin番号 0,1,5,6,7,8,9,12,13,16,19,20,21,23,24,25
+from gpiozero import Button
+import pygame
+import os
 
-# 各感情に対応する処理
-def handle_calm():
-    print("Calm (17): 落ち着いた信号を受信しました。")
-    # 必要な処理をここに追加
+# 表情に対応するGPIOピンを定義
+expressions = {
+    "Default": Button(0),
+    "Smile": Button(1),
+    "Kirarin": Button(5),
+    "Anger": Button(6),
+    "Doubt": Button(7),
+    "ThinEye": Button(8),
+    "Wink": Button(9),
+    "Sleep": Button(12),
+    "Sad": Button(13),
+    "OMG": Button(16),
+    "Embarrassed": Button(19),
+    "Other": Button(20),
+}
 
-def handle_anger():
-    print("Anger (27): 怒りの信号を受信しました。")
-    # 必要な処理をここに追加
+# 表情に対応する画像のパス
+image_paths = {
+    "Default": "C:\\EMOBOT\\Programs\\img\\boy_Default.jpg",
+    "Smile": "C:\\EMOBOT\\Programs\\img\\boy_smile.jpg",
+    "Kirarin": "C:\\EMOBOT\\Programs\\img\\boy_kirarin.jpg",
+    "Anger": "C:\\EMOBOT\\Programs\\img\\boy_anger.jpg",
+    "Doubt": "C:\\EMOBOT\\Programs\\img\\boy_doubt.jpg",
+    "ThinEye": "C:\\EMOBOT\\Programs\\img\\boy_thinEye.jpg",
+    "Wink": "C:\\EMOBOT\\Programs\\img\\boy_wink.jpg",
+    "Sleep": "C:\\EMOBOT\\Programs\\img\\boy_sleep.jpg",
+    "Sad": "C:\\EMOBOT\\Programs\\img\\boy_sad.jpg",
+    "OMG": "C:\\EMOBOT\\Programs\\img\\boy_omg.jpg",
+    "Embarrassed": "C:\\EMOBOT\\Programs\\img\\boy_embarrassed.jpg",
+    "Other": "C:\\EMOBOT\\Programs\\img\\boy_other.jpg",
+}
 
-def handle_joy():
-    print("Joy (22): 喜びの信号を受信しました。")
-    # 必要な処理をここに追加
+# Pygame初期化
+pygame.init()
+screen = pygame.display.set_mode((800, 600), pygame.FULLSCREEN)
+pygame.display.set_caption("表情ディスプレイ")
 
-def handle_sorrow():
-    print("Sorrow (5): 悲しみの信号を受信しました。")
-    # 必要な処理をここに追加
+def read_expression():
+    for expression, button in expressions.items():
+        if button.is_pressed:
+            return expression
+    return "Unknown"
 
-def handle_energy():
-    print("Energy (6): 活力の信号を受信しました。")
-    # 必要な処理をここに追加
+def display_expression(expression_name):
+    image_path = image_paths.get(expression_name)
+    if not image_path or not os.path.exists(image_path):
+        print(f"画像が見つかりません: {expression_name}")
+        return
 
-# ピンに信号が入ったときのイベント設定
-calm_pin.when_pressed = handle_calm
-anger_pin.when_pressed = handle_anger
-joy_pin.when_pressed = handle_joy
-sorrow_pin.when_pressed = handle_sorrow
-energy_pin.when_pressed = handle_energy
+    # 画像を読み込んで画面に表示
+    image = pygame.image.load(image_path)
+    screen.blit(pygame.transform.scale(image, screen.get_size()), (0, 0))
+    pygame.display.flip()
 
-# 無限ループで監視
-print("信号を監視しています。Ctrl+C で終了します。")
+try:
+    current_expression = None
+    while True:
+        new_expression = read_expression()
+        if new_expression != current_expression:
+            print(f"受信: {new_expression}")
+            display_expression(new_expression)
+            current_expression = new_expression
+except KeyboardInterrupt:
+    pygame.quit()
+    print("終了しました")
+
+
+
+
 
 # windowsの場合pause()は使えないから代用
-pause()
-# try:
-#     while True:
-#         pass  # 無限ループで待機
-# except KeyboardInterrupt:
-#     print("プログラムを終了します。")
+# pause()
+try:
+    while True:
+        pass  # 無限ループで待機
+except KeyboardInterrupt:
+    print("プログラムを終了します。")
 
 
 
