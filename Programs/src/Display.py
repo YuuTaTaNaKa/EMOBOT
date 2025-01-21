@@ -6,7 +6,7 @@ import sys
 
 try:
     #pathの読み込み
-    base_path = "C:\\EMOBOT\\Programs\\img"
+    base_path = os.path.join("Programs","img")
 
     # boy画像
     boy_Default_image = pygame.image.load(os.path.join(base_path, "boy_Default.jpg"))
