@@ -10,7 +10,7 @@ import InVoice
 def assistant():
     print("なにをする？")
     while True:
-        command, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5)
+        command, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         
         if command is None and audio_file is None:
             print("リセットされました。再度話しかけてください。")
@@ -22,19 +22,31 @@ def assistant():
         other_assistant_keywords = ["アレクサ", "あれくさ", "ALXA", "alxa", "オッケーグーグル", "おっけーぐーぐる", "OK Google", "ヘイシリー", "へいしり", "Hey Siri", "hey siri"]
 
         # エモボットのキーワードが含まれている場合
-        if any(word in command for word in emobot_keywords):
-            order = InVoice.listen(mic_timeout=5, phrase_time_limit=5)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
-            if order:
-                process(order)
+
+        # 以下追加点
+        def assistant_inner():
+            if any(word in command for word in emobot_keywords):
+                order = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
+                if order:
+                    process(order)
+                if command is None and audio_file is None:
+                    print("リセットされました。再度話しかけてください。")
+                    return assistant_inner()
+        # 以上追加点
+
+        # if any(word in command for word in emobot_keywords):
+        #     order = InVoice.listen(mic_timeout=5, phrase_time_limit=5)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
+        #     if order:
+        #         process(order)
 
         # # 他のアシスタントのキーワードが含まれている場合
         # elif any(word in command for word in other_assistant_keywords):
         #     angry()
         
         # 想定外のキーワードの場合
-        else:
-            empath_transfer(audio_file)
-            print("なんて言ったかわかんないなぁ")
+            else:
+                empath_transfer(audio_file)
+                print("なんて言ったかわかんないなぁ")
 
 def process(command):
     print("音声入力をもとに処理を行います")

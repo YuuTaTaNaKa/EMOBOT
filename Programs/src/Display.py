@@ -5,7 +5,6 @@ import sys
 # from signal import pause
 
 try:
-
     #pathの読み込み
     base_path = "C:\\EMOBOT\\Programs\\img"
 

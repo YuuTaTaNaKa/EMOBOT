@@ -24,7 +24,7 @@ def trim_audio(file_path, max_duration=5):
         print(f"音声ファイルを {max_duration} 秒にトリミングしました: {file_path}")
 
 # 音声認識関数
-def listen(mic_timeout=5, phrase_time_limit=5):
+def listen(mic_timeout, phrase_time_limit,number):
     start_time = time.time()  # 現在の時刻を取得
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
@@ -32,9 +32,14 @@ def listen(mic_timeout=5, phrase_time_limit=5):
         
         while True:
             # 音声の検出（5秒でタイムアウト）
-            if time.time() - start_time > mic_timeout:
+            if time.time() - start_time > mic_timeout and number == 0:
                 print("時間が切れました。")
                 return None, None
+             # 以下修正点
+            if time.time() - start_time > mic_timeout and number == 1:
+                print("時間が切れました。")
+                return None, None
+            # 以上修正点
             try:
                 audio = recognizer.listen(source, timeout=mic_timeout, phrase_time_limit=phrase_time_limit)
 
