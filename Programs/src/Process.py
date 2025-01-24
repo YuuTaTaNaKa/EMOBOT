@@ -5,11 +5,13 @@ import Empath
 import InVoice
 import Display
 import subprocess
+# import LED
 # import gpiozero
 # import EarProcess
 
 # 音声アシスタントのループ処理
 def assistant():
+    # LED.led_sleep()
     print("なにをする？")
     while True:
         command, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
@@ -27,6 +29,7 @@ def assistant():
 
         # 以下追加点
         def assistant_inner():
+            # LED.led_accept()
             if any(word in command for word in emobot_keywords):
                 order = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
                 if order:
@@ -131,6 +134,7 @@ def process(command):
         print("癒してほしい")
         Display.face_wink()
         OutSound.playMusic()
+        LED.led_music()
         # OutSound.welcome_home()
 
     elif "つらい" in command:
@@ -201,6 +205,7 @@ def process(command):
 
     elif "音楽を再生して" in command:
         print("音楽を再生します")
+        # LED.led_music()
         OutSound.playMusic()
 
     elif "シャットダウン" in command:

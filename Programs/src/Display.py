@@ -41,6 +41,7 @@ try:
     current_screen = "boy"
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
+    # LED.led_error()
     pygame.quit()
     # sys.exit()
 
