@@ -37,8 +37,6 @@ try:
     current_boy_image = boy_Default_image
     current_girl_image = girl_Default_image
 
-    # 画像の初期表示
-    current_screen = "boy"
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     # LED.led_error()
@@ -63,6 +61,9 @@ def display():
 
     # 色の定義 (RGB形式)
     WHITE = (255, 255, 255)
+
+    # 画像の初期表示
+    current_screen = "boy"
 
     # フルスクリーンの解像度を取得
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # フルスクリーンの設定
@@ -128,6 +129,73 @@ def display():
         # 画面更新
         pygame.display.flip()
 
+    def face_Default():
+        if current_screen == "boy":
+            current_boy_image = boy_Default_image
+        elif current_screen == "girl":
+            current_girl_image = girl_Default_image
+
+    def face_sleep():
+        if current_screen == "boy":
+            current_boy_image = boy_sleep_image
+        elif current_screen == "girl":
+            current_girl_image = girl_sleep_image
+
+    def face_anger():
+        if current_screen == "boy":
+            current_boy_image = boy_anger_image
+        elif current_screen == "girl":
+            current_girl_image = girl_anger_image
+
+    def face_smile():
+        if current_screen == "boy":
+            current_boy_image = boy_smile_image
+        elif current_screen == "girl":
+            current_girl_image = girl_smile_image
+
+    def face_thinEye():
+        if current_screen == "boy":
+            current_boy_image = boy_thinEye_image
+        elif current_screen == "girl":
+            current_girl_image = girl_thinEye_image
+
+    def face_wink():
+        if current_screen == "boy":
+            current_boy_image = boy_wink_image
+        elif current_screen == "girl":
+            current_girl_image = girl_wink_image
+
+    def face_embarrassed():
+        if current_screen == "boy":
+            current_boy_image = boy_embarrassed_image
+        elif current_screen == "girl":
+            current_girl_image = girl_embarrassed_image
+
+    def face_sad():
+        if current_screen == "boy":
+            current_boy_image = boy_sad_image
+        elif current_screen == "girl":
+            current_girl_image = girl_sad_image
+
+    def face_omg():
+        if current_screen == "boy":
+            current_boy_image = boy_omg_image
+        elif current_screen == "girl":
+            current_girl_image = girl_omg_image   
+
+    def face_kirarin():
+        if current_screen == "boy":
+            current_boy_image = boy_kirarin_image
+        elif current_screen == "girl":
+            current_girl_image = girl_kirarin_image
+
+    def face_doubt():
+        if current_screen == "boy":
+            current_boy_image = boy_doubt_image
+        elif current_screen == "girl":
+            current_girl_image = girl_doubt_image
+
+
     # Pygameを終了
     pygame.quit()
     sys.exit()
@@ -135,73 +203,6 @@ def display():
 # 実行
 if __name__ == "__main__":
     display()
-
-def face_Default():
-    if current_screen == "boy":
-        current_boy_image = boy_Default_image
-    elif current_screen == "girl":
-        current_girl_image = girl_Default_image
-
-def face_sleep():
-    if current_screen == "boy":
-        current_boy_image = boy_sleep_image
-    elif current_screen == "girl":
-        current_girl_image = girl_sleep_image
-
-def face_anger():
-    if current_screen == "boy":
-        current_boy_image = boy_anger_image
-    elif current_screen == "girl":
-        current_girl_image = girl_anger_image
-
-def face_smile():
-    if current_screen == "boy":
-        current_boy_image = boy_smile_image
-    elif current_screen == "girl":
-        current_girl_image = girl_smile_image
-
-def face_thinEye():
-    if current_screen == "boy":
-        current_boy_image = boy_thinEye_image
-    elif current_screen == "girl":
-        current_girl_image = girl_thinEye_image
-
-def face_wink():
-    if current_screen == "boy":
-        current_boy_image = boy_wink_image
-    elif current_screen == "girl":
-        current_girl_image = girl_wink_image
-
-def face_embarrassed():
-    if current_screen == "boy":
-        current_boy_image = boy_embarrassed_image
-    elif current_screen == "girl":
-        current_girl_image = girl_embarrassed_image
-
-def face_sad():
-    if current_screen == "boy":
-        current_boy_image = boy_sad_image
-    elif current_screen == "girl":
-        current_girl_image = girl_sad_image
-
-def face_omg():
-    if current_screen == "boy":
-        current_boy_image = boy_omg_image
-    elif current_screen == "girl":
-        current_girl_image = girl_omg_image   
-
-def face_kirarin():
-    if current_screen == "boy":
-        current_boy_image = boy_kirarin_image
-    elif current_screen == "girl":
-        current_girl_image = girl_kirarin_image
-
-def face_doubt():
-    if current_screen == "boy":
-        current_boy_image = boy_doubt_image
-    elif current_screen == "girl":
-        current_girl_image = girl_doubt_image
-
 
 
 # #Empath → gpioPin受け取り側
