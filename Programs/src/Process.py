@@ -3,6 +3,8 @@ import time
 import OutSound
 import Empath
 import InVoice
+import Display
+import subprocess
 # import gpiozero
 # import EarProcess
 
@@ -55,121 +57,144 @@ def process(command):
 
     if "おはよう" in command:        
         print("おはよう")
+        Display.face_smile()
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
         print("こんにちは")
+        Display.face_smile()
         OutSound.greet_afternoon()
 
     elif "こんばんは" in command:
         print("こんばんは")
+        Display.face_smile()
         OutSound.greet_night()
 
     elif "さようなら" in command:
         print("さようなら")
+        Display.face_smile()
         OutSound.bye()
     
     elif "いってきます" in command:
         print("いってきます")
+        Display.face_smile()
         OutSound.im_going()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
+        Display.face_smile()
         OutSound.welcome_home()
 
     elif "おやすみ" in command:
     #「目を閉じる」DisplayProcessに遷移
-        Display.close_eyes()
+        Display.face_sleep()
         OutSound.good_night()
 
 #キーワードコマンド
 
     elif "いいね" in command:
         print("いいね")
+        Display.face_embarrassed()
         OutSound.welcome_home()
 
     elif "体調が悪い" in command:
         print("体調が悪い")
+        Display.face_sad()
         OutSound.welcome_home()
 
     elif "体調がいい" in command:
         print("体調がいい")
-        OutSound.welcome_home()
-
-    elif "体調がいい" in command:
-        print("体調がいい")
+        Display.face_smile()
         OutSound.welcome_home()
 
     elif "誕生日" in command:
         print("誕生日")
+        Display.face_kirarin()
         OutSound.welcome_home()
 
     elif "ハッピーバースデー" in command:
         print("ハッピーバースデー")
+        Display.face_kirarin()
         OutSound.welcome_home()
 
     elif "いい気分" in command:
         print("いい気分")
+        Display.face_smile()
         OutSound.welcome_home()
 
     elif "かっこいい" in command:
-            print("かっこいい")
-            OutSound.welcome_home()
+        print("かっこいい")
+        Display.face_wink()
+        OutSound.welcome_home()
 
     elif "癒してほしい" in command:
         print("癒してほしい")
-        OutSound.welcome_home()
+        Display.face_wink()
+        OutSound.playMusic()
+        # OutSound.welcome_home()
 
     elif "つらい" in command:
         print("つらい")
+        Display.face_sad()
         OutSound.welcome_home()
 
     elif "疲れた" in command:
-            print("疲れた")
-            OutSound.welcome_home()
+        print("疲れた")
+        Display.face_thinEye()
+        OutSound.welcome_home()
 
     elif "しんどい" in command:
-            print("しんどい")
-            OutSound.welcome_home()
+        print("しんどい")
+        Display.face_sad()
+        OutSound.welcome_home()
 
     elif "おめでとう" in command:
-            print("おめでとう")
-            OutSound.welcome_home()
+        print("おめでとう")
+        Display.face_embarrassed()
+        OutSound.welcome_home()
 
     elif "最高" in command:
-            print("最高")
-            OutSound.welcome_home()
+        print("最高")
+        Display.face_kirarin()
+        OutSound.welcome_home()
 
     elif "憂鬱" in command:
-            print("憂鬱")
-            OutSound.welcome_home()
+        print("憂鬱")
+        Display.face_sad()
+        OutSound.welcome_home()
 
 #　「感情」　*************************************************************       
 
-    elif "驚き" in command:
-        print("驚き")
+    elif "驚いた" in command:
+        print("驚いた")
+        Display.face_smile()
         OutSound.surprise()
 
     elif "悲しい" in command:
         print("悲しい")
+        Display.face_sad()
         OutSound.sad()
 
-    elif "恐れ" in command:
-        print("恐れ")
+    elif "こわい" in command:
+        print("こわい")
+        Display.face_sad()
         OutSound.fear()
 
     elif "うれしい" in command:
         print("うれしい")
+        Display.face_embarrassed()
         OutSound.happy()
 
 #　「利用者からの返事」　*************************************************************  
 
     elif "わかりました" in command:
         print("わかりました")
+        Display.face_embarrassed()
         OutSound.ok()
 
     elif "わかりません" in command:
         print("わかりません")
+        Display.face_doubt()
         OutSound.no()
 
 #　「機能」　*************************************************************  
@@ -177,6 +202,18 @@ def process(command):
     elif "音楽を再生して" in command:
         print("音楽を再生します")
         OutSound.playMusic()
+
+    elif "シャットダウン" in command:
+        print("シャットダウン")
+        ComandShutdown = "shutdown"
+        result = subprocess.run(ComandShutdown, shell=True, text=True, capture_output=True)
+        print(result.stdout)
+
+    elif "再起動" in command:
+        print("再起動")
+        ComandReboot = "reboot"
+        result = subprocess.run(ComandReboot, shell=True, text=True, capture_output=True)
+        print(result.stdout)
 
     # elif "クイズ" in command:
     #     print("クイズを出して")
