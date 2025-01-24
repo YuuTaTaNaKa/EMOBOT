@@ -13,9 +13,9 @@ def display():
         full_path = os.path.join("Programs", "img", path)
         return pygame.transform.scale(pygame.image.load(full_path), (screen_width, screen_height))
 
-    main_image = load_image("emobot1.jpg")
-    screen_a_image = load_image("emobot1.jpg")
-    screen_b_image = load_image("emobot2.jpg")
+    main_image = load_image("/home/emobot/Desktop/EMOBOT/Test/sato_test/emobot1.jpg")
+    screen_a_image = load_image("/home/emobot/Desktop/EMOBOT/Test/sato_test/emobot1.jpg")
+    screen_b_image = load_image("/home/emobot/Desktop/EMOBOT/Test/sato_test/emobot2.jpg")
 
     # フレームの状態管理
     current_screen = "main"
