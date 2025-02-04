@@ -36,7 +36,6 @@ def led_accept():
 
 #エラーが発生しているとき
 def led_error():
-    
     red_color = LED(17)
     blue_color = LED(27)
     green_color = LED(22)

@@ -9,9 +9,8 @@ from time import sleep
 # from signal import pause
 
 try:
-
     #pathの読み込み
-    base_path = "C:\\EMOBOT\\Programs\\img"
+    base_path = os.path.join("Programs","img")
 
     # boy画像
     boy_Default_image = pygame.image.load(os.path.join(base_path, "boy_Default.jpg"))
@@ -19,7 +18,7 @@ try:
     boy_kirarin_image = pygame.image.load(os.path.join(base_path, "boy_kirarin.jpg"))
     boy_anger_image = pygame.image.load(os.path.join(base_path, "boy_anger.jpg"))
     boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_doubt.jpg"))
-    boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_embarrassed.jpg"))
+    boy_embarrassed_image = pygame.image.load(os.path.join(base_path, "boy_embarrassed.jpg"))
     boy_thinEye_image = pygame.image.load(os.path.join(base_path, "boy_thinEye.jpg"))
     boy_wink_image = pygame.image.load(os.path.join(base_path, "boy_wink.jpg"))
     boy_sleep_image = pygame.image.load(os.path.join(base_path, "boy_sleep.jpg"))
@@ -38,8 +37,13 @@ try:
     girl_sad_image = pygame.image.load(os.path.join(base_path, "girl_sad.jpg"))
     girl_omg_image = pygame.image.load(os.path.join(base_path, "girl_omg.jpg"))
 
+    # 現在の画像
+    current_boy_image = boy_Default_image
+    current_girl_image = girl_Default_image
+
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
+    # LED.led_error()
     pygame.quit()
     # sys.exit()
 
@@ -62,12 +66,12 @@ def display():
     # 色の定義 (RGB形式)
     WHITE = (255, 255, 255)
 
+    # 画像の初期表示
+    current_screen = "boy"
+
     # フルスクリーンの解像度を取得
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # フルスクリーンの設定
     screen_width, screen_height = screen.get_size()
-
-    # 画像の初期表示
-    current_screen = "main"
 
     # スワイプに関連する変数
     is_swiping = False
@@ -119,18 +123,82 @@ def display():
         screen.fill(WHITE)
 
         # 画面描画
-        if current_screen == "main":
-            resized_image = resize_image(boy_Default_image, screen_width, screen_height)
-            screen.blit(resized_image, (0, 0))
-        elif current_screen == "boy":
-            resized_image = resize_image(boy_Default_image, screen_width, screen_height)
+        if current_screen == "boy":
+            resized_image = resize_image(current_boy_image, screen_width, screen_height)
             screen.blit(resized_image, (0, 0))
         elif current_screen == "girl":
-            resized_image = resize_image(girl_Default_image, screen_width, screen_height)
+            resized_image = resize_image(current_girl_image, screen_width, screen_height)
             screen.blit(resized_image, (0, 0))
 
         # 画面更新
         pygame.display.flip()
+
+    def face_Default():
+        if current_screen == "boy":
+            current_boy_image = boy_Default_image
+        elif current_screen == "girl":
+            current_girl_image = girl_Default_image
+
+    def face_sleep():
+        if current_screen == "boy":
+            current_boy_image = boy_sleep_image
+        elif current_screen == "girl":
+            current_girl_image = girl_sleep_image
+
+    def face_anger():
+        if current_screen == "boy":
+            current_boy_image = boy_anger_image
+        elif current_screen == "girl":
+            current_girl_image = girl_anger_image
+
+    def face_smile():
+        if current_screen == "boy":
+            current_boy_image = boy_smile_image
+        elif current_screen == "girl":
+            current_girl_image = girl_smile_image
+
+    def face_thinEye():
+        if current_screen == "boy":
+            current_boy_image = boy_thinEye_image
+        elif current_screen == "girl":
+            current_girl_image = girl_thinEye_image
+
+    def face_wink():
+        if current_screen == "boy":
+            current_boy_image = boy_wink_image
+        elif current_screen == "girl":
+            current_girl_image = girl_wink_image
+
+    def face_embarrassed():
+        if current_screen == "boy":
+            current_boy_image = boy_embarrassed_image
+        elif current_screen == "girl":
+            current_girl_image = girl_embarrassed_image
+
+    def face_sad():
+        if current_screen == "boy":
+            current_boy_image = boy_sad_image
+        elif current_screen == "girl":
+            current_girl_image = girl_sad_image
+
+    def face_omg():
+        if current_screen == "boy":
+            current_boy_image = boy_omg_image
+        elif current_screen == "girl":
+            current_girl_image = girl_omg_image   
+
+    def face_kirarin():
+        if current_screen == "boy":
+            current_boy_image = boy_kirarin_image
+        elif current_screen == "girl":
+            current_girl_image = girl_kirarin_image
+
+    def face_doubt():
+        if current_screen == "boy":
+            current_boy_image = boy_doubt_image
+        elif current_screen == "girl":
+            current_girl_image = girl_doubt_image
+
 
     # Pygameを終了
     pygame.quit()

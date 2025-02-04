@@ -53,3 +53,5 @@ def led_music():
     green_color.off()
     blue_color.on()
     red_color.on()
+
+led_execution()
