@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)            # GPIOモード設定
-servo_pin = 17                    # GPIOピン番号
+servo_pin = 18                    # GPIOピン番号
 GPIO.setup(servo_pin, GPIO.OUT)   # GPIO出力モード
 pwm = GPIO.PWM(servo_pin, 50)     # 周波数50Hz
 pwm.start(1.45)                   # パルス幅1.45ms＝ニュートラルポジション
