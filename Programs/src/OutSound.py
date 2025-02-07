@@ -31,73 +31,72 @@ def greet_morning():
     return
 
 def greet_afternoon():
-    playsound(choice(Greet_afternoon))
+    playsound(smile_mp3)
     #print("こんにちは")
     return
 
 def greet_night():
-    playsound(choice(Greet_night))
+    playsound(smile_mp3)
     #print("こんばんは")
     return
 
 def bye():
-    playsound(choice(Bye))
+    playsound(smile_mp3)
     #print("さようなら")
     return
 
 def im_going():
-    playsound(choice(Im_going))
+    playsound(smile_mp3)
     #print("いってきます")
     return
 
 def welcome_home():
-    playsound(choice(Welcome_home))
+    playsound(smile_mp3)
     #print("おかえりなさい")
     return
 
 def good_night():
-    playsound(choice(Good_night))
+    playsound(smile_mp3)
     #print("おやすみ")
     return
 
 #「感情」************************************************************* 
 
 def happy():
-    playsound(choice(Happy))
+    playsound(smile_mp3)
     # print("うれしい")
     return
 
 def sad():
-    playsound(choice(Sad))
+    playsound(sad_mp3)
     # print("悲しい")
     return
 
 def surprise():
-    playsound(choice(Surprise))
+    playsound(omg_mp3)
     # print("驚き")
     return
 
 def fear():
-    playsound(choice(Fear))
+    playsound(omg_mp3)
     # print("恐れ")
     return
 
 #「利用者からの返事」*************************************************************  
 
 def no():
-    playsound(choice(No))
+    playsound(doubt_mp3)
     # print("わかりません")
     return
 
 def ok():
-    playsound(choice(Ok))
+    playsound(doubt_mp3)
     # print("わかりました")
     return
 
-#「Spotify_Music」*************************************************************  
+#「Music」*************************************************************  
 
 def playMusic():
-    playsound(choice(Musics_messege))
     playsound(choice(Musics))
     # print("音楽を再生します")
     return
