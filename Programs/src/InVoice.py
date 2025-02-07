@@ -54,8 +54,7 @@ def listen(mic_timeout, phrase_time_limit,number):
                 trim_audio(converted_audio_file, max_duration=5)
 
                 # 音声認識を実行
-                command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
-                print(f"認識されたコマンド: {command}")
+                command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定               
                 return command,converted_audio_file
                 #
                 # ログファイルを開く

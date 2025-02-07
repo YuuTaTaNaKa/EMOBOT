@@ -11,54 +11,44 @@ import subprocess
 
 # 音声アシスタントのループ処理
 def assistant():
-    # LED.led_sleep()
-    print("なにをする？")
+    print("エムボットと呼びかけてください")
+    
     while True:
-        command, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
-        
-        if command is None and audio_file is None:
-            print("リセットされました。再度話しかけてください。")
-            continue
+        # エムボットが呼ばれるまで待機
+        command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
 
-        # エモボットに関連するキーワード
+        # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
-        # 他のアシスタントのキーワード
-        other_assistant_keywords = ["アレクサ", "あれくさ", "ALXA", "alxa", "オッケーグーグル", "おっけーぐーぐる", "OK Google", "ヘイシリー", "へいしり", "Hey Siri", "hey siri"]
-
-        # エモボットのキーワードが含まれている場合
-
-        # 以下追加点
-        def assistant_inner():
-            # LED.led_accept()
-            if any(word in command for word in emobot_keywords):
-                order = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
+        if any(word in command for word in emobot_keywords):
+            print("エムボット起動！ 感情分析モードへ移行します")
+            
+            while True:
+                # ユーザーの問いかけを取得
+                order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
+                
                 if order:
-                    process(order)
-                if command is None and audio_file is None:
-                    print("リセットされました。再度話しかけてください。")
-                    return assistant_inner()
-        # 以上追加点
+                    print(f"認識したコマンド: {order}")
 
-        # if any(word in command for word in emobot_keywords):
-        #     order = InVoice.listen(mic_timeout=5, phrase_time_limit=5)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
-        #     if order:
-        #         process(order)
+                    # 「スリープ」と言われたらエムボットを停止し、待機状態に戻る
+                    if "スリープ" in order:
+                        print("スリープモードに移行します...")
+                        break  # 内部ループを抜け、エムボット待機状態に戻る
 
-        # # 他のアシスタントのキーワードが含まれている場合
-        # elif any(word in command for word in other_assistant_keywords):
-        #     angry()
-        
-        # 想定外のキーワードの場合
-            else:
-                empath_transfer(audio_file)
-                print("なんて言ったかわかんないなぁ")
+                    # 感情分析を実行
+                    if audio_file:
+                        print("感情分析を実行します...")
+                        empath_transfer(audio_file)
+                else:
+                    print("なんて言ったかわかんないなぁ")
+
+
 
 def process(command):
     print("音声入力をもとに処理を行います")
 
     #　「あいさつ」　*************************************************************   
 
-    if "おはよう" in command:        
+    if "おはよう" in command: 
         print("おはよう")
         Display.face_smile()
         OutSound.greet_morning()
@@ -226,7 +216,7 @@ def process(command):
     #     #OutSound() ??
 
     else:
-        print("なんて言ったかわかんないなぁ")
+        print("コマンドに含まれてはいません")
 
 # ********************************〔Empath.pyの呼び出し〕*******************************************
 def empath_transfer(audio_file):
