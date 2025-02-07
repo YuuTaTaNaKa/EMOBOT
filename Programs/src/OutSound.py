@@ -4,55 +4,21 @@ from playsound import playsound
 import os
 from random import choice
 
-# -------------------------------〈配列〉--------------------------------
+#「あかりん音声ファイルパス」
 
-#「挨拶」*************************
-
-#「おはよう」
-Greet_morning = ["Programs/se/testsound_scream.mp3"]
-#「こんにちは」
-Greet_afternoon = []
-#「こんばんわ」
-Greet_night = []
-#「さようなら、ばいばい」
-Bye = []
-#「いってきます」
-Im_going = []
-#「おかえり」
-Welcome_home = []
-#「おやすみ」
-Good_night = []
-
-#「感情」*************************
-
-#「怒り」
-Angry = []
-#「幸せ」
-Happy = []
-#「悲しい」
-Sad = []
-#「驚き」
-Surprise = []
-#「恐れ」
-Fear = []
-
-#「返事」*************************
-
-#「はい、」
-yes = []
-
-#「いいえ、だめ」
-No = []
-
-#「了解、オーケー」
-Ok = []
+anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger.mp3")
+doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt.mp3")
+embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed.mp3")
+kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin.mp3")
+omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg.mp3")
+sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad.mp3")
+smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile.mp3")
+testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "testsound_scream.mp3")
 
 #「機能」*************************
 
-#「SpotifyAPI」
-Musics = []
-#音楽を再生するね！的な奴いる？
-Musics_messege = []
+#音楽を再生
+Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"), ""]
 
 # -------------------------------〈メソッド〉--------------------------------
 
@@ -60,7 +26,7 @@ Musics_messege = []
 #「挨拶」*************************************************************   
 
 def greet_morning():
-    playsound(choice(Greet_morning))
+    playsound(smile_mp3)
     #print("おはよう")
     return
 

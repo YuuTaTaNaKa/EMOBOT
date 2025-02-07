@@ -9,7 +9,6 @@ import subprocess
 # import gpiozero
 # import EarProcess
 
-# 音声アシスタントのループ処理
 def assistant():
     print("エムボットと呼びかけてください")
     
@@ -29,19 +28,25 @@ def assistant():
                 if order:
                     print(f"認識したコマンド: {order}")
 
-                    # 「スリープ」と言われたらエムボットを停止し、待機状態に戻る
-                    if "スリープ" in order:
+                    # 「おやすみ」と言われたらエムボットを停止し、待機状態に戻る
+                    if "おやすみ" in order:
                         print("スリープモードに移行します...")
                         break  # 内部ループを抜け、エムボット待機状態に戻る
 
-                    # 感情分析を実行
-                    if audio_file:
-                        print("感情分析を実行します...")
-                        empath_transfer(audio_file)
+                    # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
+                    if process(order):
+                        print(f"コマンド {order} の処理を実行しました")
+                    else:
+                        # コマンドが含まれていなかった場合、感情分析を実行
+                        if audio_file:
+                            print("感情分析を実行します...")
+                            empath_transfer(audio_file)
+                    
+                    # 音声入力を再度待機
+                    continue
                 else:
                     print("なんて言ったかわかんないなぁ")
-
-
+                    continue  # 再度音声入力を待機するためにループ
 
 def process(command):
     print("音声入力をもとに処理を行います")

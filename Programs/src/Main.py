@@ -18,7 +18,7 @@ def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
 def main():
     global threads
 
-    # グローバルスレッドリストf
+    # グローバルスレッドリスト
     threads = []
 
     # 各機能に対してデーモンスレッドを作成
