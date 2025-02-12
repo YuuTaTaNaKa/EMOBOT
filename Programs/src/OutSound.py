@@ -18,7 +18,8 @@ testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "test
 #「機能」*************************
 
 #音楽を再生
-Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"), ""]
+Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
+           ""]
 
 # -------------------------------〈メソッド〉--------------------------------
 
