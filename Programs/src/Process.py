@@ -19,7 +19,7 @@ def assistant():
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
         if any(word in command for word in emobot_keywords):
-            print("エムボット起動！ 感情分析モードへ移行します")
+            print("エモボット起動！ 感情分析モードへ移行します")
             
             while True:
                 # ユーザーの問いかけを取得
@@ -28,10 +28,10 @@ def assistant():
                 if order:
                     print(f"認識したコマンド: {order}")
 
-                    # 「おやすみ」と言われたらエムボットを停止し、待機状態に戻る
+                    # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                     if "おやすみ" in order:
                         print("スリープモードに移行します...")
-                        break  # 内部ループを抜け、エムボット待機状態に戻る
+                        break  # 内部ループを抜け、エモボット待機状態に戻る
 
                     # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                     if process(order):
