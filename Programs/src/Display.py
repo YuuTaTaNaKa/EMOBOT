@@ -106,13 +106,6 @@ def display():
     pygame.quit()
     sys.exit()
 
-def face_smile():
-    global current_boy_image, current_girl_image, current_screen
-    if current_screen == "boy":
-        current_boy_image = boy_smile_image
-    else:
-        current_girl_image = girl_smile_image
-
 # 実行
 if __name__ == "__main__":
     display()

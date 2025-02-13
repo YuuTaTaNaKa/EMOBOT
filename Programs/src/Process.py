@@ -129,7 +129,6 @@ def process(command):
         print("癒してほしい")
         Display.face_wink()
         OutSound.playMusic()
-        LED.led_music()
         # OutSound.welcome_home()
 
     elif "つらい" in command:
