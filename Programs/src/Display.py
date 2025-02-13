@@ -61,12 +61,14 @@ import sys
 
 # 現在の画面を示す変数（グローバル）
 current_screen = "boy"  # 初期状態
+current_boy_image = None
+current_girl_image = None
 
 # Pygame 画像の読み込み処理（省略）
 
 def display():
-    global current_screen  # グローバル変数を明示
-
+    global current_screen, current_boy_image, current_girl_image
+    
     pygame.init()
     WHITE = (255, 255, 255)
 
@@ -81,10 +83,14 @@ def display():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                start_pos = event.pos
-            elif event.type == pygame.MOUSEBUTTONUP:
-                end_pos = event.pos
+            elif event.type == pygame.FINGERDOWN:
+                if current_screen == "boy" and current_boy_image == boy_sleep_image:
+                    face_smile()
+                elif current_screen == "girl" and current_girl_image == girl_sleep_image:
+                    face_smile()
+            elif event.type == pygame.FINGERUP:
+                start_pos = (event.x * screen_width, event.y * screen_height)
+                end_pos = (event.x * screen_width, event.y * screen_height)
                 dx = end_pos[0] - start_pos[0]
 
                 if abs(dx) > 50:
@@ -105,6 +111,7 @@ def display():
 
     pygame.quit()
     sys.exit()
+
 
 # 実行
 if __name__ == "__main__":
