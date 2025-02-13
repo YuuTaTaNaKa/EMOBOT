@@ -55,14 +55,8 @@ def resize_image(image, screen_width, screen_height):
         new_height = int(screen_width / aspect_ratio)
     return pygame.transform.scale(image, (new_width, new_height))
 
-import pygame
-import os
-import sys
-
 # 現在の画面を示す変数（グローバル）
 current_screen = "boy"  # 初期状態
-
-# Pygame 画像の読み込み処理（省略）
 
 def display():
     global current_screen  # グローバル変数を明示
