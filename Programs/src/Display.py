@@ -9,33 +9,33 @@ try:
     base_path = os.path.join("Programs","img")
 
     # boy画像
-    boy_Default_image = pygame.image.load(os.path.join(base_path, "boy_Default.jpg"))
-    boy_smile_image = pygame.image.load(os.path.join(base_path, "boy_smile.jpg"))
-    boy_kirarin_image = pygame.image.load(os.path.join(base_path, "boy_kirarin.jpg"))
-    boy_anger_image = pygame.image.load(os.path.join(base_path, "boy_anger.jpg"))
-    boy_doubt_image = pygame.image.load(os.path.join(base_path, "boy_doubt.jpg"))
-    boy_embarrassed_image = pygame.image.load(os.path.join(base_path, "boy_embarrassed.jpg"))
-    boy_thinEye_image = pygame.image.load(os.path.join(base_path, "boy_thinEye.jpg"))
-    boy_wink_image = pygame.image.load(os.path.join(base_path, "boy_wink.jpg"))
-    boy_sleep_image = pygame.image.load(os.path.join(base_path, "boy_sleep.jpg"))
-    boy_sad_image = pygame.image.load(os.path.join(base_path, "boy_sad.jpg"))
-    boy_omg_image = pygame.image.load(os.path.join(base_path, "boy_omg.jpg"))
+    boy_Default_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_Default.jpg"))
+    boy_smile_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_smile.jpg"))
+    boy_kirarin_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_kirarin.jpg"))
+    boy_anger_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_anger.jpg"))
+    boy_doubt_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_doubt.jpg"))
+    boy_embarrassed_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_embarrassed.jpg"))
+    boy_thinEye_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_thinEye.jpg"))
+    boy_wink_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_wink.jpg"))
+    boy_sleep_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_sleep.jpg"))
+    boy_sad_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_sad.jpg"))
+    boy_omg_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "boy_omg.jpg"))
     # girl画像
-    girl_Default_image = pygame.image.load(os.path.join(base_path, "girl_Default.jpg"))
-    girl_smile_image = pygame.image.load(os.path.join(base_path, "girl_smile.jpg"))
-    girl_kirarin_image = pygame.image.load(os.path.join(base_path, "girl_kirarin.jpg"))
-    girl_anger_image = pygame.image.load(os.path.join(base_path, "girl_anger.jpg"))
-    girl_doubt_image = pygame.image.load(os.path.join(base_path, "girl_doubt.jpg"))
-    girl_embarrassed_image = pygame.image.load(os.path.join(base_path, "girl_embarrassed.jpg"))
-    girl_thinEye_image = pygame.image.load(os.path.join(base_path, "girl_thinEye.jpg"))
-    girl_wink_image = pygame.image.load(os.path.join(base_path, "girl_wink.jpg"))
-    girl_sleep_image = pygame.image.load(os.path.join(base_path, "girl_sleep.jpg"))
-    girl_sad_image = pygame.image.load(os.path.join(base_path, "girl_sad.jpg"))
-    girl_omg_image = pygame.image.load(os.path.join(base_path, "girl_omg.jpg"))
+    girl_Default_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_Default.jpg"))
+    girl_smile_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_smile.jpg"))
+    girl_kirarin_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_kirarin.jpg"))
+    girl_anger_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_anger.jpg"))
+    girl_doubt_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_doubt.jpg"))
+    girl_embarrassed_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_embarrassed.jpg"))
+    girl_thinEye_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_thinEye.jpg"))
+    girl_wink_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_wink.jpg"))
+    girl_sleep_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_sleep.jpg"))
+    girl_sad_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_sad.jpg"))
+    girl_omg_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_omg.jpg"))
 
     # 現在の画像
-    current_boy_image = boy_Default_image
-    current_girl_image = girl_Default_image
+    current_boy_image = boy_sleep_image
+    current_girl_image = girl_sleep_image
 
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
@@ -55,84 +55,63 @@ def resize_image(image, screen_width, screen_height):
         new_height = int(screen_width / aspect_ratio)
     return pygame.transform.scale(image, (new_width, new_height))
 
-def display():
-    # Pygameの初期化
-    pygame.init()
+import pygame
+import os
+import sys
 
-    # 色の定義 (RGB形式)
+# 現在の画面を示す変数（グローバル）
+current_screen = "boy"  # 初期状態
+
+# Pygame 画像の読み込み処理（省略）
+
+def display():
+    global current_screen  # グローバル変数を明示
+
+    pygame.init()
     WHITE = (255, 255, 255)
 
-    # 画像の初期表示
-    global current_screen
-    current_screen = "boy"
-
-    # フルスクリーンの解像度を取得
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)  # フルスクリーンの設定
+    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     screen_width, screen_height = screen.get_size()
 
-    # スワイプに関連する変数
-    is_swiping = False
-    start_pos = None
-    end_pos = None
-    swipe_threshold = 50  # スワイプと判定する最低距離
-
-    # メインループ
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:  # ESCキーが押されたら終了
+                if event.key == pygame.K_ESCAPE:
                     running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                is_swiping = True
                 start_pos = event.pos
             elif event.type == pygame.MOUSEBUTTONUP:
-                is_swiping = False
                 end_pos = event.pos
+                dx = end_pos[0] - start_pos[0]
 
-                if start_pos and end_pos:
-                    # スワイプ方向を計算
-                    dx = end_pos[0] - start_pos[0]
-                    dy = end_pos[1] - start_pos[1]
-
-                    if abs(dx) > swipe_threshold or abs(dy) > swipe_threshold:
-                        if abs(dx) > abs(dy):
-                            if dx > 0:
-                                print("右スワイプ")
-                                current_screen = "boy"
-                            else:
-                                print("左スワイプ")
-                                current_screen = "girl"
-                        else:
-                            if dy > 0:
-                                print("下スワイプ")
-                            else:
-                                print("上スワイプ")
+                if abs(dx) > 50:
+                    if dx > 0:
+                        current_screen = "boy"
                     else:
-                        print("タップ")
+                        current_screen = "girl"
 
-                    start_pos = None
-                    end_pos = None
-
-        # 背景色を白に設定
         screen.fill(WHITE)
 
-        # 画面描画
         if current_screen == "boy":
             resized_image = resize_image(current_boy_image, screen_width, screen_height)
-            screen.blit(resized_image, (0, 0))
-        elif current_screen == "girl":
+        else:
             resized_image = resize_image(current_girl_image, screen_width, screen_height)
-            screen.blit(resized_image, (0, 0))
 
-        # 画面更新
+        screen.blit(resized_image, (0, 0))
         pygame.display.flip()
 
-    # Pygameを終了
     pygame.quit()
     sys.exit()
+
+def face_smile():
+    global current_boy_image, current_girl_image, current_screen
+    if current_screen == "boy":
+        current_boy_image = boy_smile_image
+    else:
+        current_girl_image = girl_smile_image
 
 # 実行
 if __name__ == "__main__":

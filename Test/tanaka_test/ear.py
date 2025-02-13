@@ -1,20 +1,21 @@
+import warnings
 from gpiozero import Servo
 from time import sleep
 
+# 警告を無視する
+warnings.filterwarnings("ignore", category=UserWarning, module='gpiozero')
+
+# サーボモーターの制御
 servo = Servo(18)
 
-# 0度（最小位置）
 servo.min()
 sleep(1)
 
-# 90度（中間位置）
 servo.mid()
 sleep(1)
 
-# 180度（最大位置）
 servo.max()
 sleep(1)
-
 
 # import pigpio
 # import time
