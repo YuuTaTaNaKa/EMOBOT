@@ -21,32 +21,49 @@ def empath(voice):
         print(f"HTTP status {response.status_code}")
         emotion(f"HTTP status {response.status_code}")
 
-#感情スコアの仕分け、一番高い値の感情を採用
+# 感情スコアをもとに表情を決定する
+def determine_emotion(calmness, anger, sadness, joy, energy):
+    if 20 <= calmness <= 50:
+        return "thinEye"
+    if 20 <= anger <= 50:
+        return "anger"
+    if 20 <= sadness <= 50:
+        return "sad"
+    if 25 <= joy <= 50 and 25 <= energy <= 50:
+        return "kirarin"
+    if 15 <= joy <= 20:
+        return "embarrassed"
+    if 15 <= energy <= 25:
+        return "smile"
+    
+    return "default"  # どの条件にも当てはまらない場合
+
+# 感情スコアの仕分けと最も強い感情の決定
 def emotion(scores):
+    # APIの返却データ（感情スコア）
     emotion_scores = scores
 
-    # 仕分けの基準を設定
-    def categorize_emotion(score):
-        if score <= 5:
-            return '低'
-        elif score <= 15:
-            return '中'
-        else:
-            return '高'
+    # 各感情のスコアを取得（データがない場合のデフォルト値は0）
+    calmness = emotion_scores.get("calmness", 0)
+    anger = emotion_scores.get("anger", 0)
+    sadness = emotion_scores.get("sadness", 0)
+    joy = emotion_scores.get("joy", 0)
+    energy = emotion_scores.get("energy", 0)
 
-    # 感情を仕分ける
-    sorted_emotions = {emotion: categorize_emotion(score) for emotion, score in emotion_scores.items() if emotion != 'error'}
-
-    # 最も強い感情を選ぶ
-    strongest_emotion = max(emotion_scores, key=emotion_scores.get)
-    strongest_score = emotion_scores[strongest_emotion]
+    # 表情を決定
+    selected_emotion = determine_emotion(calmness, anger, sadness, joy, energy)
 
     # 結果を表示
-    print("感情スコアの仕分け:")
-    for emotion, category in sorted_emotions.items():
-        print(f"{emotion}: {category}")
+    print(f"\n選択された表情: {selected_emotion}")
 
-    print(f"\n最も強い感情は '{strongest_emotion}' で、スコアは {strongest_score} です。")
+    # ラズパイ4に送信（コメント解除して使用）
+    # raspi4_send(selected_emotion)
+
+# ラズパイ4へ表情データを送信（GPIOなどを用いる場合）
+def raspi4_send(emotion):
+    print(f"ラズパイ4へ '{emotion}' を送信")
+    # ここで GPIO制御や通信処理を実装
+
     # raspi4_send(strongest_emotion)
 
 
