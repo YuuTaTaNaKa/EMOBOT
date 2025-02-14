@@ -106,7 +106,7 @@ def display():
                     current_process = "execution"
 
         if GPIO.input(23) == GPIO.HIGH:
-            current_process = "accept" 
+            current_process = "accept"        
 
         screen.fill(WHITE)
 
