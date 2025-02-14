@@ -21,7 +21,7 @@ GPIO.setup(13, GPIO.IN)
 GPIO.setup(6, GPIO.IN)
 GPIO.setup(5, GPIO.IN)
 GPIO.setup(0, GPIO.IN)
-GPIO.setup(9, GPIO.IN)
+GPIO.setup(9, GPIO.OUT)
 
 try:
     #pathの読み込み
