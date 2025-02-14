@@ -88,8 +88,8 @@ def display():
             elif event.type == pygame.MOUSEBUTTONUP:
                 end_pos = event.pos
                 dx = end_pos[0] - start_pos[0]
-
-                if abs(dx) > 50:
+                
+                if abs(dx) > 50 and current_process == "sleep":
                     if dx > 0:
                         current_screen = "boy"
                     else:
