@@ -1,6 +1,8 @@
 import pygame
 import os
 import sys
+import random
+import OutSound
 # from gpiozero import LED, Button
 # from signal import pause
 
@@ -58,8 +60,11 @@ def resize_image(image, screen_width, screen_height):
 # 現在の画面を示す変数（グローバル）
 current_screen = "boy"  # 初期状態
 
+# 現在の処理を保持する変数
+current_process = "sleep"
+
 def display():
-    global current_screen  # グローバル変数を明示
+    global current_screen,current_process # グローバル変数を明示
 
     pygame.init()
     WHITE = (255, 255, 255)
@@ -68,34 +73,46 @@ def display():
     screen_width, screen_height = screen.get_size()
 
     running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+    if current_process == "sleep":  
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
                     running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                start_pos = event.pos
-            elif event.type == pygame.MOUSEBUTTONUP:
-                end_pos = event.pos
-                dx = end_pos[0] - start_pos[0]
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    start_pos = event.pos
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    end_pos = event.pos
+                    dx = end_pos[0] - start_pos[0]
 
-                if abs(dx) > 50:
-                    if dx > 0:
-                        current_screen = "boy"
-                    else:
-                        current_screen = "girl"
-
+                    if abs(dx) > 50:
+                        if dx > 0:
+                            current_screen = "boy"
+                        else:
+                            current_screen = "girl"
         screen.fill(WHITE)
 
-        if current_screen == "boy":
-            resized_image = resize_image(current_boy_image, screen_width, screen_height)
-        else:
-            resized_image = resize_image(current_girl_image, screen_width, screen_height)
+    if current_process == "accept":
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    random.choice([face_kirarin(),face_smile()])
+                    process_execution()
+                    # OutSound.happy()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+        screen.fill(WHITE)
 
-        screen.blit(resized_image, (0, 0))
-        pygame.display.flip()
+    if current_screen == "boy":
+        resized_image = resize_image(current_boy_image, screen_width, screen_height)
+    else:
+        resized_image = resize_image(current_girl_image, screen_width, screen_height)
+
+    screen.blit(resized_image, (0, 0))
+    pygame.display.flip()
 
     pygame.quit()
     sys.exit()
@@ -192,6 +209,17 @@ def face_doubt():
     elif current_screen == "girl":
         current_girl_image = girl_doubt_image
 
+def process_sleep():
+    current_process = "sleep"
+    return current_process
+
+def process_accept():
+    current_process = "accept"
+    return current_process
+
+def process_execution():
+    current_process = "execution"
+    return current_process
 
 # #Empath → gpioPin受け取り側
 # # 各ピンを監視するためのセットアップ
