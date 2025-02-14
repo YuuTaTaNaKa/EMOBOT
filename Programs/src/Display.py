@@ -81,7 +81,7 @@ def display():
     # 現在の画面を示す変数（グローバル）
     current_screen = "boy"  # 初期状態
     # 現在の処理を保持する変数
-    current_process = "accept"
+    current_process = "sleep"
 
     pygame.init()
     WHITE = (255, 255, 255)
