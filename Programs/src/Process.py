@@ -38,18 +38,23 @@ def assistant():
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
         if any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
+            GPIO.output(25, GPIO.LOW)
             GPIO.output(23, GPIO.HIGH)
             
             while True:
                 # ユーザーの問いかけを取得
                 order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
-                
+
                 if order:
+                    GPIO.output(23, GPIO.LOW)
+                    GPIO.output(24, GPIO.HIGH)
                     print(f"認識したコマンド: {order}")
 
                     # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                     if "おやすみ" in order:
                         print("スリープモードに移行します...")
+                        GPIO.output(24, GPIO.LOW)
+                        GPIO.output(25, GPIO.HIGH)
                         break  # 内部ループを抜け、エモボット待機状態に戻る
 
                     # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
@@ -67,6 +72,26 @@ def assistant():
                     print("なんて言ったかわかんないなぁ")
                     continue  # 再度音声入力を待機するためにループ
 
+"""
+pin
+mein  disp  動作するもの
+23    23    sleepからacceptの受け取り
+24    24    acceptからexecutionの受け取り
+25    25    acceptからsleepの受け取り
+ 8     8    smileの受け取り
+ 7     7    kirarinの受け取り
+ 1     1    embarrassedの受け取り
+12    12    sadの受け取り
+16    16    winkの受け取り
+20    20    thinEyeの受け取り
+19    19    omgの受け取り
+13    13    doubtの受け取り
+ 6     6    angerの受け取り
+ 5     5    sleep時に画面タッチしたときに信号を出力
+ 0     0    accept時に画面タッチしたときに信号を出力
+11     9
+"""
+
 def process(command):
     print("音声入力をもとに処理を行います")
 
@@ -75,36 +100,42 @@ def process(command):
     if "おはよう" in command: 
         print("おはよう")
         # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
         print("こんにちは")
         # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.greet_afternoon()
 
     elif "こんばんは" in command:
         print("こんばんは")
         # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.greet_night()
 
     elif "さようなら" in command:
         print("さようなら")
         # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.bye()
     
     elif "いってきます" in command:
         print("いってきます")
         # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.im_going()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
         # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.welcome_home()
 
     elif "おやすみ" in command:
-    #「目を閉じる」DisplayProcessに遷移
         # Display.face_sleep()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.good_night()
 
 
@@ -113,8 +144,13 @@ def process(command):
     elif "音楽を再生して" in command:
         print("音楽を再生します")
         # LED.led_music()
+        GPIO.output(7,GPIO.HIGH)
         OutSound.playMusic()
 
+    elif "音楽を止めて" in command:
+        GPIO.output(7,GPIO.LOW)
+        GPIO.output(24,GPIO.HIGH)
+ 
     elif "シャットダウン" in command:
         print("シャットダウン")
         ComandShutdown = "shutdown"
