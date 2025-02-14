@@ -73,7 +73,7 @@ def display():
     screen_width, screen_height = screen.get_size()
 
     running = True
-    if current_process == "sleep":  
+    if current_process == "sleep":
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -92,7 +92,15 @@ def display():
                             current_screen = "boy"
                         else:
                             current_screen = "girl"
-        screen.fill(WHITE)
+            screen.fill(WHITE)
+
+            if current_screen == "boy":
+                resized_image = resize_image(current_boy_image, screen_width, screen_height)
+            else:
+                resized_image = resize_image(current_girl_image, screen_width, screen_height)
+
+            screen.blit(resized_image, (0, 0))
+            pygame.display.flip()
 
     if current_process == "accept":
         while running:
@@ -106,13 +114,13 @@ def display():
                         running = False
         screen.fill(WHITE)
 
-    if current_screen == "boy":
-        resized_image = resize_image(current_boy_image, screen_width, screen_height)
-    else:
-        resized_image = resize_image(current_girl_image, screen_width, screen_height)
+        if current_screen == "boy":
+            resized_image = resize_image(current_boy_image, screen_width, screen_height)
+        else:
+            resized_image = resize_image(current_girl_image, screen_width, screen_height)
 
-    screen.blit(resized_image, (0, 0))
-    pygame.display.flip()
+        screen.blit(resized_image, (0, 0))
+        pygame.display.flip()
 
     pygame.quit()
     sys.exit()
