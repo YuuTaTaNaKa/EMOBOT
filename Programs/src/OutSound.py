@@ -61,40 +61,6 @@ def good_night():
     #print("おやすみ")
     return
 
-#「感情」************************************************************* 
-
-def happy():
-    playsound(smile_mp3)
-    # print("うれしい")
-    return
-
-def sad():
-    playsound(sad_mp3)
-    # print("悲しい")
-    return
-
-def surprise():
-    playsound(omg_mp3)
-    # print("驚き")
-    return
-
-def fear():
-    playsound(omg_mp3)
-    # print("恐れ")
-    return
-
-#「利用者からの返事」*************************************************************  
-
-def no():
-    playsound(doubt_mp3)
-    # print("わかりません")
-    return
-
-def ok():
-    playsound(doubt_mp3)
-    # print("わかりました")
-    return
-
 #「Music」*************************************************************  
 
 def playMusic():
@@ -107,3 +73,36 @@ def stop():
     # print("停止")
     return
 
+
+#「感情」************************************************************* 
+# def happy():
+#     playsound(smile_mp3)
+#     # print("うれしい")
+#     return
+
+# def sad():
+#     playsound(sad_mp3)
+#     # print("悲しい")
+#     return
+
+# def surprise():
+#     playsound(omg_mp3)
+#     # print("驚き")
+#     return
+
+# def fear():
+#     playsound(omg_mp3)
+#     # print("恐れ")
+#     return
+
+# #「利用者からの返事」*************************************************************  
+
+# def no():
+#     playsound(doubt_mp3)
+#     # print("わかりません")
+#     return
+
+# def ok():
+#     playsound(doubt_mp3)
+#     # print("わかりました")
+#     return

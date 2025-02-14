@@ -8,6 +8,20 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN)
+GPIO.setup(24, GPIO.IN)
+GPIO.setup(25, GPIO.IN)
+GPIO.setup(8, GPIO.IN)
+GPIO.setup(7, GPIO.IN)
+GPIO.setup(1, GPIO.IN)
+GPIO.setup(12, GPIO.IN)
+GPIO.setup(16, GPIO.IN)
+GPIO.setup(20, GPIO.IN)
+GPIO.setup(19, GPIO.IN)
+GPIO.setup(13, GPIO.IN)
+GPIO.setup(6, GPIO.IN)
+GPIO.setup(5, GPIO.IN)
+GPIO.setup(0, GPIO.IN)
+GPIO.setup(9, GPIO.IN)
 
 try:
     #pathの読み込み
@@ -88,8 +102,8 @@ def display():
             elif event.type == pygame.MOUSEBUTTONUP:
                 end_pos = event.pos
                 dx = end_pos[0] - start_pos[0]
-
-                if abs(dx) > 50:
+                
+                if abs(dx) > 50 and current_process == "sleep":
                     if dx > 0:
                         current_screen = "boy"
                     else:
@@ -106,7 +120,8 @@ def display():
                     current_process = "execution"
 
         if GPIO.input(23) == GPIO.HIGH:
-            current_process = "accept" 
+            current_process = "accept"
+                
 
         screen.fill(WHITE)
 
@@ -128,22 +143,22 @@ if __name__ == "__main__":
     
 """
 pin
-受　送
-23　23
-24　24
-25　25
-8   8
-7   7
-1   1
-12  12
-16  16
-20  20
-19  19
-13  13
-6   6
-5   5
-0   0
-11  9
+mein　display
+23　  23
+24　  24
+25　  25
+ 8     8
+ 7     7
+ 1     1
+12    12
+16    16
+20    20
+19    19
+13    13
+ 6     6
+ 5     5
+ 0     0
+11     9
 """
 
 # import pygame
