@@ -61,6 +61,29 @@ def good_night():
     #print("おやすみ")
     return
 
+#「感情」************************************************************* 
+
+def happy():
+    playsound(smile_mp3)
+    # print("うれしい")
+    return
+
+def sad():
+    playsound(sad_mp3)
+    # print("悲しい")
+    return
+
+def surprise():
+    playsound(omg_mp3)
+    # print("驚き")
+    return
+
+def fear():
+    playsound(omg_mp3)
+    # print("恐れ")
+    return
+
+
 #「Music」*************************************************************  
 
 def playMusic():

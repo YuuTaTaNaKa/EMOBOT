@@ -19,8 +19,8 @@ GPIO.setup(20, GPIO.IN)
 GPIO.setup(19, GPIO.IN)
 GPIO.setup(13, GPIO.IN)
 GPIO.setup(6, GPIO.IN)
-GPIO.setup(5, GPIO.IN)
-GPIO.setup(0, GPIO.IN)
+GPIO.setup(5, GPIO.OUT)
+GPIO.setup(0, GPIO.OUT)
 GPIO.setup(9, GPIO.OUT)
 
 try:
@@ -52,6 +52,15 @@ try:
     girl_sad_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_sad.jpg"))
     girl_omg_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_omg.jpg"))
 
+    # 現在の画像
+    current_boy_image = boy_sleep_image
+    current_girl_image = girl_sleep_image
+
+    # 現在の画面を示す変数（グローバル）
+    current_screen = "boy"  # 初期状態
+    # 現在の処理を保持する変数
+    current_process = "sleep"
+
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     # LED.led_error()
@@ -73,15 +82,7 @@ def resize_image(image, screen_width, screen_height):
 
 def display():
     global current_screen,current_process # グローバル変数を明示
-
-    # 現在の画像
-    current_boy_image = boy_sleep_image
-    current_girl_image = girl_sleep_image
-
-    # 現在の画面を示す変数（グローバル）
-    current_screen = "boy"  # 初期状態
-    # 現在の処理を保持する変数
-    current_process = "accept"
+    global current_boy_image, current_girl_image
 
     pygame.init()
     WHITE = (255, 255, 255)
@@ -95,36 +96,90 @@ def display():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_ESCAPE:  #終了コマンド
                     running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:  #開始座標
                 start_pos = event.pos
-            elif event.type == pygame.MOUSEBUTTONUP:
+            elif event.type == pygame.MOUSEBUTTONUP:  #終了座標
                 end_pos = event.pos
                 dx = end_pos[0] - start_pos[0]
                 
+                #sleep状態かつ50以上スワイプした時
                 if abs(dx) > 50 and current_process == "sleep":
                     if dx > 0:
                         current_screen = "boy"
                     else:
                         current_screen = "girl"
+                #タップイベントの処理
                 else:
-                    if current_process == "sleep":
+                    if current_process == "sleep":  #sleep状態の時
+                        GPIO.output(5, GPIO.HIGH)
                         current_boy_image = boy_Default_image
-                    elif current_process == "accept":
-                        if current_screen == "boy":
-                            current_boy_image = boy_smile_image
+                    elif current_process == "accept": #コマンド受付時にタッチされた時
+                        GPIO.output(0, GPIO.HIGH)
+                        if current_screen == "boy":   #喜ぶ
+                            current_boy_image = boy_smile_image  
                         else:
                             current_girl_image = girl_smile_image
                     
                     current_process = "execution"
 
-        if GPIO.input(23) == GPIO.HIGH:
+        #mainからの信号を受信したとき
+        if GPIO.input(23) == GPIO.HIGH:  #エモボットを受け付けた時
             current_process = "accept"
-                
+        if GPIO.input(24) == GPIO.HIGH:  #処理に移行した時
+            current_process = "execution"
+        if GPIO.input(25) == GPIO.HIGH:  #sleepコマンドを受け付けた時
+            current_process = "sleep"
+        if GPIO.input(8) == GPIO.HIGH:   #smile
+            if current_screen == "boy":
+                current_boy_image = boy_smile_image
+            else:
+                current_girl_image = girl_smile_image
+        if GPIO.input(7) == GPIO.HIGH:   #kirarin
+            if current_screen == "boy":
+                current_boy_image = boy_kirarin_image
+            else:
+                current_girl_image = girl_kirarin_image
+        if GPIO.input(1) == GPIO.HIGH:   #emmbarrassed
+            if current_screen == "boy":
+                current_boy_image = boy_embarrassed_image
+            else:
+                current_girl_image = girl_embarrassed_image
+        if GPIO.input(12) == GPIO.HIGH:   #sad
+            if current_screen == "boy":
+                current_boy_image = boy_sad_image
+            else:
+                current_girl_image = girl_sad_image
+        if GPIO.input(16) == GPIO.HIGH:   #wink
+            if current_screen == "boy":
+                current_boy_image = boy_wink_image
+            else:
+                current_girl_image = girl_wink_image
+        if GPIO.input(20) == GPIO.HIGH:   #thinEye
+            if current_screen == "boy":
+                current_boy_image = boy_smile_image
+            else:
+                current_girl_image = girl_smile_image
+        if GPIO.input(19) == GPIO.HIGH:   #omg
+            if current_screen == "boy":
+                current_boy_image = boy_omg_image
+            else:
+                current_girl_image = girl_omg_image
+        if GPIO.input(13) == GPIO.HIGH:   #doubt
+            if current_screen == "boy":
+                current_boy_image = boy_doubt_image
+            else:
+                current_girl_image = girl_doubt_image
+        if GPIO.input(6) == GPIO.HIGH:   #anger
+            if current_screen == "boy":
+                current_boy_image = boy_anger_image
+            else:
+                current_girl_image = girl_anger_image
 
         screen.fill(WHITE)
 
+        # 画面の切り替え
         if current_screen == "boy":
             resized_image = resize_image(current_boy_image, screen_width, screen_height)
         else:
@@ -143,21 +198,21 @@ if __name__ == "__main__":
     
 """
 pin
-mein　display
-23　  23
-24　  24
-25　  25
- 8     8
- 7     7
- 1     1
-12    12
-16    16
-20    20
-19    19
-13    13
- 6     6
- 5     5
- 0     0
+mein  disp  動作するもの
+23    23    sleepからacceptの受け取り
+24    24    acceptからexecutionの受け取り
+25    25    acceptからsleepの受け取り
+ 8     8    smileの受け取り
+ 7     7    kirarinの受け取り
+ 1     1    embarrassedの受け取り
+12    12    sadの受け取り
+16    16    winkの受け取り
+20    20    thinEyeの受け取り
+19    19    omgの受け取り
+13    13    doubtの受け取り
+ 6     6    angerの受け取り
+ 5     5    sleep時に画面タッチしたときに信号を出力
+ 0     0    accept時に画面タッチしたときに信号を出力
 11     9
 """
 
