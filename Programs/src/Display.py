@@ -190,6 +190,7 @@ def display():
         pygame.display.flip()
 
     pygame.quit()
+    GPIO.cleanup()
     sys.exit()
 
 # 実行
