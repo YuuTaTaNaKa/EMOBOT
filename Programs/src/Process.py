@@ -30,7 +30,7 @@ def assistant():
     # GPIO.setup(0, GPIO.OUT)
     # GPIO.setup(9, GPIO.IN)
 
-    print("エムボットと呼びかけてください")
+    print("エモボットと呼びかけてください")
     
     while True:
         # if (GPIO.input(5) == GPIO.HIGH):
@@ -69,7 +69,7 @@ def assistant():
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
-        if any(word in command for word in emobot_keywords):
+        if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
             # GPIO.output(25, GPIO.LOW)
             # GPIO.output(23, GPIO.HIGH)

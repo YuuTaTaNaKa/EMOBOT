@@ -50,7 +50,7 @@ def main():
 # スレッドの終了処理
 def stop():
     print("プログラムを終了します。")
-    GPIO.cleanup()
+    # GPIO.cleanup()
     sys.exit()
 
 # エントリーポイント
