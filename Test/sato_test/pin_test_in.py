@@ -1,22 +1,12 @@
 import RPi.GPIO as GPIO
 import time
 
-# GPIO設定
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-
-# 使用するピン（1本だけ）
-PIN = 23
-
-# ピンを入力に設定
-GPIO.setup(PIN, GPIO.IN)
-
-print("GPIO 23 の信号を待機中...")
+GPIO.setmode(GPIO.BCM)  
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # プルダウン抵抗を有効化
 
 while True:
-    if GPIO.input(PIN) == GPIO.HIGH:
-        print("GPIO 23 → HIGH（受信）")
+    if GPIO.input(23) == GPIO.HIGH:
+        print("HIGH detected!")
     else:
-        print("GPIO 23 → LOW（待機）")
-    
-    time.sleep(1)  # 1秒ごとにチェック
+        print("LOW detected!")
+    time.sleep(1)  # 1秒ごとに確認

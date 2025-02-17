@@ -1,24 +1,13 @@
 import RPi.GPIO as GPIO
 import time
 
-# GPIO設定
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)  # ピン番号の指定方法（BCM or BOARD）
+GPIO.setup(23, GPIO.OUT)  # ピン 23 を出力モードに設定
 
-# 使用するピン（1本だけ）
-PIN = 23
+GPIO.output(23, GPIO.HIGH)  # ピンを HIGH にする
+time.sleep(2)  # 2秒待機
 
-# ピンを出力に設定
-GPIO.setup(PIN, GPIO.OUT)
+GPIO.output(23, GPIO.LOW)  # ピンを LOW にする
+time.sleep(2)
 
-# 5秒間 HIGH（ON）にする
-GPIO.output(PIN, GPIO.HIGH)
-print(f"GPIO {PIN} → HIGH（送信）")
-time.sleep(5)
-
-# LOW（OFF）に戻す
-GPIO.output(PIN, GPIO.LOW)
-print(f"GPIO {PIN} → LOW（送信終了）")
-
-# GPIOクリーンアップ
-GPIO.cleanup()
+GPIO.cleanup()  # GPIO のリセット
