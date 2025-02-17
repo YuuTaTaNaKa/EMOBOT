@@ -33,6 +33,7 @@ def assistant():
     print("エモボットと呼びかけてください")
     
     while True:
+        print("1")
         # if (GPIO.input(5) == GPIO.HIGH):
         #     while True:
         #         # ユーザーの問いかけを取得
