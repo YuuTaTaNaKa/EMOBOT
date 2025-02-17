@@ -10,6 +10,8 @@ import RPi.GPIO as GPIO
 # import gpiozero
 # import EarProcess
 
+# current_process = "sleep"
+
 def assistant():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(23, GPIO.OUT)
@@ -31,9 +33,40 @@ def assistant():
     print("エムボットと呼びかけてください")
     
     while True:
+        if (GPIO.input(5) == GPIO.HIGH):
+            while True:
+                # ユーザーの問いかけを取得
+                order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
+
+                if order:
+                    GPIO.output(23, GPIO.LOW)
+                    GPIO.output(24, GPIO.HIGH)
+                    print(f"認識したコマンド: {order}")
+
+                    # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
+                    if "おやすみ" in order:
+                        print("スリープモードに移行します...")
+                        GPIO.output(24, GPIO.LOW)
+                        GPIO.output(25, GPIO.HIGH)
+                        break  # 内部ループを抜け、エモボット待機状態に戻る
+
+                    # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
+                    if process(order):
+                        print(f"コマンド {order} の処理を実行しました")
+                    else:
+                        # コマンドが含まれていなかった場合、感情分析を実行
+                        if audio_file:
+                            print("感情分析を実行します...")
+                            empath_transfer(audio_file)
+                    
+                    # 音声入力を再度待機
+                    continue
+                else:
+                    print("なんて言ったかわかんないなぁ")
+                    continue  # 再度音声入力を待機するためにループ
+
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
-
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
         if any(word in command for word in emobot_keywords):

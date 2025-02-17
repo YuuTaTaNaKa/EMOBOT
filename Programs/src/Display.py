@@ -52,6 +52,15 @@ try:
     girl_sad_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_sad.jpg"))
     girl_omg_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_omg.jpg"))
 
+    # 現在の画像
+    current_boy_image = boy_sleep_image
+    current_girl_image = girl_sleep_image
+
+    # 現在の画面を示す変数（グローバル）
+    current_screen = "boy"  # 初期状態
+    # 現在の処理を保持する変数
+    current_process = "sleep"
+
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
     # LED.led_error()
@@ -73,15 +82,7 @@ def resize_image(image, screen_width, screen_height):
 
 def display():
     global current_screen,current_process # グローバル変数を明示
-
-    # 現在の画像
-    current_boy_image = boy_sleep_image
-    current_girl_image = girl_sleep_image
-
-    # 現在の画面を示す変数（グローバル）
-    current_screen = "boy"  # 初期状態
-    # 現在の処理を保持する変数
-    current_process = "sleep"
+    global current_boy_image, current_girl_image
 
     pygame.init()
     WHITE = (255, 255, 255)
