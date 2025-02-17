@@ -6,7 +6,7 @@ import InVoice
 import Display
 # import LED
 import Process
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):

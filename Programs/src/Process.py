@@ -5,7 +5,7 @@ import Empath
 import InVoice
 import Display
 import subprocess
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
 # import EarProcess
