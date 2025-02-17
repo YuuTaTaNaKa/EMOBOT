@@ -76,6 +76,7 @@ def assistant():
             # GPIO.output(23, GPIO.HIGH)
             
             while True:
+                print("2")
                 # ユーザーの問いかけを取得
                 order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
