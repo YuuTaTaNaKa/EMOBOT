@@ -1,4 +1,4 @@
-import cv2
+-import cv2
 
 # Haar Cascade の分類器をロード
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')

@@ -5,20 +5,20 @@ from time import sleep
 #red_color(赤)
 #green_color(緑)
 #通常時(寝ているとき)
-def led_sleep():
-    green_color = LED(22)
-    red_color = LED(17)
-    blue_color = LED(27)
-    red_color.off()
-    green_color.off()
-    blue_color.on()
 
+red_color = LED(17)
+blue_color = LED(27)
+green_color = LED(22)
+
+def led_sleep():
+    global red_color, blue_color, green_color
+    red_color.off()
+    blue_color.on()
+    green_color.off()
 
 # コマンドを実行しているとき
 def led_execution():
-    red_color = LED(17)
-    blue_color = LED(27)
-    green_color = LED(22)
+    global red_color, blue_color, green_color
     red_color.off()
     blue_color.on()
     green_color.on()
@@ -26,34 +26,24 @@ def led_execution():
 
 # コマンドを受け付けるとき
 def led_accept():
-    red_color = LED(17)
-    blue_color = LED(27)
-    green_color = LED(22)
+    global red_color, blue_color, green_color
     red_color.off()
     blue_color.off()
     green_color.on()
 
-
 #エラーが発生しているとき
 def led_error():
-    
-    red_color = LED(17)
-    blue_color = LED(27)
-    green_color = LED(22)
+    global red_color, blue_color, green_color
+    red_color.on()
     blue_color.off()
     green_color.off()
-    red_color.on()
-
 
 #音楽を再生しているとき
 def led_music():
-    red_color = LED(17)
-    blue_color = LED(27)
-    green_color = LED(22)
-    green_color.off()
-    blue_color.on()
+    global red_color, blue_color, green_color
     red_color.on()
-
+    blue_color.on()
+    green_color.off()
 
 # # ラズパイ上でインストールするライブラリ
 # # import gpiozero as LED

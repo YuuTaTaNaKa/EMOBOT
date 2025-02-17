@@ -24,7 +24,7 @@ def trim_audio(file_path, max_duration=5):
         print(f"音声ファイルを {max_duration} 秒にトリミングしました: {file_path}")
 
 # 音声認識関数
-def listen(mic_timeout, phrase_time_limit,number):
+def listen(mic_timeout, phrase_time_limit, number):
     start_time = time.time()  # 現在の時刻を取得
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
@@ -35,7 +35,7 @@ def listen(mic_timeout, phrase_time_limit,number):
             if time.time() - start_time > mic_timeout and number == 0:
                 print("時間が切れました。")
                 return None, None
-             # 以下修正点
+            # 以下修正点
             if time.time() - start_time > mic_timeout and number == 1:
                 print("時間が切れました。")
                 return None, None
@@ -54,7 +54,8 @@ def listen(mic_timeout, phrase_time_limit,number):
                 trim_audio(converted_audio_file, max_duration=5)
 
                 # 音声認識を実行
-                command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定               
+                command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定
+                print(f"認識されたコマンド: {command}")
                 return command,converted_audio_file
                 #
                 # ログファイルを開く
@@ -79,3 +80,4 @@ def listen(mic_timeout, phrase_time_limit,number):
 def stop():
     print("停止")
     return
+

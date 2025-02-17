@@ -4,55 +4,22 @@ from playsound import playsound
 import os
 from random import choice
 
-# -------------------------------〈配列〉--------------------------------
+#「あかりん音声ファイルパス」
 
-#「挨拶」*************************
-
-#「おはよう」
-Greet_morning = ["Programs/se/testsound_scream.mp3"]
-#「こんにちは」
-Greet_afternoon = []
-#「こんばんわ」
-Greet_night = []
-#「さようなら、ばいばい」
-Bye = []
-#「いってきます」
-Im_going = []
-#「おかえり」
-Welcome_home = []
-#「おやすみ」
-Good_night = []
-
-#「感情」*************************
-
-#「怒り」
-Angry = []
-#「幸せ」
-Happy = []
-#「悲しい」
-Sad = []
-#「驚き」
-Surprise = []
-#「恐れ」
-Fear = []
-
-#「返事」*************************
-
-#「はい、」
-yes = []
-
-#「いいえ、だめ」
-No = []
-
-#「了解、オーケー」
-Ok = []
+anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger.mp3")
+doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt.mp3")
+embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed.mp3")
+kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin.mp3")
+omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg.mp3")
+sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad.mp3")
+smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile.mp3")
+testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "testsound_scream.mp3")
 
 #「機能」*************************
 
-#「SpotifyAPI」
-Musics = []
-#音楽を再生するね！的な奴いる？
-Musics_messege = []
+#音楽を再生
+Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
+           ""]
 
 # -------------------------------〈メソッド〉--------------------------------
 
@@ -60,78 +27,66 @@ Musics_messege = []
 #「挨拶」*************************************************************   
 
 def greet_morning():
-    playsound(choice(Greet_morning))
+    playsound(smile_mp3)
     #print("おはよう")
     return
 
 def greet_afternoon():
-    playsound(choice(Greet_afternoon))
+    playsound(smile_mp3)
     #print("こんにちは")
     return
 
 def greet_night():
-    playsound(choice(Greet_night))
+    playsound(smile_mp3)
     #print("こんばんは")
     return
 
 def bye():
-    playsound(choice(Bye))
+    playsound(smile_mp3)
     #print("さようなら")
     return
 
 def im_going():
-    playsound(choice(Im_going))
+    playsound(smile_mp3)
     #print("いってきます")
     return
 
 def welcome_home():
-    playsound(choice(Welcome_home))
+    playsound(smile_mp3)
     #print("おかえりなさい")
     return
 
 def good_night():
-    playsound(choice(Good_night))
+    playsound(smile_mp3)
     #print("おやすみ")
     return
 
 #「感情」************************************************************* 
 
 def happy():
-    playsound(choice(Happy))
+    playsound(smile_mp3)
     # print("うれしい")
     return
 
 def sad():
-    playsound(choice(Sad))
+    playsound(sad_mp3)
     # print("悲しい")
     return
 
 def surprise():
-    playsound(choice(Surprise))
+    playsound(omg_mp3)
     # print("驚き")
     return
 
 def fear():
-    playsound(choice(Fear))
+    playsound(omg_mp3)
     # print("恐れ")
     return
 
-#「利用者からの返事」*************************************************************  
 
-def no():
-    playsound(choice(No))
-    # print("わかりません")
-    return
-
-def ok():
-    playsound(choice(Ok))
-    # print("わかりました")
-    return
-
-#「Spotify_Music」*************************************************************  
+#「Music」*************************************************************  
 
 def playMusic():
-    playsound(choice(Musics_messege))
     playsound(choice(Musics))
     # print("音楽を再生します")
     return
@@ -141,3 +96,36 @@ def stop():
     # print("停止")
     return
 
+
+#「感情」************************************************************* 
+# def happy():
+#     playsound(smile_mp3)
+#     # print("うれしい")
+#     return
+
+# def sad():
+#     playsound(sad_mp3)
+#     # print("悲しい")
+#     return
+
+# def surprise():
+#     playsound(omg_mp3)
+#     # print("驚き")
+#     return
+
+# def fear():
+#     playsound(omg_mp3)
+#     # print("恐れ")
+#     return
+
+# #「利用者からの返事」*************************************************************  
+
+# def no():
+#     playsound(doubt_mp3)
+#     # print("わかりません")
+#     return
+
+# def ok():
+#     playsound(doubt_mp3)
+#     # print("わかりました")
+#     return
