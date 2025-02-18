@@ -5,209 +5,170 @@ import Empath
 import InVoice
 import Display
 import subprocess
+# import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
 # import EarProcess
 
-# 音声アシスタントのループ処理
+# current_process = "sleep"
+
 def assistant():
-    # LED.led_sleep()
-    print("なにをする？")
+    print("0")
+    # GPIO.cleanup()
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(23, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(25, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(8, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(7, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(1, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(12, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(16, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(20, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(19, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(13, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(6, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    current_process = False
+
+    print("エモボットと呼びかけてください")
+    
     while True:
-        command, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
-        
-        if command is None and audio_file is None:
-            print("リセットされました。再度話しかけてください。")
-            continue
-
-        # エモボットに関連するキーワード
+        print("1")
+        # エムボットが呼ばれるまで待機
+        command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
+        # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
-        # 他のアシスタントのキーワード
-        other_assistant_keywords = ["アレクサ", "あれくさ", "ALXA", "alxa", "オッケーグーグル", "おっけーぐーぐる", "OK Google", "ヘイシリー", "へいしり", "Hey Siri", "hey siri"]
 
-        # エモボットのキーワードが含まれている場合
+        # if GPIO.input(5, GPIO.HIGH):
+        #     current_process = True
 
-        # 以下追加点
-        def assistant_inner():
-            # LED.led_accept()
-            if any(word in command for word in emobot_keywords):
-                order = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
-                if order:
-                    process(order)
-                if command is None and audio_file is None:
-                    print("リセットされました。再度話しかけてください。")
-                    return assistant_inner()
-        # 以上追加点
-
-        # if any(word in command for word in emobot_keywords):
-        #     order = InVoice.listen(mic_timeout=5, phrase_time_limit=5)[0]  # 再度5秒間だけONにしてコマンドを聞き取る
-        #     if order:
-        #         process(order)
-
-        # # 他のアシスタントのキーワードが含まれている場合
-        # elif any(word in command for word in other_assistant_keywords):
-        #     angry()
-        
-        # 想定外のキーワードの場合
+        if current_process == False:
+            print("2")
+            if command and any(word in command for word in emobot_keywords):
+                print("エモボット起動！ 感情分析モードへ移行します")
+                current_process = True
+                # GPIO.output(25, GPIO.LOW)
+                # GPIO.output(23, GPIO.HIGH)
+                print("3")
             else:
-                empath_transfer(audio_file)
+                print("?")
+                continue
+        
+        while True:
+            print("4")
+            # ユーザーの問いかけを取得
+            order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
+
+            if order:
+                # GPIO.output(23, GPIO.LOW)
+                # GPIO.output(24, GPIO.HIGH)
+                print(f"認識したコマンド: {order}")
+
+                # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
+                if "おやすみ" in order:
+                    print("スリープモードに移行します...")
+                    # GPIO.output(24, GPIO.LOW)
+                    # GPIO.output(25, GPIO.HIGH)
+                    break  # 内部ループを抜け、エモボット待機状態に戻る
+
+                # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
+                if process(order):
+                    print(f"コマンド {order} の処理を実行しました")
+                else:
+                    # コマンドが含まれていなかった場合、感情分析を実行
+                    if audio_file:
+                        print("感情分析を実行します...")
+                        empath_transfer(audio_file)
+                
+                # 音声入力を再度待機
+                continue
+            else:
                 print("なんて言ったかわかんないなぁ")
+                continue  # 再度音声入力を待機するためにループ
+        
+
+"""
+pin
+mein  disp  動作するもの
+23    23    sleepからacceptの受け取り
+24    24    acceptからexecutionの受け取り
+25    25    acceptからsleepの受け取り
+ 8     8    smileの受け取り
+ 7     7    kirarinの受け取り
+ 1     1    embarrassedの受け取り
+12    12    sadの受け取り
+16    16    winkの受け取り
+20    20    thinEyeの受け取り
+19    19    omgの受け取り
+13    13    doubtの受け取り
+ 6     6    angerの受け取り
+ 5     5    sleep時に画面タッチしたときに信号を出力
+ 0     0    accept時に画面タッチしたときに信号を出力
+11     9
+"""
 
 def process(command):
     print("音声入力をもとに処理を行います")
 
     #　「あいさつ」　*************************************************************   
 
-    if "おはよう" in command:        
+    if "おはよう" in command: 
         print("おはよう")
-        Display.face_smile()
+        # Display.face_smile()
+        # GPIO.output(8,GPIO.HIGH)
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
         print("こんにちは")
-        Display.face_smile()
+        # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.greet_afternoon()
 
-    elif "こんばんは" in command:
+    
         print("こんばんは")
-        Display.face_smile()
+        # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.greet_night()
 
     elif "さようなら" in command:
         print("さようなら")
-        Display.face_smile()
+        # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.bye()
     
     elif "いってきます" in command:
         print("いってきます")
-        Display.face_smile()
+        # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.im_going()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
-        Display.face_smile()
+        # Display.face_smile()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.welcome_home()
 
     elif "おやすみ" in command:
-    #「目を閉じる」DisplayProcessに遷移
-        Display.face_sleep()
+        # Display.face_sleep()
+        GPIO.output(8,GPIO.HIGH)
         OutSound.good_night()
 
-#キーワードコマンド
-
-    elif "いいね" in command:
-        print("いいね")
-        Display.face_embarrassed()
-        OutSound.welcome_home()
-
-    elif "体調が悪い" in command:
-        print("体調が悪い")
-        Display.face_sad()
-        OutSound.welcome_home()
-
-    elif "体調がいい" in command:
-        print("体調がいい")
-        Display.face_smile()
-        OutSound.welcome_home()
-
-    elif "誕生日" in command:
-        print("誕生日")
-        Display.face_kirarin()
-        OutSound.welcome_home()
-
-    elif "ハッピーバースデー" in command:
-        print("ハッピーバースデー")
-        Display.face_kirarin()
-        OutSound.welcome_home()
-
-    elif "いい気分" in command:
-        print("いい気分")
-        Display.face_smile()
-        OutSound.welcome_home()
-
-    elif "かっこいい" in command:
-        print("かっこいい")
-        Display.face_wink()
-        OutSound.welcome_home()
-
-    elif "癒してほしい" in command:
-        print("癒してほしい")
-        Display.face_wink()
-        OutSound.playMusic()
-        LED.led_music()
-        # OutSound.welcome_home()
-
-    elif "つらい" in command:
-        print("つらい")
-        Display.face_sad()
-        OutSound.welcome_home()
-
-    elif "疲れた" in command:
-        print("疲れた")
-        Display.face_thinEye()
-        OutSound.welcome_home()
-
-    elif "しんどい" in command:
-        print("しんどい")
-        Display.face_sad()
-        OutSound.welcome_home()
-
-    elif "おめでとう" in command:
-        print("おめでとう")
-        Display.face_embarrassed()
-        OutSound.welcome_home()
-
-    elif "最高" in command:
-        print("最高")
-        Display.face_kirarin()
-        OutSound.welcome_home()
-
-    elif "憂鬱" in command:
-        print("憂鬱")
-        Display.face_sad()
-        OutSound.welcome_home()
-
-#　「感情」　*************************************************************       
-
-    elif "驚いた" in command:
-        print("驚いた")
-        Display.face_smile()
-        OutSound.surprise()
-
-    elif "悲しい" in command:
-        print("悲しい")
-        Display.face_sad()
-        OutSound.sad()
-
-    elif "こわい" in command:
-        print("こわい")
-        Display.face_sad()
-        OutSound.fear()
-
-    elif "うれしい" in command:
-        print("うれしい")
-        Display.face_embarrassed()
-        OutSound.happy()
-
-#　「利用者からの返事」　*************************************************************  
-
-    elif "わかりました" in command:
-        print("わかりました")
-        Display.face_embarrassed()
-        OutSound.ok()
-
-    elif "わかりません" in command:
-        print("わかりません")
-        Display.face_doubt()
-        OutSound.no()
 
 #　「機能」　*************************************************************  
 
     elif "音楽を再生して" in command:
         print("音楽を再生します")
         # LED.led_music()
+        GPIO.output(7,GPIO.HIGH)
         OutSound.playMusic()
 
+    elif "音楽を止めて" in command:
+        GPIO.output(7,GPIO.LOW)
+        GPIO.output(24,GPIO.HIGH)
+ 
     elif "シャットダウン" in command:
         print("シャットダウン")
         ComandShutdown = "shutdown"
@@ -226,7 +187,7 @@ def process(command):
     #     #OutSound() ??
 
     else:
-        print("なんて言ったかわかんないなぁ")
+        print("コマンドに含まれてはいません")
 
 # ********************************〔Empath.pyの呼び出し〕*******************************************
 def empath_transfer(audio_file):
@@ -237,3 +198,110 @@ def empath_transfer(audio_file):
     # 感情分析
     print("感情を分析しています...")
     Empath.empath(audio_file)
+    
+# #キーワードコマンド
+
+#     elif "いいね" in command:
+#         print("いいね")
+#         # Display.face_embarrassed()
+#         OutSound.welcome_home()
+
+#     elif "体調が悪い" in command:
+#         print("体調が悪い")
+#         # Display.face_sad()
+#         OutSound.welcome_home()
+
+#     elif "体調がいい" in command:
+#         print("体調がいい")
+#         # Display.face_smile()
+#         OutSound.welcome_home()
+
+#     elif "誕生日" in command:
+#         print("誕生日")
+#         # Display.face_kirarin()
+#         OutSound.welcome_home()
+
+#     elif "ハッピーバースデー" in command:
+#         print("ハッピーバースデー")
+#         # Display.face_kirarin()
+#         OutSound.welcome_home()
+
+#     elif "いい気分" in command:
+#         print("いい気分")
+#         # Display.face_smile()
+#         OutSound.welcome_home()
+
+#     elif "かっこいい" in command:
+#         print("かっこいい")
+#         # Display.face_wink()
+#         OutSound.welcome_home()
+
+#     elif "癒してほしい" in command:
+#         print("癒してほしい")
+#         # Display.face_wink()
+#         OutSound.playMusic()
+#         # OutSound.welcome_home()
+
+#     elif "つらい" in command:
+#         print("つらい")
+#         # Display.face_sad()
+#         OutSound.welcome_home()
+
+#     elif "疲れた" in command:
+#         print("疲れた")
+#         # Display.face_thinEye()
+#         OutSound.welcome_home()
+
+#     elif "しんどい" in command:
+#         print("しんどい")
+#         # Display.face_sad()
+#         OutSound.welcome_home()
+
+#     elif "おめでとう" in command:
+#         print("おめでとう")
+#         # Display.face_embarrassed()
+#         OutSound.welcome_home()
+
+#     elif "最高" in command:
+#         print("最高")
+#         # Display.face_kirarin()
+#         OutSound.welcome_home()
+
+#     elif "憂鬱" in command:
+#         print("憂鬱")
+#         # Display.face_sad()
+#         OutSound.welcome_home()
+
+# #　「感情」　*************************************************************       
+
+#     elif "驚いた" in command:
+#         print("驚いた")
+#         # Display.face_smile()
+#         OutSound.surprise()
+
+#     elif "悲しい" in command:
+#         print("悲しい")
+#         # Display.face_sad()
+#         OutSound.sad()
+
+#     elif "こわい" in command:
+#         print("こわい")
+#         # Display.face_sad()
+#         OutSound.fear()
+
+#     elif "うれしい" in command:
+#         print("うれしい")
+#         # Display.face_embarrassed()
+#         OutSound.happy()
+
+#　「利用者からの返事」　*************************************************************  
+
+    # elif "わかりました" in command:
+    #     print("わかりました")
+    #     # Display.face_embarrassed()
+    #     OutSound.ok()
+
+    # elif "わかりません" in command:
+    #     print("わかりません")
+    #     # Display.face_doubt()
+    #     OutSound.no()

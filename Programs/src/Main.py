@@ -3,9 +3,10 @@ import os
 import threading
 import time
 import InVoice
-import Display
+# import Display
 # import LED
 import Process
+# import RPi.GPIO as GPIO
 
 
 def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
@@ -23,11 +24,9 @@ def main():
 
     # 各機能に対してデーモンスレッドを作成
     voice_thread = threading.Thread(target=Process.assistant, daemon=True)
-    # display_thread = threading.Thread(target=Display, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
-    # threads.extend([voice_thread, display_thread])  # led_thread])
     threads.extend([voice_thread])  # led_thread])
 
     # 標準エラー出力をリダイレクト
@@ -46,11 +45,12 @@ def main():
     except KeyboardInterrupt:
         print("\n停止処理を実行します...")
         stop()  # Ctrl+Cで停止
-
+        
 
 # スレッドの終了処理
 def stop():
     print("プログラムを終了します。")
+    # GPIO.cleanup()
     sys.exit()
 
 # エントリーポイント

@@ -11,12 +11,9 @@ def display():
 
     # 画像の読み込み
     try:
-        # main_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
-        # screen_a_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
-        # screen_b_image = pygame.image.load("C:\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
-        main_image = pygame.image.load("Test/sato_test/emobot1.jpg")
-        screen_a_image = pygame.image.load("Test/sato_test/emobot1.jpg")
-        screen_b_image = pygame.image.load("Test/sato_test/emobot2.jpg")
+        main_image = pygame.image.load("C:\\Users\\matth\\OneDrive\\デスクトップ\\学業\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
+        screen_a_image = pygame.image.load("C:\\Users\\matth\\OneDrive\\デスクトップ\\学業\\EMOBOT\\Test\\sato_test\\emobot1.jpg")
+        screen_b_image = pygame.image.load("C:\\Users\\matth\\OneDrive\\デスクトップ\\学業\\EMOBOT\\Test\\sato_test\\emobot2.jpg")
     except pygame.error as e:
         print(f"画像の読み込みエラー: {e}")
         pygame.quit()
@@ -31,7 +28,7 @@ def display():
     current_screen = "main"
 
     # スワイプに関連する変数
-    # is_swiping = False
+    is_swiping = False
     start_pos = None
     end_pos = None
     swipe_threshold = 50  # スワイプと判定する最低距離
@@ -46,10 +43,10 @@ def display():
                 if event.key == pygame.K_ESCAPE:  # ESCキーが押されたら終了
                     running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # is_swiping = True
+                is_swiping = True
                 start_pos = event.pos
             elif event.type == pygame.MOUSEBUTTONUP:
-                # is_swiping = False
+                is_swiping = False
                 end_pos = event.pos
 
                 if start_pos and end_pos:
