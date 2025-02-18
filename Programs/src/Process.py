@@ -54,6 +54,7 @@ def assistant():
                 # GPIO.output(23, GPIO.HIGH)
                 print("3")
             else:
+                print("?")
                 continue
         
         while True:
