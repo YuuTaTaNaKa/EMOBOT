@@ -41,20 +41,20 @@ def assistant():
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
 
-        if GPIO.input(5, GPIO.HIGH):
-            current_process = "accept"
+        # if GPIO.input(5, GPIO.HIGH):
+        #     current_process = "accept"
 
-        if current_process == "sleep":
-            print("2")
-            if command and any(word in command for word in emobot_keywords):
-                print("エモボット起動！ 感情分析モードへ移行します")
-                current_process = "accept"
-                # GPIO.output(25, GPIO.LOW)
-                # GPIO.output(23, GPIO.HIGH)
-                print("3")
-            else:
-                print("?")
-                continue
+        # if current_process == "sleep":
+        print("2")
+        if command and any(word in command for word in emobot_keywords):
+            print("エモボット起動！ 感情分析モードへ移行します")
+            current_process = "accept"
+            # GPIO.output(25, GPIO.LOW)
+            # GPIO.output(23, GPIO.HIGH)
+            print("3")
+        else:
+            print("?")
+            continue
         
         while True:
             print("4")
