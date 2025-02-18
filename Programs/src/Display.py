@@ -118,7 +118,7 @@ def display():
                     elif current_process == "accept": #コマンド受付時にタッチされた時
                         GPIO.output(0, GPIO.HIGH)
                         if current_screen == "boy":   #喜ぶ
-                            current_boy_image = boy_smile_image  
+                            current_boy_image = boy_smile_image
                         else:
                             current_girl_image = girl_smile_image
                     
