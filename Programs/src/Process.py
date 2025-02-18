@@ -5,7 +5,7 @@ import Empath
 import InVoice
 import Display
 import subprocess
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
 # import EarProcess
@@ -13,97 +13,82 @@ import RPi.GPIO as GPIO
 # current_process = "sleep"
 
 def assistant():
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(23, GPIO.OUT)
-    GPIO.setup(24, GPIO.OUT)
-    GPIO.setup(25, GPIO.OUT)
-    GPIO.setup(8, GPIO.OUT)
-    GPIO.setup(7, GPIO.OUT)
-    GPIO.setup(1, GPIO.OUT)
-    GPIO.setup(12, GPIO.OUT)
-    GPIO.setup(16, GPIO.OUT)
-    GPIO.setup(20, GPIO.OUT)
-    GPIO.setup(19, GPIO.OUT)
-    GPIO.setup(13, GPIO.OUT)
-    GPIO.setup(6, GPIO.OUT)
-    GPIO.setup(5, GPIO.OUT)
-    GPIO.setup(0, GPIO.OUT)
-    GPIO.setup(9, GPIO.IN)
+    print("0")
+    # GPIO.cleanup()
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(23, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(25, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(8, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(7, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(1, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(12, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(16, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(20, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(19, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(13, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(6, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    current_process = False
 
-    print("エムボットと呼びかけてください")
+    print("エモボットと呼びかけてください")
     
     while True:
-        if (GPIO.input(5) == GPIO.HIGH):
-            while True:
-                # ユーザーの問いかけを取得
-                order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
-
-                if order:
-                    GPIO.output(23, GPIO.LOW)
-                    GPIO.output(24, GPIO.HIGH)
-                    print(f"認識したコマンド: {order}")
-
-                    # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
-                    if "おやすみ" in order:
-                        print("スリープモードに移行します...")
-                        GPIO.output(24, GPIO.LOW)
-                        GPIO.output(25, GPIO.HIGH)
-                        break  # 内部ループを抜け、エモボット待機状態に戻る
-
-                    # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
-                    if process(order):
-                        print(f"コマンド {order} の処理を実行しました")
-                    else:
-                        # コマンドが含まれていなかった場合、感情分析を実行
-                        if audio_file:
-                            print("感情分析を実行します...")
-                            empath_transfer(audio_file)
-                    
-                    # 音声入力を再度待機
-                    continue
-                else:
-                    print("なんて言ったかわかんないなぁ")
-                    continue  # 再度音声入力を待機するためにループ
-
+        print("1")
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
-        if any(word in command for word in emobot_keywords):
-            print("エモボット起動！ 感情分析モードへ移行します")
-            GPIO.output(25, GPIO.LOW)
-            GPIO.output(23, GPIO.HIGH)
-            
-            while True:
-                # ユーザーの問いかけを取得
-                order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
-                if order:
-                    GPIO.output(23, GPIO.LOW)
-                    GPIO.output(24, GPIO.HIGH)
-                    print(f"認識したコマンド: {order}")
+        # if GPIO.input(5, GPIO.HIGH):
+        #     current_process = True
 
-                    # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
-                    if "おやすみ" in order:
-                        print("スリープモードに移行します...")
-                        GPIO.output(24, GPIO.LOW)
-                        GPIO.output(25, GPIO.HIGH)
-                        break  # 内部ループを抜け、エモボット待機状態に戻る
+        if current_process == False:
+            print("2")
+            if command and any(word in command for word in emobot_keywords):
+                print("エモボット起動！ 感情分析モードへ移行します")
+                current_process = True
+                # GPIO.output(25, GPIO.LOW)
+                # GPIO.output(23, GPIO.HIGH)
+                print("3")
+            else:
+                print("?")
+                continue
+        
+        while True:
+            print("4")
+            # ユーザーの問いかけを取得
+            order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
-                    # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
-                    if process(order):
-                        print(f"コマンド {order} の処理を実行しました")
-                    else:
-                        # コマンドが含まれていなかった場合、感情分析を実行
-                        if audio_file:
-                            print("感情分析を実行します...")
-                            empath_transfer(audio_file)
-                    
-                    # 音声入力を再度待機
-                    continue
+            if order:
+                # GPIO.output(23, GPIO.LOW)
+                # GPIO.output(24, GPIO.HIGH)
+                print(f"認識したコマンド: {order}")
+
+                # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
+                if "おやすみ" in order:
+                    print("スリープモードに移行します...")
+                    # GPIO.output(24, GPIO.LOW)
+                    # GPIO.output(25, GPIO.HIGH)
+                    break  # 内部ループを抜け、エモボット待機状態に戻る
+
+                # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
+                if process(order):
+                    print(f"コマンド {order} の処理を実行しました")
                 else:
-                    print("なんて言ったかわかんないなぁ")
-                    continue  # 再度音声入力を待機するためにループ
+                    # コマンドが含まれていなかった場合、感情分析を実行
+                    if audio_file:
+                        print("感情分析を実行します...")
+                        empath_transfer(audio_file)
+                
+                # 音声入力を再度待機
+                continue
+            else:
+                print("なんて言ったかわかんないなぁ")
+                continue  # 再度音声入力を待機するためにループ
+        
 
 """
 pin
@@ -133,7 +118,7 @@ def process(command):
     if "おはよう" in command: 
         print("おはよう")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        # GPIO.output(8,GPIO.HIGH)
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
@@ -142,7 +127,7 @@ def process(command):
         GPIO.output(8,GPIO.HIGH)
         OutSound.greet_afternoon()
 
-    elif "こんばんは" in command:
+    
         print("こんばんは")
         # Display.face_smile()
         GPIO.output(8,GPIO.HIGH)
