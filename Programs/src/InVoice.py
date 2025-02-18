@@ -58,14 +58,7 @@ def listen(mic_timeout, phrase_time_limit,number):
                 command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定  
                 print("テキスト変換完了")             
                 return command,converted_audio_file
-                #
-                # ログファイルを開く
-                logfile = open("alsa_log.txt", 'a')
-                sys.stderr = logfile
-
-                # プログラム終了時にファイルを閉じる
-                atexit.register(logfile.close)
-                #
+                
             except sr.WaitTimeoutError:
                 print("タイムアウトしました。音声入力が検出されませんでした。")
                 continue  # 再度待機
