@@ -3,7 +3,7 @@ import os
 import threading
 import time
 import InVoice
-import Display
+# import Display
 # import LED
 import Process
 # import RPi.GPIO as GPIO

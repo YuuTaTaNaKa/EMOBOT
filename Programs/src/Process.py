@@ -14,8 +14,8 @@ import subprocess
 
 def assistant():
     print("0")
-    GPIO.cleanup()
-    GPIO.setmode(GPIO.BCM)
+    # GPIO.cleanup()
+    # GPIO.setmode(GPIO.BCM)
     # GPIO.setup(23, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(25, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
@@ -28,7 +28,7 @@ def assistant():
     # GPIO.setup(19, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(13, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(6, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     current_process = False
