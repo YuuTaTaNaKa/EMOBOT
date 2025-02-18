@@ -26,8 +26,8 @@ def trim_audio(file_path, max_duration=5):
 # 音声認識関数
 def listen(mic_timeout, phrase_time_limit,number):
     start_time = time.time()  # 現在の時刻を取得
+    print("マイク")
     with sr.Microphone() as source:
-        print("recognizer直前")
         recognizer.adjust_for_ambient_noise(source)
         print("何かをはなして")
         
