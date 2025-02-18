@@ -2,26 +2,26 @@ import pygame
 import os
 import sys
 import OutSound
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 # from gpiozero import LED, Button
 # from signal import pause
 
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(9, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(9, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
 
 try:
     #pathの読み込み
