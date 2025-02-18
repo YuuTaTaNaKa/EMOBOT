@@ -5,7 +5,7 @@ import Empath
 import InVoice
 import Display
 import subprocess
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
 # import EarProcess
@@ -40,8 +40,8 @@ def assistant():
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
 
-        if GPIO.input(5, GPIO.HIGH):
-            current_process = True
+        # if GPIO.input(5, GPIO.HIGH):
+        #     current_process = True
 
         if current_process == False:
             if command and any(word in command for word in emobot_keywords):
@@ -112,7 +112,7 @@ def process(command):
     if "おはよう" in command: 
         print("おはよう")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        # GPIO.output(8,GPIO.HIGH)
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
@@ -121,7 +121,7 @@ def process(command):
         GPIO.output(8,GPIO.HIGH)
         OutSound.greet_afternoon()
 
-    elif "こんばんは" in command:
+    
         print("こんばんは")
         # Display.face_smile()
         GPIO.output(8,GPIO.HIGH)

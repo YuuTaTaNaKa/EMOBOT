@@ -2,7 +2,7 @@
 # from gpiozero import LED
 from time import sleep
 import requests
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 
 
