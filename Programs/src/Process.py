@@ -13,7 +13,7 @@ import RPi.GPIO as GPIO
 # current_process = "sleep"
 
 def assistant():
-    # GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BCM)
     # GPIO.setup(23, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(25, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
@@ -26,7 +26,7 @@ def assistant():
     # GPIO.setup(19, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(13, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(6, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-    # GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     current_process = False
@@ -44,16 +44,18 @@ def assistant():
             current_process = True
 
         if current_process == False:
+            print("2")
             if command and any(word in command for word in emobot_keywords):
                 print("エモボット起動！ 感情分析モードへ移行します")
                 current_process = True
                 # GPIO.output(25, GPIO.LOW)
                 # GPIO.output(23, GPIO.HIGH)
+                print("3")
             else:
                 continue
         
         while True:
-            print("2")
+            print("4")
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
