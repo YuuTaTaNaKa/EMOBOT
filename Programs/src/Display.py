@@ -2,26 +2,26 @@ import pygame
 import os
 import sys
 import OutSound
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 # from gpiozero import LED, Button
 # from signal import pause
 
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(9, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(9, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
 
 try:
     #pathの読み込み
@@ -81,7 +81,7 @@ def resize_image(image, screen_width, screen_height):
 
 
 def display():
-    global current_screen,current_process # グローバル変数を明示
+    global current_screen, current_process # グローバル変数を明示
     global current_boy_image, current_girl_image
 
     pygame.init()
@@ -140,7 +140,7 @@ def display():
                 current_boy_image = boy_smile_image
             else:
                 current_girl_image = girl_smile_image
-        else:
+        elif GPIO.input(8) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -151,7 +151,7 @@ def display():
                 current_boy_image = boy_kirarin_image
             else:
                 current_girl_image = girl_kirarin_image
-        else:
+        elif GPIO.input(7) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -162,7 +162,7 @@ def display():
                 current_boy_image = boy_embarrassed_image
             else:
                 current_girl_image = girl_embarrassed_image
-        else:
+        elif GPIO.input(1) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -173,7 +173,7 @@ def display():
                 current_boy_image = boy_sad_image
             else:
                 current_girl_image = girl_sad_image
-        else:
+        elif GPIO.input(12) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -184,7 +184,7 @@ def display():
                 current_boy_image = boy_wink_image
             else:
                 current_girl_image = girl_wink_image
-        else:
+        elif GPIO.input(16) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -195,7 +195,7 @@ def display():
                 current_boy_image = boy_smile_image
             else:
                 current_girl_image = girl_smile_image
-        else:
+        elif GPIO.input(20) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -206,7 +206,7 @@ def display():
                 current_boy_image = boy_omg_image
             else:
                 current_girl_image = girl_omg_image
-        else:
+        elif GPIO.input(19) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -217,7 +217,7 @@ def display():
                 current_boy_image = boy_doubt_image
             else:
                 current_girl_image = girl_doubt_image
-        else:
+        elif GPIO.input(13) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -228,7 +228,7 @@ def display():
                 current_boy_image = boy_anger_image
             else:
                 current_girl_image = girl_anger_image
-        else:
+        elif GPIO.input(6) == GPIO.LOW:
             if current_screen == "boy":
                 current_boy_image = boy_Default_image
             else:
@@ -257,9 +257,9 @@ if __name__ == "__main__":
 """
 pin
 mein  disp  動作するもの
-23    23    sleepからacceptの受け取り
-24    24    acceptからexecutionの受け取り
-25    25    acceptからsleepの受け取り
+23    23    acceptの受け取り
+24    24    executionの受け取り
+25    25    sleepの受け取り
  8     8    smileの受け取り
  7     7    kirarinの受け取り
  1     1    embarrassedの受け取り
