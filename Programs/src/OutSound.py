@@ -3,6 +3,7 @@ import time
 from playsound import playsound
 import os
 from random import choice
+import RPi.GPIO as GPIO
 
 #「あかりん音声ファイルパス」
 
@@ -29,6 +30,11 @@ Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
 def greet_morning():
     playsound(smile_mp3)
     #print("おはよう")
+    GPIO.setup(25, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.output(25, GPIO.HIGH)
+    time.sleep(3)
+    GPIO.output(25, GPIO.LOW)
+    GPIO.cleanup(25)
     return
 
 def greet_afternoon():

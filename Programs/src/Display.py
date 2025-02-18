@@ -81,7 +81,7 @@ def resize_image(image, screen_width, screen_height):
 
 
 def display():
-    global current_screen,current_process # グローバル変数を明示
+    global current_screen, current_process # グローバル変数を明示
     global current_boy_image, current_girl_image
 
     pygame.init()
