@@ -19,9 +19,9 @@ GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(9, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(5, GPIO.OUT)
+GPIO.setup(0, GPIO.OUT)
+GPIO.setup(9, GPIO.OUT)
 
 try:
     #pathの読み込み
