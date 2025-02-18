@@ -13,6 +13,8 @@ import RPi.GPIO as GPIO
 # current_process = "sleep"
 
 def assistant():
+    print("0")
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     # GPIO.setup(23, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
     # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
@@ -85,6 +87,7 @@ def assistant():
             else:
                 print("なんて言ったかわかんないなぁ")
                 continue  # 再度音声入力を待機するためにループ
+        
 
 """
 pin
