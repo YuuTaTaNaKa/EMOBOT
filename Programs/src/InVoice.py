@@ -51,6 +51,7 @@ def listen(mic_timeout, phrase_time_limit,number):
                 converted_audio_file = "converted_audio.wav"
                 convert_sample_rate(temp_audio_file, converted_audio_file)
                 #ファイルを5秒にトリミング
+                print("トリミング直前")
                 trim_audio(converted_audio_file, max_duration=5)
 
                 # 音声認識を実行
