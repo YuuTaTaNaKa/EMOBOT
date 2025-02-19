@@ -60,11 +60,8 @@ try:
     # 現在の画像
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
-
     # 現在の画面を示す変数（グローバル）
     current_screen = "boy"  # 初期状態
-    # 現在の処理を保持する変数
-    current_process = "sleep"
 
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
@@ -118,11 +115,11 @@ def display():
                 #タップイベントの処理
                 else:
                     if current_process == "sleep":  #sleep状態の時
-                        # GPIO.output(5, GPIO.HIGH)
+                        GPIO.output(5, GPIO.HIGH)
                         current_boy_image = boy_Default_image
                         current_girl_image = girl_Default_image
                     elif current_process == "accept": #コマンド受付時にタッチされた時
-                        # GPIO.output(0, GPIO.HIGH)
+                        GPIO.output(0, GPIO.HIGH)
                         current_boy_image = boy_smile_image
                         current_girl_image = girl_smile_image
                     
