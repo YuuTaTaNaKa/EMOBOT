@@ -12,20 +12,20 @@ import RPi.GPIO as GPIO
 # import EarProcess
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(25, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(8, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(7, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(1, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(12, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(16, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(20, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(19, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(13, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(6, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(5, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(0, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
+GPIO.setup(1, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 current_process = "sleep"
 
@@ -41,20 +41,20 @@ def assistant():
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
 
-        if GPIO.input(5, GPIO.HIGH):
-            current_process = "accept"
+        # if GPIO.input(5, GPIO.HIGH):
+        #     current_process = "accept"
 
-        if current_process == "sleep":
-            print("2")
-            if command and any(word in command for word in emobot_keywords):
-                print("エモボット起動！ 感情分析モードへ移行します")
-                current_process = "accept"
-                # GPIO.output(25, GPIO.LOW)
-                # GPIO.output(23, GPIO.HIGH)
-                print("3")
-            else:
-                print("?")
-                continue
+        # if current_process == "sleep":
+        print("2")
+        if command and any(word in command for word in emobot_keywords):
+            print("エモボット起動！ 感情分析モードへ移行します")
+            current_process = "accept"
+            # GPIO.output(25, GPIO.LOW)
+            # GPIO.output(23, GPIO.HIGH)
+            print("3")
+        else:
+            print("?")
+            continue
         
         while True:
             print("4")
