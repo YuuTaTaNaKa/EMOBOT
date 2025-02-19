@@ -4,7 +4,7 @@ import pygame
 pygame.mixer.init()
 print("音声を再生します")
 # ② 音声ファイルをロード
-pygame.mixer.music.load("kirarin.mp3")  # または .wav / .ogg など
+pygame.mixer.music.load("167.mp3")  # または .wav / .ogg など
 print("音声を再生します")
 # ③ 再生
 pygame.mixer.music.play(1)
