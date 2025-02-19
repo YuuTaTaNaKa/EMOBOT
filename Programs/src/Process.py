@@ -61,7 +61,7 @@ def assistant():
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
-            if order and current_process == "accept":
+            if order:
                 current_process = "execution"
                 GPIO.output(23, GPIO.LOW)
                 GPIO.output(24, GPIO.HIGH)
