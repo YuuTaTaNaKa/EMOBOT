@@ -123,7 +123,7 @@ def display():
                         current_boy_image = boy_smile_image
                         current_girl_image = girl_smile_image
                     
-                    current_process = "execution"
+                    # current_process = "execution"
 
         #mainからの信号を受信したとき
         if GPIO.input(23) == GPIO.HIGH:  #エモボットを受け付けた時

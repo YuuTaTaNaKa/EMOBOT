@@ -17,17 +17,17 @@ def redirect_stderr_to_logfile(logfile="alsa_log.txt"):
 
 # メイン処理
 def main():
-    global threads
+    # global threads
 
     # グローバルスレッドリスト
-    threads = []
+    # threads = []
 
     # 各機能に対してデーモンスレッドを作成
-    voice_thread = threading.Thread(target=Process.assistant, daemon=True)
+    # voice_thread = threading.Thread(target=Process.assistant, daemon=True)
     # led_thread = threading.Thread(target=LED.led, daemon=True)
 
     # スレッドをリストに追加
-    threads.extend([voice_thread])  # led_thread])
+    # threads.extend([voice_thread])  # led_thread])
 
     # 標準エラー出力をリダイレクト
     redirect_stderr_to_logfile()
@@ -35,8 +35,10 @@ def main():
     print("mainスレッドを開始します。")
 
     # スレッドを開始
-    for thread in threads:
-        thread.start()
+    # for thread in threads:
+        # thread.start()
+
+    Process.assistant()
 
     # プログラムの終了を防ぐために、適宜待機処理を追加
     try:

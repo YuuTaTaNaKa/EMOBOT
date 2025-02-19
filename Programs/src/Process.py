@@ -30,6 +30,7 @@ GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 current_process = "sleep"
 
 def assistant():
+    global current_process
     print("0")
 
     print("エモボットと呼びかけてください")
@@ -40,6 +41,7 @@ def assistant():
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
+        stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
         # if GPIO.input(5, GPIO.HIGH):
         #     current_process = "accept"
@@ -78,15 +80,18 @@ def assistant():
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                 if process(order):
                     print(f"コマンド {order} の処理を実行しました")
+                    current_process = "sleep"
+                    break
                 else:
                     # コマンドが含まれていなかった場合、感情分析を実行
                     if audio_file:
                         print("感情分析を実行します...")
                         empath_transfer(audio_file)
+                        break
                 
                 # 音声入力を再度待機
                 continue
-            elif (current_process == "music"):
+            elif command and any(word in command for word in stopMusic_keywords):
                 OutSound.stopMusic()
             else:
                 print("なんて言ったかわかんないなぁ")
@@ -121,6 +126,7 @@ def process(command):
         GPIO.output(pin, GPIO.HIGH)
         time.sleep(3)
         GPIO.output(pin, GPIO.LOW)
+        return
 
     #　「あいさつ」　*************************************************************   
 
