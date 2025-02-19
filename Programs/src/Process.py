@@ -136,7 +136,7 @@ def process(command):
         pinSend(8)
         OutSound.greet_afternoon()
 
-    
+    elif "こんばんは" in command:
         print("こんばんは")
         # Display.face_smile()
         pinSend(8)
