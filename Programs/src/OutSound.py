@@ -49,7 +49,6 @@ def greet_morning():
     pygame.mixer.music.play(0)
     #print("おはよう")
     pinSend_accept()
-    Process.current_process = "accept"
     return
 
 def greet_afternoon():
@@ -58,7 +57,6 @@ def greet_afternoon():
     pygame.mixer.music.play(0)
     #print("こんにちは")
     pinSend_accept()
-    Process.current_process = "accept"
     return
 
 def greet_night():
@@ -67,7 +65,6 @@ def greet_night():
     pygame.mixer.music.play(0)
     #print("こんばんは")
     pinSend_accept()
-    Process.current_process = "accept"
     return
 
 def bye():
@@ -76,7 +73,6 @@ def bye():
     pygame.mixer.music.play(0)
     #print("さようなら")]
     pinSend_accept()
-    Process.current_process = "sleep"
     return
 
 def im_going():
@@ -85,7 +81,6 @@ def im_going():
     pygame.mixer.music.play(0)
     #print("いってきます")
     pinSend_accept()
-    Process.current_process = "accept"
     return
 
 def welcome_home():
