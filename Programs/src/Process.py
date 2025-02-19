@@ -37,6 +37,7 @@ def assistant():
     
     while True:
         print("1")
+        print(current_process)
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
@@ -48,6 +49,7 @@ def assistant():
 
         # if current_process == "sleep":
         print("2")
+        print(current_process)
         if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
             current_process = "accept"
@@ -60,6 +62,7 @@ def assistant():
         
         while True:
             print("4")
+            print(current_process)
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
@@ -134,41 +137,48 @@ def process(command):
         print("おはよう")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
         print("こんにちは")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.greet_afternoon()
 
     elif "こんばんは" in command:
         print("こんばんは")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.greet_night()
 
     elif "さようなら" in command:
         print("さようなら")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.bye()
     
     elif "いってきます" in command:
         print("いってきます")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.im_going()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.welcome_home()
 
     elif "おやすみ" in command:
         # Display.face_sleep()
         pinSend(25)
+        EarProcess.earMove()
         OutSound.good_night()
 
 
