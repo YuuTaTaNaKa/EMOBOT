@@ -52,6 +52,19 @@ try:
     girl_sad_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_sad.jpg"))
     girl_omg_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_omg.jpg"))
 
+    # 初期状態を sleep にする
+    current_process = "sleep"
+    current_boy_image = boy_sleep_image
+    current_girl_image = girl_sleep_image
+
+    # while running: 内の GPIO処理
+    if GPIO.input(25) == GPIO.HIGH:  # sleepコマンドを受け付けた時
+        current_process = "sleep"
+        current_boy_image = boy_sleep_image
+        current_girl_image = girl_sleep_image  # 追加 (girlもsleepにする)
+
+    
+    
     # 現在の画像
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
@@ -60,6 +73,8 @@ try:
     current_screen = "boy"  # 初期状態
     # 現在の処理を保持する変数
     current_process = "sleep"
+
+    
 
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
