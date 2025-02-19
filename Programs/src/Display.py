@@ -56,25 +56,12 @@ try:
     current_process = "sleep"
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
-
-    # while running: 内の GPIO処理
-    if GPIO.input(25) == GPIO.HIGH:  # sleepコマンドを受け付けた時
-        current_process = "sleep"
-        current_boy_image = boy_sleep_image
-        current_girl_image = girl_sleep_image  # 追加 (girlもsleepにする)
-
-    
     
     # 現在の画像
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
-
     # 現在の画面を示す変数（グローバル）
     current_screen = "boy"  # 初期状態
-    # 現在の処理を保持する変数
-    current_process = "sleep"
-
-    
 
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
@@ -130,18 +117,19 @@ def display():
                     if current_process == "sleep":  #sleep状態の時
                         GPIO.output(5, GPIO.HIGH)
                         current_boy_image = boy_Default_image
+                        current_girl_image = girl_Default_image
                     elif current_process == "accept": #コマンド受付時にタッチされた時
                         GPIO.output(0, GPIO.HIGH)
-                        if current_screen == "boy":   #喜ぶ
-                            current_boy_image = boy_smile_image  
-                        else:
-                            current_girl_image = girl_smile_image
+                        current_boy_image = boy_smile_image
+                        current_girl_image = girl_smile_image
                     
-                    current_process = "execution"
+                    # current_process = "execution"
 
         #mainからの信号を受信したとき
         if GPIO.input(23) == GPIO.HIGH:  #エモボットを受け付けた時
             current_process = "accept"
+            current_boy_image = boy_Default_image
+            current_girl_image = girl_Default_image
 
         if GPIO.input(24) == GPIO.HIGH:  #処理に移行した時
             current_process = "execution"
@@ -149,105 +137,43 @@ def display():
         if GPIO.input(25) == GPIO.HIGH:  #sleepコマンドを受け付けた時
             current_process = "sleep"
             current_boy_image = boy_sleep_image
+            current_girl_image = girl_sleep_image
 
         if GPIO.input(8) == GPIO.HIGH:   #smile
-            if current_screen == "boy":
-                current_boy_image = boy_smile_image
-            else:
-                current_girl_image = girl_smile_image
-        elif GPIO.input(8) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_smile_image
+            current_girl_image = girl_smile_image
 
         if GPIO.input(7) == GPIO.HIGH:   #kirarin
-            if current_screen == "boy":
-                current_boy_image = boy_kirarin_image
-            else:
-                current_girl_image = girl_kirarin_image
-        elif GPIO.input(7) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
-
+            current_boy_image = boy_kirarin_image
+            current_girl_image = girl_kirarin_image
+    
         if GPIO.input(1) == GPIO.HIGH:   #emmbarrassed
-            if current_screen == "boy":
-                current_boy_image = boy_embarrassed_image
-            else:
-                current_girl_image = girl_embarrassed_image
-        elif GPIO.input(1) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_embarrassed_image
+            current_girl_image = girl_embarrassed_image
 
         if GPIO.input(12) == GPIO.HIGH:   #sad
-            if current_screen == "boy":
-                current_boy_image = boy_sad_image
-            else:
-                current_girl_image = girl_sad_image
-        elif GPIO.input(12) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_sad_image
+            current_girl_image = girl_sad_image
 
         if GPIO.input(16) == GPIO.HIGH:   #wink
-            if current_screen == "boy":
-                current_boy_image = boy_wink_image
-            else:
-                current_girl_image = girl_wink_image
-        elif GPIO.input(16) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_wink_image
+            current_girl_image = girl_wink_image
 
         if GPIO.input(20) == GPIO.HIGH:   #thinEye
-            if current_screen == "boy":
-                current_boy_image = boy_smile_image
-            else:
-                current_girl_image = girl_smile_image
-        elif GPIO.input(20) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_smile_image
+            current_girl_image = girl_smile_image
 
         if GPIO.input(19) == GPIO.HIGH:   #omg
-            if current_screen == "boy":
-                current_boy_image = boy_omg_image
-            else:
-                current_girl_image = girl_omg_image
-        elif GPIO.input(19) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_omg_image
+            current_girl_image = girl_omg_image
 
         if GPIO.input(13) == GPIO.HIGH:   #doubt
-            if current_screen == "boy":
-                current_boy_image = boy_doubt_image
-            else:
-                current_girl_image = girl_doubt_image
-        elif GPIO.input(13) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_doubt_image
+            current_girl_image = girl_doubt_image
 
         if GPIO.input(6) == GPIO.HIGH:   #anger
-            if current_screen == "boy":
-                current_boy_image = boy_anger_image
-            else:
-                current_girl_image = girl_anger_image
-        elif GPIO.input(6) == GPIO.LOW:
-            if current_screen == "boy":
-                current_boy_image = boy_Default_image
-            else:
-                current_girl_image = girl_Default_image
+            current_boy_image = boy_anger_image
+            current_girl_image = girl_anger_image
 
         screen.fill(WHITE)
 
@@ -277,11 +203,11 @@ mein  disp  動作するもの
 25    25    sleepの受け取り
  8     8    smileの受け取り
  7     7    kirarinの受け取り
- 1     1    embarrassedの受け取り
+ 1     1    embarrassedの受け取り★
 12    12    sadの受け取り
-16    16    winkの受け取り
+16    16    winkの受け取り★
 20    20    thinEyeの受け取り
-19    19    omgの受け取り
+19    19    omgの受け取り★
 13    13    doubtの受け取り
  6     6    angerの受け取り
  5     5    sleep時に画面タッチしたときに信号を出力

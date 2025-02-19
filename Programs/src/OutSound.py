@@ -6,15 +6,30 @@ from random import choice
 import RPi.GPIO as GPIO
 import Process
 
+# GPIO設定
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
+GPIO.setup(1, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+
 #「あかりん音声ファイルパス」
 
-anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger.mp3")
-doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt.mp3")
-embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed.mp3")
-kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin.mp3")
-omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg.mp3")
-sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad.mp3")
-smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile.mp3")
+anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger_Pitch Changer.mp3")
+doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt_Pitch Changer.mp3")
+embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed_Pitch Changer.mp3")
+kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin_Pitch Changer.mp3")
+omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg_Pitch Changer.mp3")
+sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad_Pitch Changer.mp3")
+smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile_Pitch Changer.mp3")
 testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "testsound_scream.mp3")
 
 #「機能」*************************
@@ -33,6 +48,7 @@ def greet_morning():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("おはよう")
+    pinSend_sleep()
     return
 
 def greet_afternoon():
@@ -40,6 +56,7 @@ def greet_afternoon():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("こんにちは")
+    pinSend_sleep()
     return
 
 def greet_night():
@@ -47,13 +64,15 @@ def greet_night():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("こんばんは")
+    pinSend_sleep()
     return
 
 def bye():
     pygame.mixer.init()
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
-    #print("さようなら")
+    #print("さようなら")]
+    pinSend_sleep()
     return
 
 def im_going():
@@ -61,6 +80,7 @@ def im_going():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("いってきます")
+    pinSend_sleep()
     return
 
 def welcome_home():
@@ -68,6 +88,7 @@ def welcome_home():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("おかえりなさい")
+    pinSend_sleep()
     return
 
 def good_night():
@@ -75,6 +96,7 @@ def good_night():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("おやすみ")
+    pinSend_sleep()
     return
 
 #「感情」************************************************************* 
@@ -84,6 +106,7 @@ def happy():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     # print("うれしい")
+    pinSend_sleep()
     return
 
 def sad():
@@ -91,6 +114,7 @@ def sad():
     pygame.mixer.music.load(sad_mp3)
     pygame.mixer.music.play(0)
     # print("悲しい")
+    pinSend_sleep()
     return
 
 def surprise():
@@ -98,6 +122,7 @@ def surprise():
     pygame.mixer.music.load(omg_mp3)
     pygame.mixer.music.play(0)
     # print("驚き")
+    pinSend_sleep()
     return
 
 def fear():
@@ -105,8 +130,8 @@ def fear():
     pygame.mixer.music.load(omg_mp3)
     pygame.mixer.music.play(0)
     # print("恐れ")
+    pinSend_sleep()
     return
-
 
 #「Music」*************************************************************  
 
@@ -121,11 +146,15 @@ def playMusic():
 def stopMusic():
     pygame.mixer.music.stop()
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.output(24, GPIO.HIGH)
-    time.sleep(3)
-    GPIO.output(24, GPIO.LOW)
     # print("音楽を停止します")
+    pinSend_sleep()
+    return
+
+def pinSend_sleep():
+    GPIO.output(25, GPIO.HIGH)
+    time.sleep(3)
+    GPIO.output(25, GPIO.LOW)
+    Process.current_process = "sleep"
     return
 
 # 汎用処理
