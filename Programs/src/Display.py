@@ -52,6 +52,11 @@ try:
     girl_sad_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_sad.jpg"))
     girl_omg_image = pygame.image.load(os.path.join(os.path.dirname(__file__), "..", "img", "girl_omg.jpg"))
 
+    # 初期状態を sleep にする
+    current_process = "sleep"
+    current_boy_image = boy_sleep_image
+    current_girl_image = girl_sleep_image
+    
     # 現在の画像
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
@@ -201,11 +206,11 @@ mein  disp  動作するもの
 25    25    sleepの受け取り
  8     8    smileの受け取り
  7     7    kirarinの受け取り
- 1     1    embarrassedの受け取り
+ 1     1    embarrassedの受け取り★
 12    12    sadの受け取り
-16    16    winkの受け取り
+16    16    winkの受け取り★
 20    20    thinEyeの受け取り
-19    19    omgの受け取り
+19    19    omgの受け取り★
 13    13    doubtの受け取り
  6     6    angerの受け取り
  5     5    sleep時に画面タッチしたときに信号を出力
