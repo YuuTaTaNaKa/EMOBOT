@@ -1,6 +1,6 @@
 import json
 import pyaudio
-from vosk import Model, KaldiRecognizer
+from Test.sato_test.vosk_test import Model, KaldiRecognizer
 
 # 日本語モデルのパス
 MODEL_PATH = "vosk-model-ja-0.22"
