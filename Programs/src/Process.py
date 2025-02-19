@@ -9,7 +9,7 @@ import subprocess
 import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
-# import EarProcess
+import EarProcess
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.OUT)
@@ -49,8 +49,8 @@ def assistant():
         if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
             current_process = "accept"
-            # GPIO.output(25, GPIO.LOW)
-            # GPIO.output(23, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+            GPIO.output(23, GPIO.HIGH)
             print("3")
         else:
             print("?")
@@ -63,16 +63,16 @@ def assistant():
 
             if order and current_process == "accept":
                 current_process = "execution"
-                # GPIO.output(23, GPIO.LOW)
-                # GPIO.output(24, GPIO.HIGH)
+                GPIO.output(23, GPIO.LOW)
+                GPIO.output(24, GPIO.HIGH)
                 print(f"認識したコマンド: {order}")
 
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
                     print("スリープモードに移行します...")
                     current_process = "sleep"
-                    # GPIO.output(24, GPIO.LOW)
-                    # GPIO.output(25, GPIO.HIGH)
+                    GPIO.output(24, GPIO.LOW)
+                    GPIO.output(25, GPIO.HIGH)
                     break  # 内部ループを抜け、エモボット待機状態に戻る
 
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
