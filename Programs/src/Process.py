@@ -4,113 +4,102 @@ import OutSound
 import Empath
 import InVoice
 import Display
+import OutSound
 import subprocess
 import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
 # import EarProcess
 
-# current_process = "sleep"
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
+GPIO.setup(1, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+current_process = "sleep"
 
 def assistant():
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(23, GPIO.OUT)
-    GPIO.setup(24, GPIO.OUT)
-    GPIO.setup(25, GPIO.OUT)
-    GPIO.setup(8, GPIO.OUT)
-    GPIO.setup(7, GPIO.OUT)
-    GPIO.setup(1, GPIO.OUT)
-    GPIO.setup(12, GPIO.OUT)
-    GPIO.setup(16, GPIO.OUT)
-    GPIO.setup(20, GPIO.OUT)
-    GPIO.setup(19, GPIO.OUT)
-    GPIO.setup(13, GPIO.OUT)
-    GPIO.setup(6, GPIO.OUT)
-    GPIO.setup(5, GPIO.OUT)
-    GPIO.setup(0, GPIO.OUT)
-    GPIO.setup(9, GPIO.IN)
+    print("0")
 
-    print("エムボットと呼びかけてください")
+    print("エモボットと呼びかけてください")
     
     while True:
-        if (GPIO.input(5) == GPIO.HIGH):
-            while True:
-                # ユーザーの問いかけを取得
-                order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
-
-                if order:
-                    GPIO.output(23, GPIO.LOW)
-                    GPIO.output(24, GPIO.HIGH)
-                    print(f"認識したコマンド: {order}")
-
-                    # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
-                    if "おやすみ" in order:
-                        print("スリープモードに移行します...")
-                        GPIO.output(24, GPIO.LOW)
-                        GPIO.output(25, GPIO.HIGH)
-                        break  # 内部ループを抜け、エモボット待機状態に戻る
-
-                    # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
-                    if process(order):
-                        print(f"コマンド {order} の処理を実行しました")
-                    else:
-                        # コマンドが含まれていなかった場合、感情分析を実行
-                        if audio_file:
-                            print("感情分析を実行します...")
-                            empath_transfer(audio_file)
-                    
-                    # 音声入力を再度待機
-                    continue
-                else:
-                    print("なんて言ったかわかんないなぁ")
-                    continue  # 再度音声入力を待機するためにループ
-
+        print("1")
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
-        if any(word in command for word in emobot_keywords):
+
+        # if GPIO.input(5, GPIO.HIGH):
+        #     current_process = "accept"
+
+        # if current_process == "sleep":
+        print("2")
+        if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
-            GPIO.output(25, GPIO.LOW)
-            GPIO.output(23, GPIO.HIGH)
-            
-            while True:
-                # ユーザーの問いかけを取得
-                order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
+            current_process = "accept"
+            # GPIO.output(25, GPIO.LOW)
+            # GPIO.output(23, GPIO.HIGH)
+            print("3")
+        else:
+            print("?")
+            continue
+        
+        while True:
+            print("4")
+            # ユーザーの問いかけを取得
+            order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
-                if order:
-                    GPIO.output(23, GPIO.LOW)
-                    GPIO.output(24, GPIO.HIGH)
-                    print(f"認識したコマンド: {order}")
+            if order and current_process == "accept":
+                current_process = "execution"
+                # GPIO.output(23, GPIO.LOW)
+                # GPIO.output(24, GPIO.HIGH)
+                print(f"認識したコマンド: {order}")
 
-                    # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
-                    if "おやすみ" in order:
-                        print("スリープモードに移行します...")
-                        GPIO.output(24, GPIO.LOW)
-                        GPIO.output(25, GPIO.HIGH)
-                        break  # 内部ループを抜け、エモボット待機状態に戻る
+                # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
+                if "おやすみ" in order:
+                    print("スリープモードに移行します...")
+                    current_process = "sleep"
+                    # GPIO.output(24, GPIO.LOW)
+                    # GPIO.output(25, GPIO.HIGH)
+                    break  # 内部ループを抜け、エモボット待機状態に戻る
 
-                    # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
-                    if process(order):
-                        print(f"コマンド {order} の処理を実行しました")
-                    else:
-                        # コマンドが含まれていなかった場合、感情分析を実行
-                        if audio_file:
-                            print("感情分析を実行します...")
-                            empath_transfer(audio_file)
-                    
-                    # 音声入力を再度待機
-                    continue
+                # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
+                if process(order):
+                    print(f"コマンド {order} の処理を実行しました")
                 else:
-                    print("なんて言ったかわかんないなぁ")
-                    continue  # 再度音声入力を待機するためにループ
+                    # コマンドが含まれていなかった場合、感情分析を実行
+                    if audio_file:
+                        print("感情分析を実行します...")
+                        empath_transfer(audio_file)
+                
+                # 音声入力を再度待機
+                continue
+            elif (current_process == "music"):
+                OutSound.stopMusic()
+            else:
+                print("なんて言ったかわかんないなぁ")
+                continue  # 再度音声入力を待機するためにループ
+
+        
 
 """
 pin
 mein  disp  動作するもの
-23    23    sleepからacceptの受け取り
-24    24    acceptからexecutionの受け取り
-25    25    acceptからsleepの受け取り
+23    23    acceptの受け取り
+24    24    executionの受け取り
+25    25    sleepの受け取り
  8     8    smileの受け取り
  7     7    kirarinの受け取り
  1     1    embarrassedの受け取り
@@ -128,47 +117,52 @@ mein  disp  動作するもの
 def process(command):
     print("音声入力をもとに処理を行います")
 
+    def pinSend(pin):
+        GPIO.output(pin, GPIO.HIGH)
+        time.sleep(3)
+        GPIO.output(pin, GPIO.LOW)
+
     #　「あいさつ」　*************************************************************   
 
     if "おはよう" in command: 
         print("おはよう")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(8)
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
         print("こんにちは")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(8)
         OutSound.greet_afternoon()
 
-    elif "こんばんは" in command:
+    
         print("こんばんは")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(8)
         OutSound.greet_night()
 
     elif "さようなら" in command:
         print("さようなら")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(8)
         OutSound.bye()
     
     elif "いってきます" in command:
         print("いってきます")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(8)
         OutSound.im_going()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
         # Display.face_smile()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(8)
         OutSound.welcome_home()
 
     elif "おやすみ" in command:
         # Display.face_sleep()
-        GPIO.output(8,GPIO.HIGH)
+        pinSend(25)
         OutSound.good_night()
 
 
@@ -177,13 +171,12 @@ def process(command):
     elif "音楽を再生して" in command:
         print("音楽を再生します")
         # LED.led_music()
-        GPIO.output(7,GPIO.HIGH)
+        pinSend(7)
         OutSound.playMusic()
-
+        
     elif "音楽を止めて" in command:
-        GPIO.output(7,GPIO.LOW)
-        GPIO.output(24,GPIO.HIGH)
- 
+        OutSound.stopMusic()
+
     elif "シャットダウン" in command:
         print("シャットダウン")
         ComandShutdown = "shutdown"

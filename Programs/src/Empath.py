@@ -2,6 +2,10 @@
 # from gpiozero import LED
 from time import sleep
 import requests
+import RPi.GPIO as GPIO
+import time
+
+
 
 def empath(voice):
     url = "https://api.webempath.net/v2/analyzeWav"
@@ -36,7 +40,7 @@ def determine_emotion(calmness, anger, sadness, joy, energy):
     if 15 <= energy <= 25:
         return "smile"
     
-    return "default"  # どの条件にも当てはまらない場合
+    return "doubt"  # どの条件にも当てはまらない場合
 
 # 感情スコアの仕分けと最も強い感情の決定
 def emotion(scores):
@@ -56,7 +60,7 @@ def emotion(scores):
     # 結果を表示
     print(f"\n選択された表情: {selected_emotion}")
 
-    # ラズパイ4に送信（コメント解除して使用）
+    # OutSoundに送信（コメント解除して使用）
     # raspi4_send(selected_emotion)
 
 # ラズパイ4へ表情データを送信（GPIOなどを用いる場合）

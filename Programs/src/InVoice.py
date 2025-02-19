@@ -26,6 +26,7 @@ def trim_audio(file_path, max_duration=5):
 # 音声認識関数
 def listen(mic_timeout, phrase_time_limit,number):
     start_time = time.time()  # 現在の時刻を取得
+    print("マイク")
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
         print("何かをはなして")
@@ -51,19 +52,17 @@ def listen(mic_timeout, phrase_time_limit,number):
                 converted_audio_file = "converted_audio.wav"
                 convert_sample_rate(temp_audio_file, converted_audio_file)
                 #ファイルを5秒にトリミング
+                print("トリミング直前")
                 trim_audio(converted_audio_file, max_duration=5)
 
                 # 音声認識を実行
-                command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定               
-                return command,converted_audio_file
-                #
-                # ログファイルを開く
-                logfile = open("alsa_log.txt", 'a')
-                sys.stderr = logfile
-
-                # プログラム終了時にファイルを閉じる
-                atexit.register(logfile.close)
-                #
+                try:              
+                    command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定  
+                    print("テキスト変換完了")  
+                    return command,converted_audio_file
+                except Exception as e:
+                    print(f"error: {e}")
+                                         
             except sr.WaitTimeoutError:
                 print("タイムアウトしました。音声入力が検出されませんでした。")
                 continue  # 再度待機
