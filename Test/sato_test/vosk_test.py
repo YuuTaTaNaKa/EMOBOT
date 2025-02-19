@@ -3,7 +3,7 @@ import pyaudio
 from vosk import Model, KaldiRecognizer  
 
 # 日本語モデルのパス
-MODEL_PATH = "vosk-model-ja-0.22"
+MODEL_PATH = "/home/emobot2/Desktop/EMOBOT/Test/sato_test/vosk-model-ja-0.22"
 
 # モデルを読み込む
 model = Model(MODEL_PATH)
