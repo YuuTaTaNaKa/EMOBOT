@@ -6,10 +6,10 @@ import InVoice
 import Display
 import OutSound
 import subprocess
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
-# import EarProcess
+import EarProcess
 
 # GPIO.setmode(GPIO.BCM)
 # GPIO.setup(23, GPIO.OUT)
@@ -30,27 +30,31 @@ import subprocess
 # current_process = "sleep"
 
 def assistant():
+    global current_process
     print("0")
 
     print("エモボットと呼びかけてください")
     
     while True:
         print("1")
+        print(current_process)
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
+        stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
         # if GPIO.input(5, GPIO.HIGH):
         #     current_process = "accept"
 
         # if current_process == "sleep":
         print("2")
+        print(current_process)
         if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
             current_process = "accept"
-            # GPIO.output(25, GPIO.LOW)
-            # GPIO.output(23, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+            GPIO.output(23, GPIO.HIGH)
             print("3")
         else:
             print("?")
@@ -58,35 +62,39 @@ def assistant():
         
         while True:
             print("4")
+            print(current_process)
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
 
-            if order and current_process == "accept":
+            if order:
                 current_process = "execution"
-                # GPIO.output(23, GPIO.LOW)
-                # GPIO.output(24, GPIO.HIGH)
+                GPIO.output(23, GPIO.LOW)
+                GPIO.output(24, GPIO.HIGH)
                 print(f"認識したコマンド: {order}")
 
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
                     print("スリープモードに移行します...")
                     current_process = "sleep"
-                    # GPIO.output(24, GPIO.LOW)
-                    # GPIO.output(25, GPIO.HIGH)
+                    GPIO.output(24, GPIO.LOW)
+                    GPIO.output(25, GPIO.HIGH)
                     break  # 内部ループを抜け、エモボット待機状態に戻る
 
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                 if process(order):
                     print(f"コマンド {order} の処理を実行しました")
+                    current_process = "sleep"
+                    break
                 else:
                     # コマンドが含まれていなかった場合、感情分析を実行
                     if audio_file:
                         print("感情分析を実行します...")
                         empath_transfer(audio_file)
+                        break
                 
                 # 音声入力を再度待機
                 continue
-            elif (current_process == "music"):
+            elif command and any(word in command for word in stopMusic_keywords):
                 OutSound.stopMusic()
             else:
                 print("なんて言ったかわかんないなぁ")
@@ -120,7 +128,8 @@ def process(command):
     def pinSend(pin):
         # GPIO.output(pin, GPIO.HIGH)
         time.sleep(3)
-        # GPIO.output(pin, GPIO.LOW)
+        GPIO.output(pin, GPIO.LOW)
+        return
 
     #　「あいさつ」　*************************************************************   
 
@@ -128,41 +137,48 @@ def process(command):
         print("おはよう")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.greet_morning()
 
     elif "こんにちは" in command:
         print("こんにちは")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.greet_afternoon()
 
-    
+    elif "こんばんは" in command:
         print("こんばんは")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.greet_night()
 
     elif "さようなら" in command:
         print("さようなら")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.bye()
     
     elif "いってきます" in command:
         print("いってきます")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.im_going()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
         # Display.face_smile()
         pinSend(8)
+        EarProcess.earMove()
         OutSound.welcome_home()
 
     elif "おやすみ" in command:
         # Display.face_sleep()
         pinSend(25)
+        EarProcess.earMove()
         OutSound.good_night()
 
 

@@ -56,25 +56,12 @@ try:
     current_process = "sleep"
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
-
-    # while running: 内の GPIO処理
-    # if GPIO.input(25) == GPIO.HIGH:  # sleepコマンドを受け付けた時
-    #     current_process = "sleep"
-    #     current_boy_image = boy_sleep_image
-    #     current_girl_image = girl_sleep_image  # 追加 (girlもsleepにする)
-
-    
     
     # 現在の画像
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
-
     # 現在の画面を示す変数（グローバル）
     current_screen = "boy"  # 初期状態
-    # 現在の処理を保持する変数
-    current_process = "sleep"
-
-    
 
 except pygame.error as e:
     print(f"画像の読み込みエラー: {e}")
@@ -130,18 +117,19 @@ def display():
                     if current_process == "sleep":  #sleep状態の時
                         # GPIO.output(5, GPIO.HIGH)
                         current_boy_image = boy_Default_image
+                        current_girl_image = girl_Default_image
                     elif current_process == "accept": #コマンド受付時にタッチされた時
                         # GPIO.output(0, GPIO.HIGH)
-                        if current_screen == "boy":   #喜ぶ
-                            current_boy_image = boy_smile_image
-                        else:
-                            current_girl_image = girl_smile_image
+                        current_boy_image = boy_smile_image
+                        current_girl_image = girl_smile_image
                     
-                    current_process = "execution"
+                    # current_process = "execution"
 
         #mainからの信号を受信したとき
         # if GPIO.input(23) == GPIO.HIGH:  #エモボットを受け付けた時
         #     current_process = "accept"
+        #     current_boy_image = boy_Default_image
+        #     current_girl_image = girl_Default_image
 
         # if GPIO.input(24) == GPIO.HIGH:  #処理に移行した時
         #     current_process = "execution"

@@ -58,7 +58,8 @@ def listen(mic_timeout, phrase_time_limit,number):
                 # 音声認識を実行
                 try:              
                     command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定  
-                    print("テキスト変換完了")  
+                    print("テキスト変換完了") 
+                    print(f"認識されたコマンド: {command}") 
                     return command,converted_audio_file
                 except Exception as e:
                     print(f"error: {e}")
