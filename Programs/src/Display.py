@@ -1,8 +1,10 @@
 import pygame
 import os
 import sys
-import OutSound
 import RPi.GPIO as GPIO
+import subprocess
+import time
+# import OutSound
 # from gpiozero import LED, Button
 # from signal import pause
 
@@ -57,9 +59,10 @@ try:
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
     
-    # 現在の画像
-    current_boy_image = boy_sleep_image
-    current_girl_image = girl_sleep_image
+    # # 現在の画像
+    # current_boy_image = boy_sleep_image
+    # current_girl_image = girl_sleep_image
+
     # 現在の画面を示す変数（グローバル）
     current_screen = "boy"  # 初期状態
 
@@ -115,13 +118,18 @@ def display():
                 #タップイベントの処理
                 else:
                     if current_process == "sleep":  #sleep状態の時
-                        GPIO.output(5, GPIO.HIGH)
+                        # GPIO.output(5, GPIO.HIGH)
                         current_boy_image = boy_Default_image
                         current_girl_image = girl_Default_image
-                    elif current_process == "accept": #コマンド受付時にタッチされた時
-                        GPIO.output(0, GPIO.HIGH)
+                        current_process = "accept"
+
+                    if current_process == "accept": #タッチされた時
                         current_boy_image = boy_smile_image
                         current_girl_image = girl_smile_image
+                        time.sleep(2)
+                        current_boy_image = boy_Default_image
+                        current_girl_image = girl_Default_image
+                        current_process = "sleep"
                     
                     # current_process = "execution"
 
@@ -146,7 +154,7 @@ def display():
         if GPIO.input(7) == GPIO.HIGH:   #kirarin
             current_boy_image = boy_kirarin_image
             current_girl_image = girl_kirarin_image
-    
+
         if GPIO.input(1) == GPIO.HIGH:   #emmbarrassed
             current_boy_image = boy_embarrassed_image
             current_girl_image = girl_embarrassed_image
@@ -160,8 +168,8 @@ def display():
             current_girl_image = girl_wink_image
 
         if GPIO.input(20) == GPIO.HIGH:   #thinEye
-            current_boy_image = boy_smile_image
-            current_girl_image = girl_smile_image
+            current_boy_image = boy_thinEye_image
+            current_girl_image = girl_thinEye_image
 
         if GPIO.input(19) == GPIO.HIGH:   #omg
             current_boy_image = boy_omg_image
@@ -174,6 +182,11 @@ def display():
         if GPIO.input(6) == GPIO.HIGH:   #anger
             current_boy_image = boy_anger_image
             current_girl_image = girl_anger_image
+
+        if GPIO.input(9) == GPIO.HIGH:   #shutdown
+            ComandShutdown = "shutdown now"
+            result = subprocess.run(ComandShutdown, shell=True, text=True, capture_output=True)
+            print(result.stdout)
 
         screen.fill(WHITE)
 
@@ -188,7 +201,6 @@ def display():
         pygame.display.flip()
 
     pygame.quit()
-    # GPIO.cleanup()
     sys.exit()
 
 # 実行
@@ -212,7 +224,7 @@ mein  disp  動作するもの
  6     6    angerの受け取り
  5     5    sleep時に画面タッチしたときに信号を出力
  0     0    accept時に画面タッチしたときに信号を出力
-11     9
+11     9    shutdown時に信号を取得する
 """
 
 # import pygame
