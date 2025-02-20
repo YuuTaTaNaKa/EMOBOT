@@ -39,7 +39,7 @@ def assistant():
         print("1")
         print(current_process)
         # エムボットが呼ばれるまで待機
-        command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
+        command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
