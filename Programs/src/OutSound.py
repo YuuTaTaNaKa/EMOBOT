@@ -112,8 +112,8 @@ def voice_embarrassed():
 
 def playMusic():
     pygame.mixer.init()
-    pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.load(choice(Musics))
+    pygame.mixer.music.set_volume(0.3)
     pygame.mixer.music.play(-1)
     # print("音楽を再生します")
     # Process.current_process = "music"
