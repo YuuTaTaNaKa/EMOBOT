@@ -150,27 +150,19 @@ def emotion(scores):
 
     if selected_emotion == "thinEye":
         pinSend(20)
-        pygame.mixer.init()
-        pygame.mixer.music.load(smile_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_smile
     elif selected_emotion == "anger":
         pinSend(6)
-        pygame.mixer.init()
-        pygame.mixer.music.load(anger_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_anger()
     elif selected_emotion == "sad":
         pinSend(12)
-        pygame.mixer.init()
-        pygame.mixer.music.load(sad_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_sad()
     elif selected_emotion == "smile":
         pinSend(8)
-        pygame.mixer.init()
-        pygame.mixer.music.load(kirarin_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_smile()
     elif selected_emotion == "kirarin":
         pinSend(7)
-        OutSound.voice_smile()
+        OutSound.voice_kirarin()
     else:
         pinSend(13)
         OutSound.voice_doubt()
