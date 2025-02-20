@@ -44,30 +44,33 @@ def assistant():
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
-        # if GPIO.input(5, GPIO.HIGH):
-        #     current_process = "accept"
+        if GPIO.input(5, GPIO.HIGH):
+            current_accept()
+            # current_process = "accept"
 
-        # if current_process == "sleep":
-        print("2")
-        print(current_process)
-        if command and any(word in command for word in emobot_keywords):
-            print("エモボット起動！ 感情分析モードへ移行します")
-            current_process = "accept"
-            GPIO.output(25, GPIO.LOW)
-            GPIO.output(23, GPIO.HIGH)
-            print("3")
-        else:
-            print("?")
-            continue
+        if current_process == "sleep":
+            print("2")
+            print(current_process)
+            if command and any(word in command for word in emobot_keywords):
+                print("エモボット起動！ 感情分析モードへ移行します")
+                current_accept()
+                # current_process = "accept"
+                GPIO.output(25, GPIO.LOW)
+                GPIO.output(23, GPIO.HIGH)
+                print("3")
+            else:
+                print("?")
+                continue
         
-        while True:
+        while current_process == "accept":
             print("4")
             print(current_process)
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
-                current_process = "execution"
+                current_execution()
+                # current_process = "execution"
                 GPIO.output(23, GPIO.LOW)
                 GPIO.output(24, GPIO.HIGH)
                 print(f"認識したコマンド: {order}")
@@ -75,7 +78,8 @@ def assistant():
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
                     print("スリープモードに移行します...")
-                    current_process = "sleep"
+                    current_sleep()
+                    # current_process = "sleep"
                     GPIO.output(24, GPIO.LOW)
                     GPIO.output(25, GPIO.HIGH)
                     break  # 内部ループを抜け、エモボット待機状態に戻る
@@ -94,6 +98,35 @@ def assistant():
                 print("なんて言ったかわかんないなぁ")
                 continue  # 再度音声入力を待機するためにループ
 
+        while current_process == "music":
+            print("5")
+            print(current_process)
+            command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
+            if command and any(word in command for word in stopMusic_keywords):
+                print("音楽を止める")
+                OutSound.stopMusic()
+                current_sleep()
+                # current_process = "sleep"
+                GPIO.output(24, GPIO.LOW)
+                time.sleep(3)
+                GPIO.output(25, GPIO.HIGH)
+                break
+
+def current_sleep():
+    global current_process
+    current_process = "sleep"
+
+def current_accept():
+    global current_process
+    current_process = "accept"
+
+def current_execution():
+    global current_process
+    current_process = "execution"
+
+def current_music():
+    global current_process
+    current_process = "music"
         
 
 """
@@ -195,9 +228,9 @@ def process(command):
         OutSound.playMusic()
         return True
         
-    elif command and any(word in command for word in stopMusic_keywords):
-        OutSound.stopMusic()
-        return True
+    # elif command and any(word in command for word in stopMusic_keywords):
+    #     OutSound.stopMusic()
+    #     return True
 
     elif "シャットダウン" in command:
         print("シャットダウン")
