@@ -5,6 +5,7 @@ import os
 from random import choice
 import RPi.GPIO as GPIO
 import Process
+import threading
 
 #GPIO設定
 GPIO.setmode(GPIO.BCM)
@@ -110,15 +111,40 @@ def voice_embarrassed():
 
 #「Music」*************************************************************  
 
+# def playMusic():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(choice(Musics))
+#     pygame.mixer.music.set_volume(0.2)
+#     pygame.mixer.music.play(-1)
+#     # print("音楽を再生します")
+#     # Process.current_process = "music"
+#     pygame.mixer.fadeout(3000)
+#     time.sleep(30)
+#     Process.current_music()
+#     return
+
 def playMusic():
     pygame.mixer.init()
-    pygame.mixer.music.load(choice(Musics))
-    pygame.mixer.music.set_volume(0.2)
-    pygame.mixer.music.play(-1)
-    # print("音楽を再生します")
-    # Process.current_process = "music"
+    
+    if not Musics:
+        print("エラー: 音楽ファイルが見つかりません！")
+        return
+
+    music_file = choice(Musics)
+    pygame.mixer.music.load(music_file)
+    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.play(-1)  # ループ再生
+
+    print(f"再生中: {music_file}")
+
+    # **30秒後にフェードアウトを実行するスレッドを開始**
+    threading.Thread(target=delayed_fadeout, daemon=True).start()
     Process.current_music()
-    return
+def delayed_fadeout():
+    """30秒待ってから3秒かけてフェードアウト"""
+    time.sleep(30)
+    print("フェードアウト開始")
+    pygame.mixer.music.fadeout(3000)
 
 def stopMusic():
     pygame.mixer.music.stop()
