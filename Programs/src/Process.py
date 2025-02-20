@@ -42,27 +42,27 @@ def assistant():
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
-        pin_state = GPIO.input(5)
+        # pin_state = GPIO.input(5)
 
-        if pin_state == GPIO.HIGH:
+        # if pin_state == GPIO.HIGH:
+        #     current_accept()
+        #     # current_process = "accept"
+
+        # if current_process == "sleep":
+        # エムボットが呼ばれるまで待機
+        command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
+        print("2")
+        print(current_process)
+        if command and any(word in command for word in emobot_keywords):
+            print("エモボット起動！ 感情分析モードへ移行します")
             current_accept()
             # current_process = "accept"
-
-        if current_process == "sleep":
-            # エムボットが呼ばれるまで待機
-            command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
-            print("2")
-            print(current_process)
-            if command and any(word in command for word in emobot_keywords):
-                print("エモボット起動！ 感情分析モードへ移行します")
-                current_accept()
-                # current_process = "accept"
-                GPIO.output(25, GPIO.LOW)
-                GPIO.output(23, GPIO.HIGH)
-                print("3")
-            else:
-                print("?")
-                continue
+            GPIO.output(25, GPIO.LOW)
+            GPIO.output(23, GPIO.HIGH)
+            print("3")
+        else:
+            print("?")
+            continue
         
         while current_process == "accept":
             print("4")

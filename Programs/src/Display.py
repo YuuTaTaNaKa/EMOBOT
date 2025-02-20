@@ -3,6 +3,7 @@ import os
 import sys
 import RPi.GPIO as GPIO
 import subprocess
+import time
 # import OutSound
 # from gpiozero import LED, Button
 # from signal import pause
@@ -117,13 +118,17 @@ def display():
                 #タップイベントの処理
                 else:
                     if current_process == "sleep":  #sleep状態の時
-                        GPIO.output(5, GPIO.HIGH)
+                        # GPIO.output(5, GPIO.HIGH)
                         current_boy_image = boy_Default_image
                         current_girl_image = girl_Default_image
-                    elif current_process == "accept": #コマンド受付時にタッチされた時
-                        GPIO.output(0, GPIO.HIGH)
+                        current_process = "accept"
+                    elif current_process == "accept": #タッチされた時
                         current_boy_image = boy_smile_image
                         current_girl_image = girl_smile_image
+                        time.sleep(2)
+                        current_boy_image = boy_Default_image
+                        current_girl_image = girl_Default_image
+                        current_process = "accept"
                     
                     # current_process = "execution"
 
