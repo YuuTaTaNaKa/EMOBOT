@@ -64,7 +64,7 @@ def assistant():
             print("4")
             print(current_process)
             # ユーザーの問いかけを取得
-            order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
+            order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
                 current_process = "execution"
