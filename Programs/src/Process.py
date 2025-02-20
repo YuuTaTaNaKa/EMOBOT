@@ -194,7 +194,7 @@ def process(command):
 
     elif "シャットダウン" in command:
         print("シャットダウン")
-        ComandShutdown = "shutdown"
+        ComandShutdown = "shutdown now"
         result = subprocess.run(ComandShutdown, shell=True, text=True, capture_output=True)
         print(result.stdout)
 
