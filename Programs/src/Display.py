@@ -58,9 +58,10 @@ try:
     current_boy_image = boy_sleep_image
     current_girl_image = girl_sleep_image
     
-    # 現在の画像
-    current_boy_image = boy_sleep_image
-    current_girl_image = girl_sleep_image
+    # # 現在の画像
+    # current_boy_image = boy_sleep_image
+    # current_girl_image = girl_sleep_image
+
     # 現在の画面を示す変数（グローバル）
     current_screen = "boy"  # 初期状態
 
@@ -161,8 +162,8 @@ def display():
             current_girl_image = girl_wink_image
 
         if GPIO.input(20) == GPIO.HIGH:   #thinEye
-            current_boy_image = boy_smile_image
-            current_girl_image = girl_smile_image
+            current_boy_image = boy_thinEye_image
+            current_girl_image = girl_thinEye_image
 
         if GPIO.input(19) == GPIO.HIGH:   #omg
             current_boy_image = boy_omg_image

@@ -134,48 +134,48 @@ def process(command):
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.greet_morning()
+        OutSound.voice_smile()
 
     elif "こんにちは" in command:
         print("こんにちは")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.greet_afternoon()
+        OutSound.voice_smile()
 
     elif "こんばんは" in command:
         print("こんばんは")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.greet_night()
+        OutSound.voice_smile()
 
     elif "さようなら" in command:
         print("さようなら")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.bye()
+        OutSound.voice_smile()
     
     elif "いってきます" in command:
         print("いってきます")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.im_going()
+        OutSound.voice_smile()
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.welcome_home()
+        OutSound.voice_smile()
 
     elif "おやすみ" in command:
         # Display.face_sleep()
         pinSend(25)
         EarProcess.earMove()
-        OutSound.good_night()
+        OutSound.voice_smile()
 
 
 #　「機能」　*************************************************************  
