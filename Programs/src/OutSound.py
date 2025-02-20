@@ -3,23 +3,23 @@ import time
 import pygame
 import os
 from random import choice
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import Process
 
 # GPIO設定
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
-GPIO.setup(25, GPIO.OUT)
-GPIO.setup(8, GPIO.OUT)
-GPIO.setup(7, GPIO.OUT)
-GPIO.setup(1, GPIO.OUT)
-GPIO.setup(12, GPIO.OUT)
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(20, GPIO.OUT)
-GPIO.setup(19, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(6, GPIO.OUT)
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(23, GPIO.OUT)
+# GPIO.setup(24, GPIO.OUT)
+# GPIO.setup(25, GPIO.OUT)
+# GPIO.setup(8, GPIO.OUT)
+# GPIO.setup(7, GPIO.OUT)
+# GPIO.setup(1, GPIO.OUT)
+# GPIO.setup(12, GPIO.OUT)
+# GPIO.setup(16, GPIO.OUT)
+# GPIO.setup(20, GPIO.OUT)
+# GPIO.setup(19, GPIO.OUT)
+# GPIO.setup(13, GPIO.OUT)
+# GPIO.setup(6, GPIO.OUT)
 
 #「あかりん音声ファイルパス」
 
@@ -120,15 +120,19 @@ def playMusic():
 
 def stopMusic():
     pygame.mixer.music.stop()
-    GPIO.setmode(GPIO.BCM)
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.output(24, GPIO.HIGH)
+    time.sleep(3)
+    # GPIO.output(24, GPIO.LOW)
     # print("音楽を停止します")
     pinSend_sleep()
     return
 
 def pinSend_sleep():
-    GPIO.output(25, GPIO.HIGH)
+    # GPIO.output(25, GPIO.HIGH)
     time.sleep(3)
-    GPIO.output(25, GPIO.LOW)
+    # GPIO.output(25, GPIO.LOW)
     Process.current_process = "sleep"
     return
 
