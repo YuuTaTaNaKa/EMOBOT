@@ -132,7 +132,7 @@ def playMusic():
 
     music_file = choice(Musics)
     pygame.mixer.music.load(music_file)
-    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.set_volume(0.1)
     pygame.mixer.music.play(-1)  # ループ再生
 
     print(f"再生中: {music_file}")
