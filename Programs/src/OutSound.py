@@ -3,7 +3,7 @@ import time
 import pygame
 import os
 from random import choice
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import Process
 
 #「あかりん音声ファイルパス」
@@ -120,11 +120,11 @@ def playMusic():
 
 def stopMusic():
     pygame.mixer.music.stop()
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.output(24, GPIO.HIGH)
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(24, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
+    # GPIO.output(24, GPIO.HIGH)
     time.sleep(3)
-    GPIO.output(24, GPIO.LOW)
+    # GPIO.output(24, GPIO.LOW)
     # print("音楽を停止します")
     return
 

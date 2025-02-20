@@ -2,27 +2,27 @@
 # from gpiozero import LED
 from time import sleep
 import requests
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 import os
 import pygame
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
-GPIO.setup(25, GPIO.OUT)
-GPIO.setup(8, GPIO.OUT)
-GPIO.setup(7, GPIO.OUT)
-GPIO.setup(1, GPIO.OUT)
-GPIO.setup(12, GPIO.OUT)
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(20, GPIO.OUT)
-GPIO.setup(19, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(6, GPIO.OUT)
-GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(23, GPIO.OUT)
+# GPIO.setup(24, GPIO.OUT)
+# GPIO.setup(25, GPIO.OUT)
+# GPIO.setup(8, GPIO.OUT)
+# GPIO.setup(7, GPIO.OUT)
+# GPIO.setup(1, GPIO.OUT)
+# GPIO.setup(12, GPIO.OUT)
+# GPIO.setup(16, GPIO.OUT)
+# GPIO.setup(20, GPIO.OUT)
+# GPIO.setup(19, GPIO.OUT)
+# GPIO.setup(13, GPIO.OUT)
+# GPIO.setup(6, GPIO.OUT)
+# GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 current_process = "sleep"
 
 #「あかりん音声ファイルパス」
@@ -91,9 +91,9 @@ def emotion(scores):
     print(f"\n選択された表情: {selected_emotion}")
 
     def pinSend(pin):
-        GPIO.output(pin, GPIO.HIGH)
+        # GPIO.output(pin, GPIO.HIGH)
         time.sleep(3)
-        GPIO.output(pin, GPIO.LOW)
+        # GPIO.output(pin, GPIO.LOW)
 
     if selected_emotion ==calm:
         pinSend(20)
