@@ -145,6 +145,7 @@ def delayed_fadeout():
     time.sleep(10)
     print("フェードアウト開始")
     pygame.mixer.music.fadeout(3000)
+    time.sleep(3)
     pinSend_sleep()
 
 def stopMusic():
