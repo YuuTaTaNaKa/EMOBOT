@@ -42,7 +42,9 @@ def assistant():
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
-        if GPIO.input(5, GPIO.HIGH):
+        pin_state = GPIO.input(5)
+
+        if pin_state == GPIO.HIGH:
             current_accept()
             # current_process = "accept"
 
