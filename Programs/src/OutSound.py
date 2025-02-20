@@ -115,7 +115,8 @@ def playMusic():
     pygame.mixer.music.load(choice(Musics))
     pygame.mixer.music.play(-1)
     # print("音楽を再生します")
-    Process.current_process = "music"
+    # Process.current_process = "music"
+    Process.current_music()
     return
 
 def stopMusic():
@@ -133,7 +134,8 @@ def pinSend_sleep():
     GPIO.output(25, GPIO.HIGH)
     time.sleep(3)
     GPIO.output(25, GPIO.LOW)
-    Process.current_process = "sleep"
+    # Process.current_process = "sleep"
+    Process.current_sleep()
     return
 
 # 汎用処理
