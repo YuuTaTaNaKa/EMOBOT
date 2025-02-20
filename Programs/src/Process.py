@@ -99,6 +99,9 @@ def assistant():
                 continue  # 再度音声入力を待機するためにループ
 
         while current_process == "music":
+            print("5")
+            print(current_process)
+            command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
             if command and any(word in command for word in stopMusic_keywords):
                 print("音楽を止める")
                 OutSound.stopMusic()
