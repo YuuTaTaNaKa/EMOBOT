@@ -41,7 +41,7 @@ def assistant():
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
         # 「エムボット」と認識したら起動
-        emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット"]
+        emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
         # if GPIO.input(5, GPIO.HIGH):
