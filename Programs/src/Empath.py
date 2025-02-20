@@ -2,28 +2,28 @@
 # from gpiozero import LED
 from time import sleep
 import requests
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import os
 import pygame
 import OutSound
 
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(23, GPIO.OUT)
-# GPIO.setup(24, GPIO.OUT)
-# GPIO.setup(25, GPIO.OUT)
-# GPIO.setup(8, GPIO.OUT)
-# GPIO.setup(7, GPIO.OUT)
-# GPIO.setup(1, GPIO.OUT)
-# GPIO.setup(12, GPIO.OUT)
-# GPIO.setup(16, GPIO.OUT)
-# GPIO.setup(20, GPIO.OUT)
-# GPIO.setup(19, GPIO.OUT)
-# GPIO.setup(13, GPIO.OUT)
-# GPIO.setup(6, GPIO.OUT)
-# GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
+GPIO.setup(1, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 current_process = "sleep"
 
 #「あかりん音声ファイルパス」
@@ -144,33 +144,25 @@ def emotion(scores):
     print(f"\n選択された表情: {selected_emotion}")
 
     def pinSend(pin):
-        # GPIO.output(pin, GPIO.HIGH)
+        GPIO.output(pin, GPIO.HIGH)
         time.sleep(3)
-        # GPIO.output(pin, GPIO.LOW)
+        GPIO.output(pin, GPIO.LOW)
 
     if selected_emotion == "thinEye":
         pinSend(20)
-        pygame.mixer.init()
-        pygame.mixer.music.load(smile_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_smile()
     elif selected_emotion == "anger":
         pinSend(6)
-        pygame.mixer.init()
-        pygame.mixer.music.load(anger_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_anger()
     elif selected_emotion == "sad":
         pinSend(12)
-        pygame.mixer.init()
-        pygame.mixer.music.load(sad_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_sad()
     elif selected_emotion == "smile":
         pinSend(8)
-        pygame.mixer.init()
-        pygame.mixer.music.load(kirarin_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_smile()
     elif selected_emotion == "kirarin":
         pinSend(7)
-        OutSound.voice_smile()
+        OutSound.voice_kirarin()
     else:
         pinSend(13)
         OutSound.voice_doubt()
