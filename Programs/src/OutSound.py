@@ -139,6 +139,7 @@ def playMusic():
 
     # **30秒後にフェードアウトを実行するスレッドを開始**
     threading.Thread(target=delayed_fadeout, daemon=True).start()
+    stopMusic()
     Process.current_music()
 def delayed_fadeout():
     """30秒待ってから3秒かけてフェードアウト"""
