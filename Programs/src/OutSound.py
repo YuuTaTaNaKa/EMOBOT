@@ -23,113 +23,88 @@ GPIO.setup(6, GPIO.OUT)
 
 #「あかりん音声ファイルパス」
 
-anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger_Pitch Changer.mp3")
-doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt_Pitch Changer.mp3")
-embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed_Pitch Changer.mp3")
-kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin_Pitch Changer.mp3")
-omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg_Pitch Changer.mp3")
-sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad_Pitch Changer.mp3")
-smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile_Pitch Changer.mp3")
-testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "testsound_scream.mp3")
+anger_wav = os.path.join(os.path.dirname(__file__), "..", "se", "anger_Pitch Changer.wav")
+doubt_wav = os.path.join(os.path.dirname(__file__), "..", "se", "doubt_Pitch Changer.wav")
+embarrassed_wav = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed_Pitch Changer.wav")
+kirarin_wav = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin_Pitch Changer.wav")
+omg_wav = os.path.join(os.path.dirname(__file__), "..", "se", "omg_Pitch Changer.wav")
+sad_wav = os.path.join(os.path.dirname(__file__), "..", "se", "sad_Pitch Changer.wav")
+smile_wav = os.path.join(os.path.dirname(__file__), "..", "se", "smile_Pitch Changer.wav")
+testsound_scream_wav = os.path.join(os.path.dirname(__file__), "..", "se", "testsound_scream.mp3")
 
 #「機能」*************************
 
 #音楽を再生
 Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
-           ""]
+          os.path.join(os.path.dirname(__file__), "..", "se", "2_23AM_2.mp3"),
+          os.path.join(os.path.dirname(__file__), "..", "se", "303PM_230312.mp3"),
+          os.path.join(os.path.dirname(__file__), "..", "se", "Cassette_Tape_Dream.mp3"),
+          os.path.join(os.path.dirname(__file__), "..", "se", "Culture.mp3")]
 
 # -------------------------------〈メソッド〉--------------------------------
 
-
-#「挨拶」*************************************************************   
-
-def greet_morning():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("おはよう")
-    pinSend_sleep()
-    return
-
-def greet_afternoon():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("こんにちは")
-    pinSend_sleep()
-    return
-
-def greet_night():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("こんばんは")
-    pinSend_sleep()
-    return
-
-def bye():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("さようなら")]
-    pinSend_sleep()
-    return
-
-def im_going():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("いってきます")
-    pinSend_sleep()
-    return
-
-def welcome_home():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("おかえりなさい")
-    pinSend_sleep()
-    return
-
-def good_night():
-    pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
-    #print("おやすみ")
-    pinSend_sleep()
-    return
-
 #「感情」************************************************************* 
 
-def happy():
+def voice_smile():
     pygame.mixer.init()
-    pygame.mixer.music.load(smile_mp3)
-    pygame.mixer.music.play(0)
+    # pygame.mixer.music.load(smile_wav)
+    # pygame.mixer.music.play(0)
+    pygame.mixer.Sound(smile_wav).play()
     # print("うれしい")
     pinSend_sleep()
     return
 
-def sad():
+def voice_sad():
     pygame.mixer.init()
-    pygame.mixer.music.load(sad_mp3)
-    pygame.mixer.music.play(0)
+    # pygame.mixer.music.load(sad_wav)
+    # pygame.mixer.music.play(0)
     # print("悲しい")
+    pygame.mixer.Sound(sad_wav).play()
     pinSend_sleep()
     return
 
-def surprise():
+def voise_omg():
     pygame.mixer.init()
-    pygame.mixer.music.load(omg_mp3)
-    pygame.mixer.music.play(0)
+    # pygame.mixer.music.load(omg_wav)
+    # pygame.mixer.music.play(0)
+    pygame.mixer.Sound(omg_wav).play()
     # print("驚き")
     pinSend_sleep()
     return
 
-def fear():
+def voice_kirarin():
     pygame.mixer.init()
-    pygame.mixer.music.load(omg_mp3)
-    pygame.mixer.music.play(0)
-    # print("恐れ")
+    # pygame.mixer.music.load(kirarin_wav)
+    # pygame.mixer.music.play(0)
+    pygame.mixer.Sound(kirarin_wav).play()
+    # print("うれしい")
+    pinSend_sleep()
+    return
+
+def voice_anger():
+    pygame.mixer.init()
+    # pygame.mixer.music.load(anger_wav)
+    # pygame.mixer.music.play(0)
+    pygame.mixer.Sound(anger_wav).play()
+    # print("うれしい")
+    pinSend_sleep()
+    return
+
+def voice_doubt():
+    pygame.mixer.init()
+    # pygame.mixer.music.load(doubt_wav)
+    # pygame.mixer.music.play(0)
+    pygame.mixer.Sound(doubt_wav).play()
+    # print("うれしい")
+    pinSend_sleep()
+    return
+
+def voice_embarrassed():
+    pygame.mixer.init()
+    # pygame.mixer.music.load(embarrassed_wav)
+    # pygame.mixer.music.play(0)
+    pygame.mixer.Sound(embarrassed_wav).play()
+    # print("うれしい")
     pinSend_sleep()
     return
 
@@ -162,6 +137,63 @@ def stop():
     # print("停止")
     return
 
+# #「挨拶」*************************************************************   
+
+# def greet_morning():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("おはよう")
+#     pinSend_sleep()
+#     return
+
+# def greet_afternoon():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("こんにちは")
+#     pinSend_sleep()
+#     return
+
+# def greet_night():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("こんばんは")
+#     pinSend_sleep()
+#     return
+
+# def bye():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("さようなら")]
+#     pinSend_sleep()
+#     return
+
+# def im_going():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("いってきます")
+#     pinSend_sleep()
+#     return
+
+# def welcome_home():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("おかえりなさい")
+#     pinSend_sleep()
+#     return
+
+# def good_night():
+#     pygame.mixer.init()
+#     pygame.mixer.music.load(smile_wav)
+#     pygame.mixer.music.play(0)
+#     #print("おやすみ")
+#     pinSend_sleep()
+#     return
 
 #「感情」************************************************************* 
 # def happy():

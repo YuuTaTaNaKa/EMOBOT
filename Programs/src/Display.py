@@ -1,8 +1,9 @@
 import pygame
 import os
 import sys
-import OutSound
 import RPi.GPIO as GPIO
+import subprocess
+# import OutSound
 # from gpiozero import LED, Button
 # from signal import pause
 
@@ -175,6 +176,11 @@ def display():
             current_boy_image = boy_anger_image
             current_girl_image = girl_anger_image
 
+        if GPIO.input(9) == GPIO.HIGH:   #shutdown
+            ComandShutdown = "shutdown now"
+            result = subprocess.run(ComandShutdown, shell=True, text=True, capture_output=True)
+            print(result.stdout)
+
         screen.fill(WHITE)
 
         # 画面の切り替え
@@ -212,7 +218,7 @@ mein  disp  動作するもの
  6     6    angerの受け取り
  5     5    sleep時に画面タッチしたときに信号を出力
  0     0    accept時に画面タッチしたときに信号を出力
-11     9
+11     9    shutdown時に信号を取得する
 """
 
 # import pygame

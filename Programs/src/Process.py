@@ -89,9 +89,6 @@ def assistant():
                         print("感情分析を実行します...")
                         empath_transfer(audio_file)
                         break
-                
-                # 音声入力を再度待機
-                continue
             else:
                 print("なんて言ったかわかんないなぁ")
                 continue  # 再度音声入力を待機するためにループ
@@ -115,7 +112,7 @@ mein  disp  動作するもの
  6     6    angerの受け取り
  5     5    sleep時に画面タッチしたときに信号を出力
  0     0    accept時に画面タッチしたときに信号を出力
-11     9
+11     9    shutdown時に信号を取得する
 """
 
 def process(command):

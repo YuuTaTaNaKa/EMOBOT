@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 import time
 import os
 import pygame
+import OutSound
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.OUT)
@@ -95,36 +96,24 @@ def emotion(scores):
         time.sleep(3)
         GPIO.output(pin, GPIO.LOW)
 
-    if selected_emotion ==calm:
+    if selected_emotion == calm:
         pinSend(20)
-        pygame.mixer.init()
-        pygame.mixer.music.load(smile_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_smile()
     elif selected_emotion == anger:
         pinSend(6)
-        pygame.mixer.init()
-        pygame.mixer.music.load(anger_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_anger()
     elif selected_emotion == sad:
         pinSend(12)
-        pygame.mixer.init()
-        pygame.mixer.music.load(sad_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_sad()
     elif selected_emotion == joy:
         pinSend(8)
-        pygame.mixer.init()
-        pygame.mixer.music.load(kirarin_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_kirarin()
     elif selected_emotion == energy:
         pinSend(7)
-        pygame.mixer.init()
-        pygame.mixer.music.load(smile_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_smile()
     else:
         pinSend(13)
-        pygame.mixer.init()
-        pygame.mixer.music.load(doubt_mp3)
-        pygame.mixer.music.play(0)
+        OutSound.voice_doubt()
 
 
 #一番高い値の感情を元に、Displayに信号を送る gpiozero
