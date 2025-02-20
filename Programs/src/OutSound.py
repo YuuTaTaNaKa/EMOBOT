@@ -139,13 +139,13 @@ def playMusic():
 
     # **30秒後にフェードアウトを実行するスレッドを開始**
     threading.Thread(target=delayed_fadeout, daemon=True).start()
-    pinSend_sleep()
     Process.current_music()
 def delayed_fadeout():
     """30秒待ってから3秒かけてフェードアウト"""
     time.sleep(10)
     print("フェードアウト開始")
     pygame.mixer.music.fadeout(3000)
+    pinSend_sleep()
 
 def stopMusic():
     pygame.mixer.music.stop()
