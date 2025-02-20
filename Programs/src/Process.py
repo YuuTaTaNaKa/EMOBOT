@@ -6,27 +6,27 @@ import InVoice
 import Display
 import OutSound
 import subprocess
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 # import LED
 # import gpiozero
 import EarProcess
 
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(23, GPIO.OUT)
-# GPIO.setup(24, GPIO.OUT)
-# GPIO.setup(25, GPIO.OUT)
-# GPIO.setup(8, GPIO.OUT)
-# GPIO.setup(7, GPIO.OUT)
-# GPIO.setup(1, GPIO.OUT)
-# GPIO.setup(12, GPIO.OUT)
-# GPIO.setup(16, GPIO.OUT)
-# GPIO.setup(20, GPIO.OUT)
-# GPIO.setup(19, GPIO.OUT)
-# GPIO.setup(13, GPIO.OUT)
-# GPIO.setup(6, GPIO.OUT)
-# GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-# GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(7, GPIO.OUT)
+GPIO.setup(1, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
+GPIO.setup(20, GPIO.OUT)
+GPIO.setup(19, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 current_process = "sleep"
 
 def assistant():
@@ -53,8 +53,8 @@ def assistant():
         if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
             current_process = "accept"
-            # GPIO.output(25, GPIO.LOW)
-            # GPIO.output(23, GPIO.HIGH)
+            GPIO.output(25, GPIO.LOW)
+            GPIO.output(23, GPIO.HIGH)
             print("3")
         else:
             print("?")
@@ -68,16 +68,16 @@ def assistant():
 
             if order:
                 current_process = "execution"
-                # GPIO.output(23, GPIO.LOW)
-                # GPIO.output(24, GPIO.HIGH)
+                GPIO.output(23, GPIO.LOW)
+                GPIO.output(24, GPIO.HIGH)
                 print(f"認識したコマンド: {order}")
 
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
                     print("スリープモードに移行します...")
                     current_process = "sleep"
-                    # GPIO.output(24, GPIO.LOW)
-                    # GPIO.output(25, GPIO.HIGH)
+                    GPIO.output(24, GPIO.LOW)
+                    GPIO.output(25, GPIO.HIGH)
                     break  # 内部ループを抜け、エモボット待機状態に戻る
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                 elif process(order):
@@ -123,9 +123,9 @@ def process(command):
 
 
     def pinSend(pin):
-        # GPIO.output(pin, GPIO.HIGH)
+        GPIO.output(pin, GPIO.HIGH)
         time.sleep(3)
-        # GPIO.output(pin, GPIO.LOW)
+        GPIO.output(pin, GPIO.LOW)
         return
 
     #　「あいさつ」　*************************************************************   
@@ -136,8 +136,6 @@ def process(command):
         pinSend(8)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.greet_morning()
         return True
 
     elif "こんにちは" in command:
@@ -146,8 +144,6 @@ def process(command):
         pinSend(8)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.greet_afternoon()
         return True
 
     elif "こんばんは" in command:
@@ -156,8 +152,6 @@ def process(command):
         pinSend(8)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.greet_night()
         return True
 
     elif "さようなら" in command:
@@ -166,8 +160,6 @@ def process(command):
         pinSend(8)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.bye()
         return True
     
     elif "いってきます" in command:
@@ -176,8 +168,6 @@ def process(command):
         pinSend(8)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.im_going()
         return True
 
     elif "おかえりなさい" in command:
@@ -186,8 +176,6 @@ def process(command):
         pinSend(8)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.welcome_home()
         return True
 
     elif "おやすみ" in command:
@@ -195,8 +183,6 @@ def process(command):
         pinSend(25)
         EarProcess.earMove()
         OutSound.voice_smile()
-        # # EarProcess.earMove()
-        OutSound.good_night()
         return True
 
 
