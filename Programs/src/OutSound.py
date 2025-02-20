@@ -3,23 +3,23 @@ import time
 import pygame
 import os
 from random import choice
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import Process
 
 # GPIO設定
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.OUT)
-GPIO.setup(24, GPIO.OUT)
-GPIO.setup(25, GPIO.OUT)
-GPIO.setup(8, GPIO.OUT)
-GPIO.setup(7, GPIO.OUT)
-GPIO.setup(1, GPIO.OUT)
-GPIO.setup(12, GPIO.OUT)
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(20, GPIO.OUT)
-GPIO.setup(19, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(6, GPIO.OUT)
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(23, GPIO.OUT)
+# GPIO.setup(24, GPIO.OUT)
+# GPIO.setup(25, GPIO.OUT)
+# GPIO.setup(8, GPIO.OUT)
+# GPIO.setup(7, GPIO.OUT)
+# GPIO.setup(1, GPIO.OUT)
+# GPIO.setup(12, GPIO.OUT)
+# GPIO.setup(16, GPIO.OUT)
+# GPIO.setup(20, GPIO.OUT)
+# GPIO.setup(19, GPIO.OUT)
+# GPIO.setup(13, GPIO.OUT)
+# GPIO.setup(6, GPIO.OUT)
 
 #「あかりん音声ファイルパス」
 
@@ -35,8 +35,7 @@ testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "test
 #「機能」*************************
 
 #音楽を再生
-Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
-           ""]
+Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3")]
 
 # -------------------------------〈メソッド〉--------------------------------
 
@@ -155,9 +154,9 @@ def stopMusic():
     return
 
 def pinSend_sleep():
-    GPIO.output(25, GPIO.HIGH)
+    # GPIO.output(25, GPIO.HIGH)
     time.sleep(3)
-    GPIO.output(25, GPIO.LOW)
+    # GPIO.output(25, GPIO.LOW)
     Process.current_process = "sleep"
     return
 
