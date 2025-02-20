@@ -38,8 +38,6 @@ def assistant():
     while True:
         print("1")
         print(current_process)
-        # エムボットが呼ばれるまで待機
-        command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
@@ -49,6 +47,8 @@ def assistant():
             # current_process = "accept"
 
         if current_process == "sleep":
+            # エムボットが呼ばれるまで待機
+            command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
             print("2")
             print(current_process)
             if command and any(word in command for word in emobot_keywords):
@@ -111,22 +111,28 @@ def assistant():
                 time.sleep(3)
                 GPIO.output(25, GPIO.HIGH)
                 break
+        
+        time.sleep(1)
 
 def current_sleep():
     global current_process
     current_process = "sleep"
+    return
 
 def current_accept():
     global current_process
     current_process = "accept"
+    return
 
 def current_execution():
     global current_process
     current_process = "execution"
+    return
 
 def current_music():
     global current_process
     current_process = "music"
+    return
         
 
 """
