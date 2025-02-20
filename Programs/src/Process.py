@@ -59,6 +59,7 @@ def assistant():
             print("エモボット起動！ 感情分析モードへ移行します")
             current_accept()
             # current_process = "accept"
+            time.sleep(3)
             GPIO.output(25, GPIO.LOW)
             GPIO.output(23, GPIO.HIGH)
             print("3")
