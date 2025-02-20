@@ -49,6 +49,7 @@ def assistant():
         #     # current_process = "accept"
 
         # if current_process == "sleep":
+
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
         print("2")
@@ -88,7 +89,8 @@ def assistant():
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                 elif process(order):
                     print(f"コマンド {order} の処理を実行しました")
-                    current_process = "sleep"
+                    # current_process = "sleep"
+                    current_sleep()
                     break
                 else:
                     # コマンドが含まれていなかった場合、感情分析を実行
@@ -106,7 +108,6 @@ def assistant():
             command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
             if command and any(word in command for word in stopMusic_keywords):
                 print("音楽を止める")
-                OutSound.stopMusic()
                 current_sleep()
                 # current_process = "sleep"
                 GPIO.output(24, GPIO.LOW)
@@ -160,7 +161,7 @@ mein  disp  動作するもの
 def process(command):
     print("音声入力をもとに処理を行います")
     startMusic_keywords = ["おんがくをながして","音楽を流して","おんがくを流して","音楽をながして"] 
-    stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
+    # stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
 
     def pinSend(pin):

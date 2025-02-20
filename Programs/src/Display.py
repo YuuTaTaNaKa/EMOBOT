@@ -122,13 +122,14 @@ def display():
                         current_boy_image = boy_Default_image
                         current_girl_image = girl_Default_image
                         current_process = "accept"
-                    elif current_process == "accept": #タッチされた時
+
+                    if current_process == "accept": #タッチされた時
                         current_boy_image = boy_smile_image
                         current_girl_image = girl_smile_image
                         time.sleep(2)
                         current_boy_image = boy_Default_image
                         current_girl_image = girl_Default_image
-                        current_process = "accept"
+                        current_process = "sleep"
                     
                     # current_process = "execution"
 
@@ -161,6 +162,10 @@ def display():
         if GPIO.input(12) == GPIO.HIGH:   #sad
             current_boy_image = boy_sad_image
             current_girl_image = girl_sad_image
+
+        if GPIO.input(16) == GPIO.HIGH:   #wink
+            current_boy_image = boy_wink_image
+            current_girl_image = girl_wink_image
 
         if GPIO.input(20) == GPIO.HIGH:   #thinEye
             current_boy_image = boy_thinEye_image
