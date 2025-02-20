@@ -42,7 +42,6 @@ def assistant():
         command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
-        stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
         # if GPIO.input(5, GPIO.HIGH):
         #     current_process = "accept"
@@ -79,9 +78,8 @@ def assistant():
                     GPIO.output(24, GPIO.LOW)
                     GPIO.output(25, GPIO.HIGH)
                     break  # 内部ループを抜け、エモボット待機状態に戻る
-
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
-                if process(order):
+                elif process(order):
                     print(f"コマンド {order} の処理を実行しました")
                     current_process = "sleep"
                     break
@@ -94,8 +92,6 @@ def assistant():
                 
                 # 音声入力を再度待機
                 continue
-            elif command and any(word in command for word in stopMusic_keywords):
-                OutSound.stopMusic()
             else:
                 print("なんて言ったかわかんないなぁ")
                 continue  # 再度音声入力を待機するためにループ
@@ -124,6 +120,9 @@ mein  disp  動作するもの
 
 def process(command):
     print("音声入力をもとに処理を行います")
+    startMusic_keywords = ["おんがくをながして","音楽を流して","おんがくを流して","音楽をながして"] 
+    stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
+
 
     def pinSend(pin):
         GPIO.output(pin, GPIO.HIGH)
@@ -184,13 +183,13 @@ def process(command):
 
 #　「機能」　*************************************************************  
 
-    elif "音楽を再生して" in command:
+    elif command and any(word in command for word in startMusic_keywords):
         print("音楽を再生します")
         # LED.led_music()
         pinSend(7)
         OutSound.playMusic()
         
-    elif "音楽を止めて" in command:
+    elif command and any(word in command for word in stopMusic_keywords):
         OutSound.stopMusic()
 
     elif "シャットダウン" in command:
@@ -212,6 +211,7 @@ def process(command):
 
     else:
         print("コマンドに含まれてはいません")
+        return False
 
 # ********************************〔Empath.pyの呼び出し〕*******************************************
 def empath_transfer(audio_file):

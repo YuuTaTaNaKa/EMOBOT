@@ -27,13 +27,13 @@ current_process = "sleep"
 
 #「あかりん音声ファイルパス」
 
-anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger.mp3")
-doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt.mp3")
-embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed.mp3")
-kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin.mp3")
-omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg.mp3")
-sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad.mp3")
-smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile.mp3")
+anger_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "anger_Pitch Changer.mp3")
+doubt_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "doubt_Pitch Changer.mp3")
+embarrassed_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "embarrassed_Pitch Changer.mp3")
+kirarin_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "kirarin_Pitch Changer.mp3")
+omg_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "omg_Pitch Changer.mp3")
+sad_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "sad_Pitch Changer.mp3")
+smile_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "smile_Pitch Changer.mp3")
 testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "testsound_scream.mp3")
 
 
