@@ -114,6 +114,8 @@ def assistant():
                 time.sleep(3)
                 GPIO.output(25, GPIO.HIGH)
                 break
+            else:
+                continue
         
         time.sleep(1)
 
