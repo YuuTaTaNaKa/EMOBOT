@@ -59,7 +59,6 @@ def assistant():
             print("エモボット起動！ 感情分析モードへ移行します")
             current_accept()
             # current_process = "accept"
-            time.sleep(3)
             GPIO.output(25, GPIO.LOW)
             GPIO.output(23, GPIO.HIGH)
             print("3")
@@ -164,7 +163,7 @@ mein  disp  動作するもの
 
 def process(command):
     print("音声入力をもとに処理を行います")
-    startMusic_keywords = ["おんがくをながして","音楽を流して","おんがくを流して","音楽をながして"] 
+    startMusic_keywords = ["おんがくをながして","音楽を流して","音楽流して","音楽を再生して","おんがくを流して","音楽をながして"] 
     # stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
 
