@@ -48,7 +48,7 @@ def greet_morning():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("おはよう")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def greet_afternoon():
@@ -56,7 +56,7 @@ def greet_afternoon():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("こんにちは")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def greet_night():
@@ -64,7 +64,7 @@ def greet_night():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("こんばんは")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def bye():
@@ -72,7 +72,7 @@ def bye():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("さようなら")]
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def im_going():
@@ -80,7 +80,7 @@ def im_going():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("いってきます")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def welcome_home():
@@ -88,7 +88,7 @@ def welcome_home():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("おかえりなさい")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def good_night():
@@ -96,7 +96,7 @@ def good_night():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     #print("おやすみ")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 #「感情」************************************************************* 
@@ -106,7 +106,7 @@ def happy():
     pygame.mixer.music.load(smile_mp3)
     pygame.mixer.music.play(0)
     # print("うれしい")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def sad():
@@ -114,7 +114,7 @@ def sad():
     pygame.mixer.music.load(sad_mp3)
     pygame.mixer.music.play(0)
     # print("悲しい")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def surprise():
@@ -122,7 +122,7 @@ def surprise():
     pygame.mixer.music.load(omg_mp3)
     pygame.mixer.music.play(0)
     # print("驚き")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 def fear():
@@ -130,7 +130,7 @@ def fear():
     pygame.mixer.music.load(omg_mp3)
     pygame.mixer.music.play(0)
     # print("恐れ")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
 #「Music」*************************************************************  
@@ -147,14 +147,14 @@ def stopMusic():
     pygame.mixer.music.stop()
     GPIO.setmode(GPIO.BCM)
     # print("音楽を停止します")
-    pinSend_accept()
+    pinSend_sleep()
     return
 
-def pinSend_accept():
-    GPIO.output(24, GPIO.HIGH)
+def pinSend_sleep():
+    GPIO.output(25, GPIO.HIGH)
     time.sleep(3)
-    GPIO.output(24, GPIO.LOW)
-    Process.current_process = "accept"
+    GPIO.output(25, GPIO.LOW)
+    Process.current_process = "sleep"
     return
 
 # 汎用処理
