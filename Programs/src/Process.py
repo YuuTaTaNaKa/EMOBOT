@@ -96,7 +96,7 @@ def assistant():
                 else:
                     # コマンドが含まれていなかった場合、感情分析を実行
                     if audio_file:
-                        print("感情分析を実行します...")
+                        # print("感情分析を実行します...")
                         empath_transfer(audio_file)
                         break
             else:
