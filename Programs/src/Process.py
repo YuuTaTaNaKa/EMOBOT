@@ -31,13 +31,13 @@ current_process = "sleep"
 
 def assistant():
     global current_process
-    print("0")
+    # print("0")
 
     print("エモボットと呼びかけてください")
     
     while True:
-        print("1")
-        print(current_process)
+        # print("1")
+        # print(current_process)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本", "絵もボット", "絵もぼっと"
         "絵もbot","エモート","柄本","メモボット","M バット"]
@@ -53,21 +53,21 @@ def assistant():
 
         # エムボットが呼ばれるまで待機
         command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
-        print("2")
-        print(current_process)
+        # print("2")
+        # print(current_process)
         if command and any(word in command for word in emobot_keywords):
             print("エモボット起動！ 感情分析モードへ移行します")
             current_accept()
             # current_process = "accept"
             GPIO.output(25, GPIO.LOW)
             GPIO.output(23, GPIO.HIGH)
-            print("3")
+            # print("3")
         else:
             print("?")
             continue
         
         while current_process == "accept":
-            print("4")
+            # print("4")
             print(current_process)
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
@@ -104,8 +104,8 @@ def assistant():
                 continue  # 再度音声入力を待機するためにループ
 
         while current_process == "music":
-            print("5")
-            print(current_process)
+            # print("5")
+            # print(current_process)
             command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
             if command and any(word in command for word in stopMusic_keywords):
                 print("音楽を止める")

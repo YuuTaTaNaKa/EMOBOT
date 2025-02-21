@@ -150,7 +150,7 @@ def playMusic():
 def delayed_fadeout():
     """30秒待ってから3秒かけてフェードアウト"""
     time.sleep(30)
-    print("フェードアウト開始")
+    # print("フェードアウト開始")
     pygame.mixer.music.fadeout(3000)
     time.sleep(3)
     pinSend_sleep()
