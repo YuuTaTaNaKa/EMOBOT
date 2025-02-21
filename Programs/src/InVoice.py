@@ -59,10 +59,11 @@ def listen(mic_timeout, phrase_time_limit,number):
                 try:              
                     command = recognizer.recognize_google(audio, language='ja-JP')  # 日本語設定  
                     # print("テキスト変換完了") 
-                    print(f"認識されたコマンド: {command}") 
+                    print(f"エモボットが聞いた言葉: {command}") 
                     return command,converted_audio_file
                 except Exception as e:
-                    print(f"error: {e}")
+                    pass
+                    #print(f"error: {e}")
                                          
             except sr.WaitTimeoutError:
                 print("タイムアウトしました。音声入力が検出されませんでした。")

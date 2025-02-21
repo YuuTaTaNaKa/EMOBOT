@@ -17,7 +17,7 @@ def set_angle(angle):
     pwm.ChangeDutyCycle(0)
 
 def earMove():
-    print("耳の処理を行います。")
+    # print("耳の処理を行います。")
     set_angle(0)
     time.sleep(1)
     set_angle(180)

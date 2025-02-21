@@ -68,7 +68,7 @@ def assistant():
         
         while current_process == "accept":
             # print("4")
-            print(current_process)
+            # print(current_process)
             # ユーザーの問いかけを取得
             order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
 
@@ -77,7 +77,7 @@ def assistant():
                 # current_process = "execution"
                 GPIO.output(23, GPIO.LOW)
                 GPIO.output(24, GPIO.HIGH)
-                print(f"認識したコマンド: {order}")
+                # print(f"認識したコマンド: {order}")
 
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
