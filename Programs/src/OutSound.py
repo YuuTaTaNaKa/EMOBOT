@@ -97,6 +97,7 @@ def voice_doubt():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(doubt_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
