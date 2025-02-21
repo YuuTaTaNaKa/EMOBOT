@@ -37,7 +37,7 @@ testsound_scream_wav = os.path.join(os.path.dirname(__file__), "..", "se", "test
 
 #音楽を再生
 Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
-          os.path.join(os.path.dirname(__file__), "..", "se", "2_23AM_2.mp3"),
+          os.path.join(os.path.dirname(__file__), "..", "se", "2_23_AM_2.mp3"),
           os.path.join(os.path.dirname(__file__), "..", "se", "303PM_230312.mp3"),
           os.path.join(os.path.dirname(__file__), "..", "se", "Cassette_Tape_Dream.mp3"),
           os.path.join(os.path.dirname(__file__), "..", "se", "Culture.mp3")]
