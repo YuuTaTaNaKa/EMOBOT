@@ -52,6 +52,7 @@ def voice_smile():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(smile_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -61,6 +62,7 @@ def voice_sad():
     # pygame.mixer.music.play(0)
     # print("悲しい")
     pygame.mixer.Sound(sad_wav).play()
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -70,6 +72,7 @@ def voise_omg():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(omg_wav).play()
     # print("驚き")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -79,6 +82,7 @@ def voice_kirarin():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(kirarin_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -88,6 +92,7 @@ def voice_anger():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(anger_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -107,6 +112,7 @@ def voice_embarrassed():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(embarrassed_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
