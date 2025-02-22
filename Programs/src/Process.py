@@ -64,7 +64,7 @@ def assistant():
             GPIO.output(23, GPIO.HIGH)
             # print("3")
         else:
-            print("?")
+            print("もう一度‼")
             continue
         
         while current_process == "accept":
@@ -72,7 +72,7 @@ def assistant():
             # print(current_process)
             # ユーザーの問いかけを取得
             
-            print("もう一度!!")
+           
             order, audio_file = InVoice.listen2(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
@@ -165,7 +165,7 @@ mein  disp  動作するもの
 """
 
 def process(command):
-    print("音声入力をもとに処理を行います")
+    # print("音声入力をもとに処理を行います")
     startMusic_keywords = ["おんがくをながして","音楽を流して","音楽流して","音楽を再生して","おんがくを流して","音楽をながして"] 
     # stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
@@ -263,7 +263,8 @@ def process(command):
 
     
     else:
-        print("コマンドに含まれてはいません")
+        # print("コマンドに含まれてはいません")
+        pass
         
 # ********************************〔Empath.pyの呼び出し〕*******************************************
 def empath_transfer(audio_file):
