@@ -51,6 +51,7 @@ def assistant():
 
         # エムボットが呼ばれるまで待機
        
+        print("\n")
         print("「エモボット」と呼びかけてね")
         command, _ = InVoice.listen1(mic_timeout=10, phrase_time_limit=10, number=0)
         # print("2")
