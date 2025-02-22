@@ -52,13 +52,12 @@ def assistant():
         # エムボットが呼ばれるまで待機
        
         print("「エモボット」と呼びかけてね")
-        print("\n")
-        command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
+        command, _ = InVoice.listen1(mic_timeout=10, phrase_time_limit=10, number=0)
         # print("2")
         # print(current_process)
         if command and any(word in command for word in emobot_keywords):
-            print("エモボット起動！ 感情分析モードへ移行します")
-            print("\n")
+            # print("エモボット起動！ 感情分析モードへ移行します")
+            # print("\n")
             current_accept()
             # current_process = "accept"
             GPIO.output(25, GPIO.LOW)
@@ -73,9 +72,8 @@ def assistant():
             # print(current_process)
             # ユーザーの問いかけを取得
             
-            print("もう一度話しかけてね")
-            print("\n")
-            order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
+            print("もう一度!!")
+            order, audio_file = InVoice.listen2(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
                 current_execution()
