@@ -29,8 +29,7 @@ def listen(mic_timeout, phrase_time_limit,number):
     # print("マイク")
     with sr.Microphone() as source:
         recognizer.adjust_for_ambient_noise(source)
-        print("\n")
-        print("なにか話しかけてね！！")
+        print("話しかけてね！！")
         print("\n")
         
         while True:
