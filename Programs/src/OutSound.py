@@ -37,7 +37,7 @@ testsound_scream_wav = os.path.join(os.path.dirname(__file__), "..", "se", "test
 
 #音楽を再生
 Musics = [os.path.join(os.path.dirname(__file__), "..", "se", "167.mp3"),
-          os.path.join(os.path.dirname(__file__), "..", "se", "2_23AM_2.mp3"),
+          os.path.join(os.path.dirname(__file__), "..", "se", "2_23_AM_2.mp3"),
           os.path.join(os.path.dirname(__file__), "..", "se", "303PM_230312.mp3"),
           os.path.join(os.path.dirname(__file__), "..", "se", "Cassette_Tape_Dream.mp3"),
           os.path.join(os.path.dirname(__file__), "..", "se", "Culture.mp3")]
@@ -52,6 +52,7 @@ def voice_smile():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(smile_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -61,6 +62,7 @@ def voice_sad():
     # pygame.mixer.music.play(0)
     # print("悲しい")
     pygame.mixer.Sound(sad_wav).play()
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -70,6 +72,7 @@ def voise_omg():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(omg_wav).play()
     # print("驚き")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -79,6 +82,7 @@ def voice_kirarin():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(kirarin_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -88,6 +92,7 @@ def voice_anger():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(anger_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -97,6 +102,7 @@ def voice_doubt():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(doubt_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -106,6 +112,7 @@ def voice_embarrassed():
     # pygame.mixer.music.play(0)
     pygame.mixer.Sound(embarrassed_wav).play()
     # print("うれしい")
+    time.sleep(2)
     pinSend_sleep()
     return
 
@@ -142,8 +149,8 @@ def playMusic():
     Process.current_music()
 def delayed_fadeout():
     """30秒待ってから3秒かけてフェードアウト"""
-    time.sleep(10)
-    print("フェードアウト開始")
+    time.sleep(30)
+    # print("フェードアウト開始")
     pygame.mixer.music.fadeout(3000)
     time.sleep(3)
     pinSend_sleep()

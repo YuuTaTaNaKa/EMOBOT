@@ -31,16 +31,14 @@ current_process = "sleep"
 
 def assistant():
     global current_process
-    print("0")
+    # print("0")
 
-    print("エモボットと呼びかけてください")
-    
     while True:
-        print("1")
-        print(current_process)
+        # print("1")
+        # print(current_process)
         # 「エムボット」と認識したら起動
         emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本", "絵もボット", "絵もぼっと"
-        "絵もbot","エモート","柄本","メモボット"]
+        "絵もbot","エモート","柄本","メモボット","M バット"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
         # pin_state = GPIO.input(5)
@@ -52,32 +50,38 @@ def assistant():
         # if current_process == "sleep":
 
         # エムボットが呼ばれるまで待機
-        command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
-        print("2")
-        print(current_process)
+       
+        print("\n")
+        print("「エモボット」と呼びかけてね")
+        command, _ = InVoice.listen1(mic_timeout=10, phrase_time_limit=10, number=0)
+        # print("2")
+        # print(current_process)
         if command and any(word in command for word in emobot_keywords):
-            print("エモボット起動！ 感情分析モードへ移行します")
+            # print("エモボット起動！ 感情分析モードへ移行します")
+            # print("\n")
             current_accept()
             # current_process = "accept"
             GPIO.output(25, GPIO.LOW)
             GPIO.output(23, GPIO.HIGH)
-            print("3")
+            # print("3")
         else:
-            print("?")
+            print("もう一度‼")
             continue
         
         while current_process == "accept":
-            print("4")
-            print(current_process)
+            # print("4")
+            # print(current_process)
             # ユーザーの問いかけを取得
-            order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
+            
+           
+            order, audio_file = InVoice.listen2(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
                 current_execution()
                 # current_process = "execution"
                 GPIO.output(23, GPIO.LOW)
                 GPIO.output(24, GPIO.HIGH)
-                print(f"認識したコマンド: {order}")
+                # print(f"認識したコマンド: {order}")
 
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
@@ -89,26 +93,26 @@ def assistant():
                     break  # 内部ループを抜け、エモボット待機状態に戻る
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                 elif process(order):
-                    print(f"コマンド {order} の処理を実行しました")
+                    # print(f"コマンド {order} の処理を実行しました")
                     # current_process = "sleep"
                     current_sleep()
                     break
                 else:
                     # コマンドが含まれていなかった場合、感情分析を実行
                     if audio_file:
-                        print("感情分析を実行します...")
+                        # print("感情分析を実行します...")
                         empath_transfer(audio_file)
                         break
             else:
-                print("なんて言ったかわかんないなぁ")
+                print("もう一度話しかけてね")
                 continue  # 再度音声入力を待機するためにループ
 
         while current_process == "music":
-            print("5")
-            print(current_process)
+            # print("5")
+            # print(current_process)
             command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
             if command and any(word in command for word in stopMusic_keywords):
-                print("音楽を止める")
+                print("音楽を停止します")
                 current_sleep()
                 # current_process = "sleep"
                 GPIO.output(24, GPIO.LOW)
@@ -162,8 +166,8 @@ mein  disp  動作するもの
 """
 
 def process(command):
-    print("音声入力をもとに処理を行います")
-    startMusic_keywords = ["おんがくをながして","音楽を流して","おんがくを流して","音楽をながして"] 
+    # print("音声入力をもとに処理を行います")
+    startMusic_keywords = ["おんがくをながして","音楽を流して","音楽流して","音楽を再生して","おんがくを流して","音楽をながして"] 
     # stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
 
@@ -260,7 +264,8 @@ def process(command):
 
     
     else:
-        print("コマンドに含まれてはいません")
+        # print("コマンドに含まれてはいません")
+        pass
         
 # ********************************〔Empath.pyの呼び出し〕*******************************************
 def empath_transfer(audio_file):

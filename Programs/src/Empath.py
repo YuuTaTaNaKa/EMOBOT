@@ -141,7 +141,7 @@ def emotion(scores):
     selected_emotion = determine_emotion(calm, anger, sad, joy, energy)
 
     # 結果を表示
-    print(f"\n選択された表情: {selected_emotion}")
+    # print(f"\n選択された表情: {selected_emotion}")
 
     def pinSend(pin):
         GPIO.output(pin, GPIO.HIGH)
