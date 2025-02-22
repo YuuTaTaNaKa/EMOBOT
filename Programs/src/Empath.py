@@ -40,7 +40,7 @@ testsound_scream_mp3 = os.path.join(os.path.dirname(__file__), "..", "se", "test
 
 def empath(voice):
     url = "https://api.webempath.net/v2/analyzeWav"
-    api_key = "-m_gBMbIiYjyyA-3k6ahRpM9X14-zg6gTg3HqokktI4"
+    api_key = "S-WexRCCl-JrmrSHoQY3il76YXx5KcKG478CX0Ddrjc"
 
     # ファイルをアップロード
     with open(voice, "rb") as audio_file:
