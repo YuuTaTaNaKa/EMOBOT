@@ -33,8 +33,6 @@ def assistant():
     global current_process
     # print("0")
 
-    print("エモボットと呼びかけてください")
-    
     while True:
         # print("1")
         # print(current_process)
@@ -52,11 +50,16 @@ def assistant():
         # if current_process == "sleep":
 
         # エムボットが呼ばれるまで待機
+        print("\n")
+        print("「エモボット」と呼びかけてね")
+        print("\n")
         command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
         # print("2")
         # print(current_process)
         if command and any(word in command for word in emobot_keywords):
-            print("エモボット起動！ 感情分析モードへ移行します")
+            # print("\n")
+            # print("エモボット起動！ 感情分析モードへ移行します")
+            # print("\n")
             current_accept()
             # current_process = "accept"
             GPIO.output(25, GPIO.LOW)
@@ -70,6 +73,7 @@ def assistant():
             # print("4")
             # print(current_process)
             # ユーザーの問いかけを取得
+            print("話しかけてね")
             order, audio_file = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
@@ -89,7 +93,7 @@ def assistant():
                     break  # 内部ループを抜け、エモボット待機状態に戻る
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
                 elif process(order):
-                    print(f"コマンド {order} の処理を実行しました")
+                    # print(f"コマンド {order} の処理を実行しました")
                     # current_process = "sleep"
                     current_sleep()
                     break
@@ -100,7 +104,7 @@ def assistant():
                         empath_transfer(audio_file)
                         break
             else:
-                print("なんて言ったかわかんないなぁ")
+                print("もう一度話しかけてね")
                 continue  # 再度音声入力を待機するためにループ
 
         while current_process == "music":
@@ -108,7 +112,7 @@ def assistant():
             # print(current_process)
             command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
             if command and any(word in command for word in stopMusic_keywords):
-                print("音楽を止める")
+                print("音楽を停止します")
                 current_sleep()
                 # current_process = "sleep"
                 GPIO.output(24, GPIO.LOW)
