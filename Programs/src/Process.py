@@ -31,75 +31,118 @@ current_process = "sleep"
 
 def assistant():
     global current_process
-    print("0")
+    # print("0")
 
-    print("エモボットと呼びかけてください")
-    
     while True:
-        print("1")
-        print(current_process)
-        # エムボットが呼ばれるまで待機
-        command, _ = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=0)
+        # print("1")
+        # print(current_process)
         # 「エムボット」と認識したら起動
-        emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot"]
+        emobot_keywords = ["エモボット", "エムボット", "えもぼっと", "EMOBOT", "emobot","エムバッタ","エムバット","エンバット","エンバッタ", "エンボット", "榎本", "絵もボット", "絵もぼっと"
+        "絵もbot","エモート","柄本","メモボット","M バット"]
         stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
 
-        # if GPIO.input(5, GPIO.HIGH):
-        #     current_process = "accept"
+        # pin_state = GPIO.input(5)
+
+        # if pin_state == GPIO.HIGH:
+        #     current_accept()
+        #     # current_process = "accept"
 
         # if current_process == "sleep":
-        print("2")
-        print(current_process)
+
+        # エムボットが呼ばれるまで待機
+       
+        print("\n")
+        print("「エモボット」と呼びかけてね")
+        command, _ = InVoice.listen1(mic_timeout=10, phrase_time_limit=10, number=0)
+        # print("2")
+        # print(current_process)
         if command and any(word in command for word in emobot_keywords):
-            print("エモボット起動！ 感情分析モードへ移行します")
-            current_process = "accept"
+            # print("エモボット起動！ 感情分析モードへ移行します")
+            # print("\n")
+            current_accept()
+            # current_process = "accept"
             GPIO.output(25, GPIO.LOW)
             GPIO.output(23, GPIO.HIGH)
-            print("3")
+            # print("3")
         else:
-            print("?")
+            print("もう一度‼")
             continue
         
-        while True:
-            print("4")
-            print(current_process)
+        while current_process == "accept":
+            # print("4")
+            # print(current_process)
             # ユーザーの問いかけを取得
-            order, audio_file = InVoice.listen(mic_timeout=5, phrase_time_limit=5, number=1)
+            
+           
+            order, audio_file = InVoice.listen2(mic_timeout=10, phrase_time_limit=10, number=1)
 
             if order:
-                current_process = "execution"
+                current_execution()
+                # current_process = "execution"
                 GPIO.output(23, GPIO.LOW)
                 GPIO.output(24, GPIO.HIGH)
-                print(f"認識したコマンド: {order}")
+                # print(f"認識したコマンド: {order}")
 
                 # 「おやすみ」と言われたらエモボットを停止し、待機状態に戻る
                 if "おやすみ" in order:
                     print("スリープモードに移行します...")
-                    current_process = "sleep"
+                    current_sleep()
+                    # current_process = "sleep"
                     GPIO.output(24, GPIO.LOW)
                     GPIO.output(25, GPIO.HIGH)
                     break  # 内部ループを抜け、エモボット待機状態に戻る
-
                 # 特定のコマンドが含まれている場合、感情分析は実行せず、コマンド処理を行う
-                if process(order):
-                    print(f"コマンド {order} の処理を実行しました")
-                    current_process = "sleep"
+                elif process(order):
+                    # print(f"コマンド {order} の処理を実行しました")
+                    # current_process = "sleep"
+                    current_sleep()
                     break
                 else:
                     # コマンドが含まれていなかった場合、感情分析を実行
                     if audio_file:
-                        print("感情分析を実行します...")
+                        # print("感情分析を実行します...")
                         empath_transfer(audio_file)
                         break
-                
-                # 音声入力を再度待機
-                continue
-            elif command and any(word in command for word in stopMusic_keywords):
-                OutSound.stopMusic()
             else:
-                print("なんて言ったかわかんないなぁ")
+                print("もう一度話しかけてね")
                 continue  # 再度音声入力を待機するためにループ
 
+        while current_process == "music":
+            # print("5")
+            # print(current_process)
+            command, _ = InVoice.listen(mic_timeout=10, phrase_time_limit=10, number=0)
+            if command and any(word in command for word in stopMusic_keywords):
+                print("音楽を停止します")
+                current_sleep()
+                # current_process = "sleep"
+                GPIO.output(24, GPIO.LOW)
+                time.sleep(3)
+                GPIO.output(25, GPIO.HIGH)
+                break
+            else:
+                continue
+        
+        time.sleep(1)
+
+def current_sleep():
+    global current_process
+    current_process = "sleep"
+    return
+
+def current_accept():
+    global current_process
+    current_process = "accept"
+    return
+
+def current_execution():
+    global current_process
+    current_process = "execution"
+    return
+
+def current_music():
+    global current_process
+    current_process = "music"
+    return
         
 
 """
@@ -119,11 +162,14 @@ mein  disp  動作するもの
  6     6    angerの受け取り
  5     5    sleep時に画面タッチしたときに信号を出力
  0     0    accept時に画面タッチしたときに信号を出力
-11     9
+11     9    shutdown時に信号を取得する
 """
 
 def process(command):
-    print("音声入力をもとに処理を行います")
+    # print("音声入力をもとに処理を行います")
+    startMusic_keywords = ["おんがくをながして","音楽を流して","音楽流して","音楽を再生して","おんがくを流して","音楽をながして"] 
+    # stopMusic_keywords = ["おんがくをとめて","音楽を止めて","おんがくを止めて","音楽をとめて"]
+
 
     def pinSend(pin):
         GPIO.output(pin, GPIO.HIGH)
@@ -138,81 +184,89 @@ def process(command):
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.greet_morning()
+        OutSound.voice_smile()
+        return True
 
     elif "こんにちは" in command:
         print("こんにちは")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.greet_afternoon()
+        OutSound.voice_smile()
+        return True
 
     elif "こんばんは" in command:
         print("こんばんは")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.greet_night()
+        OutSound.voice_smile()
+        return True
 
     elif "さようなら" in command:
         print("さようなら")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.bye()
+        OutSound.voice_smile()
+        return True
     
     elif "いってきます" in command:
         print("いってきます")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.im_going()
+        OutSound.voice_smile()
+        return True
 
     elif "おかえりなさい" in command:
         print("おかえりなさい")
         # Display.face_smile()
         pinSend(8)
         EarProcess.earMove()
-        OutSound.welcome_home()
+        OutSound.voice_smile()
+        return True
 
     elif "おやすみ" in command:
         # Display.face_sleep()
         pinSend(25)
         EarProcess.earMove()
-        OutSound.good_night()
+        OutSound.voice_smile()
+        return True
 
 
 #　「機能」　*************************************************************  
 
-    elif "音楽を再生して" in command:
+    elif command and any(word in command for word in startMusic_keywords):
         print("音楽を再生します")
         # LED.led_music()
         pinSend(7)
         OutSound.playMusic()
+        return True
         
-    elif "音楽を止めて" in command:
-        OutSound.stopMusic()
+    # elif command and any(word in command for word in stopMusic_keywords):
+    #     OutSound.stopMusic()
+    #     return True
 
     elif "シャットダウン" in command:
         print("シャットダウン")
         ComandShutdown = "shutdown now"
         result = subprocess.run(ComandShutdown, shell=True, text=True, capture_output=True)
         print(result.stdout)
+        return True
 
     elif "再起動" in command:
         print("再起動")
         ComandReboot = "reboot"
         result = subprocess.run(ComandReboot, shell=True, text=True, capture_output=True)
         print(result.stdout)
+        return True
 
-    # elif "クイズ" in command:
-    #     print("クイズを出して")
-    #     DisplayProcess.quiz()
-    #     #OutSound() ??
-
+    
     else:
-        print("コマンドに含まれてはいません")
-
+        # print("コマンドに含まれてはいません")
+        pass
+        
 # ********************************〔Empath.pyの呼び出し〕*******************************************
 def empath_transfer(audio_file):
     if not audio_file:
@@ -311,7 +365,7 @@ def empath_transfer(audio_file):
 #     elif "こわい" in command:
 #         print("こわい")
 #         # Display.face_sad()
-#         OutSound.fear()
+
 
 #     elif "うれしい" in command:
 #         print("うれしい")
